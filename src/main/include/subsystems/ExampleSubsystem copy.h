@@ -7,9 +7,9 @@
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/SubsystemBase.h>
 
-class SwerveModule : public frc2::SubsystemBase {
+class ExampleSubsystem : public frc2::SubsystemBase {
  public:
-  SwerveModule();
+  ExampleSubsystem();
 
   /**
    * Example command factory method.
