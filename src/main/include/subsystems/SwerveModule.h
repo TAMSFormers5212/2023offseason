@@ -6,6 +6,7 @@
 
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/SubsystemBase.h>
+#include <rev/CANSparkMax>
 
 class SwerveModule : public frc2::SubsystemBase {
  public:
@@ -38,4 +39,20 @@ class SwerveModule : public frc2::SubsystemBase {
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
+  rev::CANSparkMax m_driveMotor;
+  rev::CANSparkMax m_turningMotor;
+
+  rev::SparkMaxRelativeEncoder m_driveEncoder = m_driveMotor.GetEncoder();
+  rev::SparkMaxRelativeEncoder m_turningEncoder = m_turningMotor.GetEncoder();
+
+  rev::SparkMaxPIDController m_turningController = m_turningMotor.GetPIDController();
+  rev::SparkMaxPIDController m_driveController = m_driveMotor.GetPIDController();
+
+  frc::AnalogInput m_absoluteEncoder;
+
+
+
+
+
+
 };
