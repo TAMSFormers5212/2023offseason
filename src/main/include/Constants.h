@@ -19,3 +19,17 @@ namespace OperatorConstants {
 constexpr int kDriverControllerPort = 0;
 
 }  // namespace OperatorConstants
+
+
+
+namespace OIConstants {
+
+}
+
+namespace SwerveModuleConstants {
+
+}
+
+namespace PoseConstants{
+    
+}
