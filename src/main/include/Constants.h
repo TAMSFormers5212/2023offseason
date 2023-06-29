@@ -17,16 +17,62 @@
 namespace OperatorConstants {
 
 constexpr int kDriverControllerPort = 0;
+constexpr int kOperatorControllerPort = 1;
+
+//LEDS?
+//vision or other accessories
 
 }  // namespace OperatorConstants
 
 
 
-namespace OIConstants {
+namespace OIConstants {//Controller buttons 
+
+//joystick controller
+
+//axis
+
+
+//buttons
+
+
+//console controller
+
+//axis
+
+//buttons
+
 
 }
 
-namespace SwerveModuleConstants {
+namespace SwerveModuleConstants {//per swerve module
+    constexpr double ktP;
+    constexpr double ktI;
+    constexpr double KtD;
+    
+    constexpr double kdP;
+    constexpr double kdI;
+    constexpr double KdD;
+
+    constexpr double maxSpeed;
+    constexpr double driveRatio;
+    constexpr double steerRatio;
+    
+    
+    namespace topleft{
+        double offset;
+
+
+    }
+    namespace topright{
+        
+    }
+    namespace bottomleft{
+        
+    }
+    namespace bottomright{
+        
+    }
 
 }
 
