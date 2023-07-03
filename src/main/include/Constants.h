@@ -14,10 +14,8 @@
  * they are needed.
  */
 
-namespace OperatorConstants {
+namespace ElectricalConstants {
 
-constexpr int kDriverControllerPort = 0;
-constexpr int kOperatorControllerPort = 1;
 
 //LEDS?
 //vision or other accessories
@@ -27,6 +25,9 @@ constexpr int kOperatorControllerPort = 1;
 
 
 namespace OIConstants {//Controller buttons 
+
+constexpr int kDriverControllerPort = 0;
+constexpr int kOperatorControllerPort = 1;
 
 //joystick controller
 
