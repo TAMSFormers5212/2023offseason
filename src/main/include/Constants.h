@@ -46,17 +46,17 @@ namespace OIConstants {//Controller buttons
 }
 
 namespace SwerveModuleConstants {//per swerve module
-    constexpr double ktP;
-    constexpr double ktI;
-    constexpr double KtD;
+    constexpr double ktP = 0.0;
+    constexpr double ktI = 0.0;
+    constexpr double KtD = 0.0;
     
-    constexpr double kdP;
-    constexpr double kdI;
-    constexpr double KdD;
+    constexpr double kdP = 0.0;
+    constexpr double kdI = 0.0;
+    constexpr double KdD = 0.0;
 
-    constexpr double maxSpeed;
-    constexpr double driveRatio;
-    constexpr double steerRatio;
+    constexpr double maxSpeed = 4.0;
+    constexpr double driveRatio; //SDS Mk4 L1
+    constexpr double steerRatio; //SDS Mk4 L1
     
     
     namespace topleft{
