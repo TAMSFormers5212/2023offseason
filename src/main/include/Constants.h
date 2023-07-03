@@ -20,6 +20,9 @@ namespace ElectricalConstants {
 //LEDS?
 //vision or other accessories
 
+constexpr int kMXP = 2;
+
+
 }  // namespace OperatorConstants
 
 
@@ -56,25 +59,36 @@ namespace SwerveModuleConstants {//per swerve module
     constexpr double KdD = 0.0;
 
     constexpr double maxSpeed = 4.0;
-    constexpr double driveRatio; //SDS Mk4 L1
-    constexpr double steerRatio; //SDS Mk4 L1
+    constexpr double driveRatio = 1; //SDS Mk4 L1
+    constexpr double steerRatio = 1; //SDS Mk4 L1
     
     
     namespace topleft{
-        double offset;
+        constexpr int driveMotor = 1;
+        constexpr int turningMotor = 2;
+
+
+        constexpr double offset = 0;
 
 
     }
     namespace topright{
-        double offset;
+        constexpr int driveMotor = 3;
+        constexpr int turningMotor = 4;
+
+        constexpr double offset = 0;
         
     }
     namespace bottomleft{
-        double offset;
+        constexpr int driveMotor = 5;
+        constexpr int turningMotor = 6;
+        constexpr double offset = 0;
         
     }
     namespace bottomright{
-        double offset;
+        constexpr int driveMotor = 7;
+        constexpr int turningMotor = 8;
+        constexpr double offset = 0;
         
     }
 

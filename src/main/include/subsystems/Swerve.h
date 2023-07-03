@@ -6,6 +6,12 @@
 
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/SubsystemBase.h>
+#include "subsystems/SwerveModule.h"
+#include <frc/kinematics/SwerveDriveKinematics.h>
+#include <frc/kinematics/SwerveDriveOdometry.h>
+#include "AHRS.h"
+#include <frc/geometry/Pose2d.h>
+#include "Constants.h"
 
 class Swerve : public frc2::SubsystemBase {
  public:

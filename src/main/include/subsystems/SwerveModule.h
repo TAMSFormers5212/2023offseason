@@ -10,6 +10,8 @@
 #include <rev/CANSparkMaxLowLevel.h>
 #include <rev/RelativeEncoder.h>
 #include <rev/SparkMaxPIDController.h>
+#include <frc/kinematics/SwerveModuleState.h>
+#include <frc/kinematics/SwerveModulePosition.h>
 
 class SwerveModule : public frc2::SubsystemBase {
  public:
