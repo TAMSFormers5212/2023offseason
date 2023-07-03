@@ -65,12 +65,15 @@ namespace SwerveModuleConstants {//per swerve module
 
     }
     namespace topright{
+        double offset;
         
     }
     namespace bottomleft{
+        double offset;
         
     }
     namespace bottomright{
+        double offset;
         
     }
 
