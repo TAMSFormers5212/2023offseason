@@ -6,9 +6,14 @@
 
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/button/CommandXboxController.h>
+// #include <path
 
 #include "Constants.h"
 #include "subsystems/ExampleSubsystem.h"
+#include "subsystems/Swerve.h"
+#include "subsystems/SwerveModule.h"
+
+
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -25,11 +30,14 @@ class RobotContainer {
 
  private:
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  frc2::CommandXboxController m_driverController{
-      OIConstants::kDriverControllerPort};
+  frc::GenericHID m_driverController{0};
+  frc::GenericHID m_operatorController{1};
 
   // The robot's subsystems are defined here...
   ExampleSubsystem m_subsystem;
+  Swerve m_drive;
+
+
 
   void ConfigureBindings();
 };

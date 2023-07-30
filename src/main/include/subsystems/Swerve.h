@@ -8,7 +8,7 @@
 #include <frc2/command/SubsystemBase.h>
 #include "subsystems/SwerveModule.h"
 #include <AHRS.h>
-#include <Constants.hpp>
+#include <Constants.h>
 #include <frc/StateSpaceUtil.h>
 #include <frc/Timer.h>
 #include <frc/estimator/SwerveDrivePoseEstimator.h>
@@ -40,6 +40,12 @@ class Swerve : public frc2::SubsystemBase {
 
   void Periodic() override; //update pose using gyro, vision, and odometry
 
+  void resetAbsoluteEncoders();
+
+  void SyncAbsoluteEncoders();
+
+  void SetVisionBeginning();
+
   /*** Example command factory method.*/frc2::CommandPtr ExampleMethodCommand();
   /*** An example method querying a boolean state of the subsystem (for example, a* digital sensor).** @return value of some boolean subsystem state, such as a digital sensor.*/bool ExampleCondition();
   /*** Will be called periodically whenever the CommandScheduler runs.*void Periodic() override;*/
@@ -48,4 +54,26 @@ class Swerve : public frc2::SubsystemBase {
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
+
+  wpi::array<frc::SwerveModulePosition, 4> GetPositions() const;
+
+  std::array<SwerveModule, 4> m_modules;
+
+  AHRS m_gyro{frc::SPI::Port::kMXP};
+
+  frc::Rotation2d heading;
+
+  double lastAngle;
+
+  //limelight
+
+  frc::SwerveDriveOdometry<4> m_odometry;
+
+  frc::SwerveDrivePoseEstimator<4> m_poseEstimator;
+
+  frc::Field2d m_poseEstField;
+  frc::Field2d m_visionEstField;
+
+  
+
 };

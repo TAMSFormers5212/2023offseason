@@ -6,12 +6,13 @@
 
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/SubsystemBase.h>
-#include <rev/CANSparkMax>
+#include <rev/CANSparkMax.h>
 #include <rev/CANSparkMaxLowLevel.h>
 #include <rev/RelativeEncoder.h>
 #include <rev/SparkMaxPIDController.h>
 #include <frc/kinematics/SwerveModuleState.h>
 #include <frc/kinematics/SwerveModulePosition.h>
+#include <frc/AnalogInput.h>
 
 class SwerveModule : public frc2::SubsystemBase {
  public:
@@ -57,6 +58,8 @@ class SwerveModule : public frc2::SubsystemBase {
   rev::SparkMaxPIDController m_driveController = m_driveMotor.GetPIDController();
 
   frc::AnalogInput m_absoluteEncoder;
+
+  std::string m_name;
 
 
 
