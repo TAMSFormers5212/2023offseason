@@ -13,6 +13,7 @@
 #include <frc/kinematics/SwerveModuleState.h>
 #include <frc/kinematics/SwerveModulePosition.h>
 #include <frc/AnalogInput.h>
+#include <Constants.h>
 
 class SwerveModule : public frc2::SubsystemBase {
  public:
@@ -27,18 +28,14 @@ class SwerveModule : public frc2::SubsystemBase {
   double getTurningPosition();
   double getDriveVelocity();
   double getTurningVelocity();
+  frc::SwerveModuleState getState();
+  frc::SwerveModulePosition getPosition();
+
+  std::string getName(int driveMotorID);
   
 
-  /**
-   * Example command factory method.
-   */
-  frc2::CommandPtr ExampleMethodCommand();
 
-
-
-
-
-
+  frc2::CommandPtr ExampleMethodCommand();  /*** Example command factory method.*/
   bool ExampleCondition();  /*** An example method querying a boolean state of the subsystem (for example, a* digital sensor).** @return value of some boolean subsystem state, such as a digital sensor.*/
   void Periodic() override;  /*** Will be called periodically whenever the CommandScheduler runs.*/
   void SimulationPeriodic() override;  /*** Will be called periodically whenever the CommandScheduler runs during* simulation.*/
@@ -59,7 +56,9 @@ class SwerveModule : public frc2::SubsystemBase {
 
   frc::AnalogInput m_absoluteEncoder;
 
-  std::string m_name;
+  frc::SwerveModuleState lastState;
+
+  std::string m_moduleName;
 
 
 
