@@ -35,10 +35,10 @@ class SwerveModule : public frc2::SubsystemBase {
   
 
 
-  frc2::CommandPtr ExampleMethodCommand();  /*** Example command factory method.*/
-  bool ExampleCondition();  /*** An example method querying a boolean state of the subsystem (for example, a* digital sensor).** @return value of some boolean subsystem state, such as a digital sensor.*/
-  void Periodic() override;  /*** Will be called periodically whenever the CommandScheduler runs.*/
-  void SimulationPeriodic() override;  /*** Will be called periodically whenever the CommandScheduler runs during* simulation.*/
+  //frc2::CommandPtr ExampleMethodCommand();  /*** Example command factory method.*/
+  //bool ExampleCondition();  /*** An example method querying a boolean state of the subsystem (for example, a* digital sensor).** @return value of some boolean subsystem state, such as a digital sensor.*/
+  //void Periodic() override;  /*** Will be called periodically whenever the CommandScheduler runs.*/
+  //void SimulationPeriodic() override;  /*** Will be called periodically whenever the CommandScheduler runs during* simulation.*/
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be
@@ -51,12 +51,12 @@ class SwerveModule : public frc2::SubsystemBase {
   rev::SparkMaxRelativeEncoder m_driveEncoder = m_driveMotor.GetEncoder();
   rev::SparkMaxRelativeEncoder m_turningEncoder = m_turningMotor.GetEncoder();
 
-  rev::SparkMaxPIDController m_turningController = m_turningMotor.GetPIDController();
   rev::SparkMaxPIDController m_driveController = m_driveMotor.GetPIDController();
+  rev::SparkMaxPIDController m_turningController = m_turningMotor.GetPIDController();
 
   frc::AnalogInput m_absoluteEncoder;
 
-  frc::SwerveModuleState lastState;
+  // frc::SwerveModuleState lastState;
 
   std::string m_moduleName;
 

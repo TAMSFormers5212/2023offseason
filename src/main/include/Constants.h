@@ -75,6 +75,11 @@ namespace SwerveModuleConstants {//per swerve module
     constexpr double maxSpeed = 4.0;
     constexpr double driveRatio = 1; //SDS Mk4 L1
     constexpr double steerRatio = 1; //SDS Mk4 L1
+
+    namespace drivebase{
+        constexpr units::meter_t WheelBase = 0.6096_m;
+        constexpr units::meter_t TrackWidth = 0.5588_m;
+    }
     
     
     namespace topleft{

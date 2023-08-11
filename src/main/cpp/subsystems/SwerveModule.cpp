@@ -10,13 +10,14 @@ using namespace SwerveModuleConstants;
 using namespace rev;
 
   SwerveModule::SwerveModule(int driveMotorPort, int turningMotorPort, int encoderPort, double offset)
-  : m_driveMotor(driveMotorPort, kBrushless), 
+  : encoffset(offset),
+    m_driveMotor(driveMotorPort, kBrushless), 
     m_turningMotor(turningMotorPort, kBrushless), 
     m_driveEncoder(m_driveMotor.GetEncoder()),
     m_turningEncoder(m_turningMotor.GetEncoder()),
-    m_absoluteEncoder(encoderPort),
     m_driveController(m_driveMotor.GetPIDController()),
     m_turningController(m_turningMotor.GetPIDController()),
+    m_absoluteEncoder(encoderPort),
     m_moduleName(getName(driveMotorPort))
   {
     m_driveController.SetP(kdP);
@@ -87,4 +88,5 @@ using namespace rev;
         return ""+driveMotorID;
     }
   }
+
   
