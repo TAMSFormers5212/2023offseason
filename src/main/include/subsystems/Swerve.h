@@ -24,55 +24,55 @@
 
 class Swerve : public frc2::SubsystemBase {
  public:
-  Swerve();
+  // Swerve(int a);
 
-  frc::Pose2d AveragePose(); //vision and odometry pose
+  // frc::Pose2d AveragePose(); //vision and odometry pose
 
-  frc::Pose2d OdometryPose(); //odometry pose
+  // frc::Pose2d OdometryPose(); //odometry pose
 
-  frc::Rotation2d getGyroHeading();
+  // frc::Rotation2d getGyroHeading();
 
-  void resetOdometry(const frc::Pose2d pose);
+  // void resetOdometry(const frc::Pose2d pose);
 
-  void swerveDrive(double x, double y, double theta, bool fieldCentric, bool team);
+  // void swerveDrive(double x, double y, double theta, bool fieldCentric, bool team);
 
-  void brake();
+  // void brake();
 
-  void Periodic() override; //update pose using gyro, vision, and odometry
+  // void Periodic() override; //update pose using gyro, vision, and odometry
 
-  void resetAbsoluteEncoders();
+  // void resetAbsoluteEncoders();
 
-  void SyncAbsoluteEncoders();
+  // void SyncAbsoluteEncoders();
 
-  void SetVisionBeginning();
+  // void SetVisionBeginning();
 
-  /*** Example command factory method.*/frc2::CommandPtr ExampleMethodCommand();
-  /*** An example method querying a boolean state of the subsystem (for example, a* digital sensor).** @return value of some boolean subsystem state, such as a digital sensor.*/bool ExampleCondition();
+  /*** Example command factory method.frc2::CommandPtr ExampleMethodCommand();*/
+  /*** An example method querying a boolean state of the subsystem (for example, a* digital sensor).** @return value of some boolean subsystem state, such as a digital sensor.bool ExampleCondition();*/
   /*** Will be called periodically whenever the CommandScheduler runs.*void Periodic() override;*/
-  /*** Will be called periodically whenever the CommandScheduler runs during* simulation.*/void SimulationPeriodic() override;
+  /*** Will be called periodically whenever the CommandScheduler runs during* simulation.void SimulationPeriodic() override;*/
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 
-  wpi::array<frc::SwerveModulePosition, 4> GetPositions() const;
+  // wpi::array<frc::SwerveModulePosition, 4> GetPositions() const;
 
-  std::array<SwerveModule, 4> m_modules;
+  // // std::array<SwerveModule, 4> m_modules;
 
-  AHRS m_gyro{frc::SPI::Port::kMXP};
+  // AHRS m_gyro{frc::SPI::Port::kMXP};
 
-  frc::Rotation2d heading;
+  // frc::Rotation2d heading;
 
-  double lastAngle;
+  // double lastAngle;
 
-  //limelight
+  // //limelight
 
-  frc::SwerveDriveOdometry<4> m_odometry;
+  // frc::SwerveDriveOdometry<4> m_odometry;
 
-  frc::SwerveDrivePoseEstimator<4> m_poseEstimator;
+  // frc::SwerveDrivePoseEstimator<4> m_poseEstimator;
 
-  frc::Field2d m_poseEstField;
-  frc::Field2d m_visionEstField;
+  // frc::Field2d m_poseEstField;
+  // frc::Field2d m_visionEstField;
 
   
 
