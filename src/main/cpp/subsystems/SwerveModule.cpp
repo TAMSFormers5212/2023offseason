@@ -62,16 +62,16 @@ using namespace rev;
     encoffset = m_absoluteEncoder.GetValue();
   }
   double SwerveModule::getDrivePosition(){
-
+    return m_driveEncoder.GetPosition();
   }
   double SwerveModule::getTurningPosition(){
-
+    return m_turningEncoder.GetPosition();
   }
   double SwerveModule::getDriveVelocity(){
-
+    return m_driveEncoder.GetVelocity();
   }
   double SwerveModule::getTurningVelocity(){
-
+    return m_turningEncoder.GetVelocity();
   }
 
   std::string SwerveModule::getName(int driveMotorID){
