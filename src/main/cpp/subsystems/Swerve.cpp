@@ -55,11 +55,14 @@ using namespace units;
   }
 
   void Swerve::resetOdometry(const frc::Pose2d pose){
-    
+    m_odometry.ResetPosition(getGyroHeading(), {m_modules[0].getPosition(), m_modules[1].getPosition(), 
+                             m_modules[2].getPosition(), m_modules[3].getPosition()}, pose);
+    m_poseEstimator.ResetPosition(getGyroHeading(), {m_modules[0].getPosition(), m_modules[1].getPosition(), 
+                                  m_modules[2].getPosition(), m_modules[3].getPosition()}, pose);
   }
 
   void Swerve::swerveDrive(double x, double y, double theta, bool fieldCentric, bool team){
-
+    
   }
 
   void Swerve::brake(){

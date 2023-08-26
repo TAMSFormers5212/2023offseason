@@ -51,16 +51,33 @@ using namespace rev;
     resetTurningMotor();
   }
   void SwerveModule::resetDriveMotor(){
-
+    m_driveMotor.RestoreFactoryDefaults();
+    m_driveController.SetP(kdP);
+    m_driveController.SetI(kdI);
+    m_driveController.SetD(kdD);
+    m_driveController.SetFF(kdFF);
+    m_driveMotor.SetIdleMode(CANSparkMax::IdleMode::kBrake);
+    m_driveMotor.EnableVoltageCompensation(12.0);
+    m_driveMotor.SetSmartCurrentLimit(40);
+    resetDriveEncoder();
   }
   void SwerveModule::resetTurningMotor(){
-
+    m_turningMotor.RestoreFactoryDefaults();
+    m_turningController.SetP(ktP);
+    m_turningController.SetI(ktI);
+    m_turningController.SetD(ktD);
+    m_turningController.SetFF(ktFF);
+    m_turningMotor.SetIdleMode(CANSparkMax::IdleMode::kBrake);
+    m_turningMotor.EnableVoltageCompensation(12.0);
+    m_turningMotor.SetSmartCurrentLimit(20);
+    resetTurningEncoder();
   }
   void SwerveModule::resetDriveEncoder(){
-
+    m_driveEncoder.SetPosition(0.0);
   }
   void SwerveModule::resetTurningEncoder(){
-    encoffset = m_absoluteEncoder.GetValue();
+    // encoffset = m_absoluteEncoder.GetValue();
+    m_turningEncoder.SetPosition(m_absoluteEncoder.GetAbsolutePosition()* M_PI/180);
   }
   double SwerveModule::getDrivePosition(){
     return m_driveEncoder.GetPosition();

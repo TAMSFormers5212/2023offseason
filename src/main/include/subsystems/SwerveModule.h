@@ -13,6 +13,7 @@
 #include <frc/kinematics/SwerveModuleState.h>
 #include <frc/kinematics/SwerveModulePosition.h>
 #include <frc/AnalogInput.h>
+#include <frc/AnalogEncoder.h>
 #include <Constants.h>
 
 class SwerveModule : public frc2::SubsystemBase {
@@ -54,7 +55,7 @@ class SwerveModule : public frc2::SubsystemBase {
   rev::SparkMaxPIDController m_driveController = m_driveMotor.GetPIDController();
   rev::SparkMaxPIDController m_turningController = m_turningMotor.GetPIDController();
 
-  frc::AnalogInput m_absoluteEncoder;
+  frc::AnalogEncoder m_absoluteEncoder;
 
   // frc::SwerveModuleState lastState;
 
