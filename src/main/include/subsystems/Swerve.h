@@ -34,7 +34,7 @@ class Swerve : public frc2::SubsystemBase {
 
   void resetOdometry(const frc::Pose2d pose);
 
-  void swerveDrive(double x, double y, double theta, bool fieldCentric, bool team);
+  void swerveDrive(double x, double y, double theta, bool fieldCentric);
 
   void brake();
 

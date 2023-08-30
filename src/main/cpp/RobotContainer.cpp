@@ -5,6 +5,8 @@
 #include "RobotContainer.h"
 
 #include <frc2/command/button/Trigger.h>
+#include <frc2/command/Command.h>
+#include <frc2/command/RunCommand.h>
 
 #include "commands/Autos.h"
 #include "commands/ExampleCommand.h"
@@ -12,6 +14,24 @@
 RobotContainer::RobotContainer() {
   // Initialize all of your commands and subsystems here
   // m_drive = Swerve(0);
+  
+    m_drive.SetDefaultCommand(frc2::RunCommand(
+      [this] {  // onExecute
+        // Right stick up on xbox is negative, right stick down is postive.
+        // Right stick right on xbox is negative, right stick left is postive.
+        // Left stick right is positive, left stick left is negative.
+        double XAxis = -m_driverController.GetRawAxis(OIConstants::Joystick::XAxis);
+        double YAxis = -m_driverController.GetRawAxis(OIConstants::Joystick::YAxis);
+        double RotAxis = -m_driverController.GetRawAxis(OIConstants::Joystick::RotAxis);
+        return m_drive.swerveDrive(
+            std::abs(XAxis) < 0.025 ? 0.0 : XAxis,
+            std::abs(YAxis) < 0.025 ? 0.0 : YAxis,
+            std::abs(RotAxis) < 0.025 ? 0.0 : RotAxis,
+            true
+            );
+      },
+      {&m_drive}  // requirements
+      ));
 
   // Configure the button bindings
   ConfigureBindings();

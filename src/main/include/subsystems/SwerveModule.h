@@ -31,6 +31,7 @@ class SwerveModule : public frc2::SubsystemBase {
   double getTurningVelocity();
   frc::SwerveModuleState getState();
   frc::SwerveModulePosition getPosition();
+  void setState(const frc::SwerveModuleState state);
 
   std::string getName(int driveMotorID);
   

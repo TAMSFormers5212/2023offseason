@@ -47,9 +47,15 @@ constexpr int kOperatorControllerPort = 1;
 //joystick controller
 
 //axis
+namespace Joystick{
+constexpr int XAxis = 0;
+constexpr int YAxis = 1;
+constexpr int RotAxis = 2;
+}
 
 
 //buttons
+
 
 
 //console controller
@@ -72,7 +78,8 @@ namespace SwerveModuleConstants {//per swerve module
     constexpr double kdD = 0.0;
     constexpr double kdFF = 0.0;
 
-    constexpr double maxSpeed = 4.0;
+    constexpr auto maxSpeed = 4.0_mps; // arbitrary values
+    constexpr auto maxRotation = 2.0_rad_per_s;
     constexpr double driveRatio = 1; //SDS Mk4 L1
     constexpr double steerRatio = 1; //SDS Mk4 L1
 

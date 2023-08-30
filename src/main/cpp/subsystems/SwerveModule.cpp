@@ -72,6 +72,7 @@ using namespace rev;
     m_turningMotor.SetSmartCurrentLimit(20);
     resetTurningEncoder();
   }
+
   void SwerveModule::resetDriveEncoder(){
     m_driveEncoder.SetPosition(0.0);
   }
@@ -104,6 +105,30 @@ using namespace rev;
     }else{
         return ""+driveMotorID;
     }
+  }
+
+  void SwerveModule::setState(const frc::SwerveModuleState state){
+    frc::SwerveModuleState optimizedState = frc::SwerveModuleState::Optimize(state, units::radian_t{getTurningPosition()});
+
+    //since the driving motor is relative it doesn't wrap around 2 pi and 0. Therefore we need to calculate the position 
+    //delta to be within those bounds. 
+
+    frc::Rotation2d curAngle = units::radian_t{getTurningPosition()};
+
+    //copied cuz idk how it works
+    double delta = std::fmod(std::fmod((state.angle.Radians().value() -
+                                      curAngle.Radians().value() + M_PI),
+                                     2 * M_PI) +
+                               2 * M_PI,
+                           2 * M_PI) -
+                 M_PI;  // NOLINT
+
+    double adjustedAngle = delta + curAngle.Radians().value();
+
+    m_turningController.SetReference(adjustedAngle, CANSparkMax::ControlType::kPosition);
+    m_driveController.SetReference(state.speed.value(), CANSparkMax::ControlType::kVelocity);
+    
+
   }
 
   
