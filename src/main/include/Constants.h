@@ -35,7 +35,7 @@ namespace ElectricalConstants {
 constexpr int kMXP = 2;
 
 
-}  // namespace OperatorConstants
+} 
 
 
 
@@ -48,9 +48,15 @@ constexpr int kOperatorControllerPort = 1;
 
 //axis
 namespace Joystick{
-constexpr int XAxis = 0;
-constexpr int YAxis = 1;
-constexpr int RotAxis = 2;
+    //Axis
+constexpr int XAxis = 0; 
+constexpr int YAxis = 1; 
+constexpr int RotAxis = 2; 
+constexpr int ThrottleSlider = 3;
+
+    //Buttons
+constexpr int Trigger = 1; 
+constexpr int ButtonThree = 3;
 }
 
 
@@ -68,12 +74,12 @@ constexpr int RotAxis = 2;
 }
 
 namespace SwerveModuleConstants {//per swerve module
-    constexpr double ktP = 0.0;
+    constexpr double ktP = 0.0; // Turning PID
     constexpr double ktI = 0.0;
     constexpr double ktD = 0.0;
     constexpr double ktFF = 0.0;
     
-    constexpr double kdP = 0.0;
+    constexpr double kdP = 0.0; // Driving Speed PID
     constexpr double kdI = 0.0;
     constexpr double kdD = 0.0;
     constexpr double kdFF = 0.0;
@@ -84,40 +90,40 @@ namespace SwerveModuleConstants {//per swerve module
     constexpr double steerRatio = 1; //SDS Mk4 L1
 
     namespace drivebase{
-        constexpr units::meter_t WheelBase = 0.6096_m;
+        constexpr units::meter_t WheelBase = 0.6096_m; // for kinematics
         constexpr units::meter_t TrackWidth = 0.5588_m;
     }
     
     
     namespace topleft{
-        constexpr int driveMotor = 1;
-        constexpr int turningMotor = 2;
-        constexpr int absencoder = 1;
+        constexpr int driveMotor = 2; //CAN Port/NEO ID
+        constexpr int turningMotor = 9; //CAN Port/NEO ID
+        constexpr int absencoder = 3; //PWM Port
 
         constexpr double offset = 0;
 
 
     }
     namespace topright{
-        constexpr int driveMotor = 3;
-        constexpr int turningMotor = 4;
-        constexpr int absencoder = 2;
+        constexpr int driveMotor = 5; //CAN Port/NEO ID
+        constexpr int turningMotor = 6; //CAN Port/NEO ID
+        constexpr int absencoder = 0; //PWM Port
 
         constexpr double offset = 0;
         
     }
     namespace bottomleft{
-        constexpr int driveMotor = 5;
-        constexpr int turningMotor = 6;
-        constexpr int absencoder = 3;
+        constexpr int driveMotor = 3; //CAN Port/NEO ID
+        constexpr int turningMotor = 4; //CAN Port/NEO ID
+        constexpr int absencoder = 2; //PWM Port
 
         constexpr double offset = 0;
         
     }
     namespace bottomright{
-        constexpr int driveMotor = 7;
-        constexpr int turningMotor = 8;
-        constexpr int absencoder = 4;
+        constexpr int driveMotor = 8; //CAN Port/NEO ID
+        constexpr int turningMotor = 7; //CAN Port/NEO ID
+        constexpr int absencoder = 1; //PWM Port
 
         constexpr double offset = 0;
         
@@ -125,6 +131,26 @@ namespace SwerveModuleConstants {//per swerve module
 
 }
 
-namespace PoseConstants{
-    
+namespace ArmConstants{
+    namespace shoulderConstants{
+
+        constexpr double kP = 0.0; // PID
+        constexpr double kI = 0.0;
+        constexpr double kD = 0.0;
+        constexpr double kFF = 0.0;
+    }
+
+    namespace elbowConstants{
+        constexpr double kS = 0.0; // Feedforward
+        constexpr double kG = 0.0;
+        constexpr double kV = 0.0;
+        constexpr double kA = 0.0;
+
+        constexpr double kP = 0.0; // PID
+        constexpr double kI = 0.0;
+        constexpr double kD = 0.0;
+        constexpr double kFF = 0.0;
+    }
 }
+
+

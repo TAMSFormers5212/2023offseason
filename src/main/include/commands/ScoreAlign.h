@@ -6,27 +6,20 @@
 
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/SubsystemBase.h>
+#include <subsystems/Swerve.h>
 
 class PositionSubsystem : public frc2::SubsystemBase {
  public:
-  PositionSubsystem();
+  frc::Pose2d GetPosition();
 
-  /**
-   * Example command factory method.
-   */
-  frc2::CommandPtr ExampleMethodCommand();
 
-  /**
-   * An example method querying a boolean state of the subsystem (for example, a
-   * digital sensor).
-   *
-   * @return value of some boolean subsystem state, such as a digital sensor.
-   */
+  /*** Example command factory method.*/
+frc2::CommandPtr ExampleMethodCommand();
+
+  /*** An example method querying a boolean state of the subsystem (for example, a* digital sensor).** @return value of some boolean subsystem state, such as a digital sensor.*/
   bool ExampleCondition();
 
-  /**
-   * Will be called periodically whenever the CommandScheduler runs.
-   */
+  /*** Will be called periodically whenever the CommandScheduler runs.*/
   void Periodic() override;
 
   /**
