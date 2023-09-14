@@ -14,6 +14,7 @@
 #include <units/math.h>
 #include <units/velocity.h>
 #include <string>
+#include <vector>
 #include <array>
 
 /**
@@ -133,23 +134,52 @@ namespace SwerveModuleConstants {//per swerve module
 
 namespace ArmConstants{
     namespace shoulderConstants{
+        constexpr int armMotorLeft = 12;
+        constexpr int armMotorRight = 13;
+
+        // constexpr double encoderOffset;
 
         constexpr double kP = 0.0; // PID
         constexpr double kI = 0.0;
         constexpr double kD = 0.0;
         constexpr double kFF = 0.0;
+        constexpr double maxAcel = 1000;
+        constexpr double maxVelo = 1000;
+        constexpr double minVelo = 0;
+        constexpr double maxSpeed = 0.6; // 1 = 5500
+        constexpr double minSpeed = -0.6;
+
+        std::vector<double> positions = {};
+
+        constexpr int limitSwtich = 6;
     }
 
     namespace elbowConstants{
-        constexpr double kS = 0.0; // Feedforward
-        constexpr double kG = 0.0;
-        constexpr double kV = 0.0;
-        constexpr double kA = 0.0;
+        constexpr int elbowMotor = 11;
+
+        // constexpr double encoderOffset;
 
         constexpr double kP = 0.0; // PID
         constexpr double kI = 0.0;
         constexpr double kD = 0.0;
         constexpr double kFF = 0.0;
+
+        constexpr double maxSpeed = 0.6;
+        constexpr double minSpeed = -0.9;
+
+        std::vector<double> positions = {};
+    }
+
+    namespace grabberConstants{
+        constexpr int grabberMotor = 10;
+        
+        constexpr double kP = 0.0;
+        constexpr double kI = 0.0;
+        constexpr double kD = 0.0;
+        constexpr double kFF = 0.0;
+
+        constexpr double maxSpeed = 1.0;
+        constexpr double minSpeed = -1.0;
     }
 }
 

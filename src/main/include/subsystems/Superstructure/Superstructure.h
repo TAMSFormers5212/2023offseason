@@ -6,24 +6,45 @@
 
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/SubsystemBase.h>
+#include <frc/AnalogInput.h>
+#include <frc/AnalogEncoder.h>
+#include <frc/controller/ArmFeedforward.h>
+#include <frc/DigitalInput.h>
+
 #include <rev/CANSparkMax.h>
 #include <rev/CANSparkMaxLowLevel.h>
 #include <rev/RelativeEncoder.h>
 #include <rev/SparkMaxPIDController.h>
-#include <frc/AnalogInput.h>
-#include <frc/AnalogEncoder.h>
-#include <frc/controller/ArmFeedforward.h>
+
 #include "armPose.h"
 #include "Constants.h"
 
 class Superstructure : public frc2::SubsystemBase {
  public:
-  Superstructure(int shoulderLeftPort, int shoulderRightPort, int elbowPort, int shoulderEncoderPort, int elbowEncoderPort);
+  Superstructure(int shoulderLeftPort, int shoulderRightPort, int elbowPort, int limitSwitchPort);
 
   armPose getPose();
-  void setPose();
+  void setPose(armPose pose);
+  void resetPose();
 
-  
+  //intaking positions
+  void groundCone();
+  void groundCube();
+  void singleStation();
+  void doubleStation();
+
+  //low
+  void hybridNode();
+
+  //mid cone, cube
+  void midCone(); // move arm to right above cone pole
+  void midCube();
+
+  //high cone, cube
+  void highCone(); // move arm to right above cone pole
+  void highCube();
+
+  void scoreCone();// place cone down
   
 
 
@@ -44,8 +65,11 @@ class Superstructure : public frc2::SubsystemBase {
   rev::CANSparkMax m_shoulderMotorRight;
   rev::CANSparkMax m_elbowMotor;
 
-  frc::AnalogEncoder m_absoluteShoulderEncoder;
-  frc::AnalogEncoder m_absoluteElbowEncoder;
+  // frc::AnalogEncoder m_absoluteShoulderEncoder;
+  // frc::AnalogEncoder m_absoluteElbowEncoder;
+
+  // double shoulderOffset;
+  // double elbowOffset;
 
   rev::SparkMaxPIDController m_shoulderController = m_shoulderMotorLeft.GetPIDController();
   rev::SparkMaxPIDController m_elbowController = m_elbowMotor.GetPIDController();
@@ -56,7 +80,10 @@ class Superstructure : public frc2::SubsystemBase {
   // frc::ArmFeedforward m_shoulderFeedforward();
   // frc::ArmFeedforward m_elbowFeedforward;
 
-  armPose m_pose;
+  armPose m_pose; // current pose
+  int poseID;
+
+  frc::DigitalInput shoulderLimitSwtich;
 
 
 
