@@ -133,6 +133,7 @@ namespace SwerveModuleConstants {//per swerve module
 }
 
 namespace ArmConstants{
+
     namespace shoulderConstants{
         constexpr int armMotorLeft = 12;
         constexpr int armMotorRight = 13;
@@ -149,8 +150,6 @@ namespace ArmConstants{
         constexpr double maxSpeed = 0.6; // 1 = 5500
         constexpr double minSpeed = -0.6;
 
-        std::vector<double> positions = {};
-
         constexpr int limitSwtich = 6;
     }
 
@@ -164,10 +163,8 @@ namespace ArmConstants{
         constexpr double kD = 0.0;
         constexpr double kFF = 0.0;
 
-        constexpr double maxSpeed = 0.6;
-        constexpr double minSpeed = -0.9;
-
-        std::vector<double> positions = {};
+        constexpr double maxSpeed = 0.9;
+        constexpr double minSpeed = -0.6;
     }
 
     namespace grabberConstants{
@@ -180,6 +177,12 @@ namespace ArmConstants{
 
         constexpr double maxSpeed = 1.0;
         constexpr double minSpeed = -1.0;
+    }
+
+    namespace poseConstants{
+        constexpr std::array<double,2> elbowPositions = {0.0, 0.0};
+        constexpr std::array<double, 2> shoulderPositions = {0.0, 0.0};
+
     }
 }
 

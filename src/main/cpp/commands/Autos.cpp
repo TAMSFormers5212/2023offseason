@@ -6,9 +6,12 @@
 
 #include <frc2/command/Commands.h>
 
-#include "commands/ExampleCommand.h"
 
-frc2::CommandPtr autos::ExampleAuto(ExampleSubsystem* subsystem) {
-  return frc2::cmd::Sequence(subsystem->ExampleMethodCommand(),
-                             ExampleCommand(subsystem).ToPtr());
+// frc2::CommandPtr autos::ExampleAuto(ExampleSubsystem* subsystem) {
+//   return frc2::cmd::Sequence(subsystem->ExampleMethodCommand(),
+//                              ExampleCommand(subsystem).ToPtr());
+// }
+
+frc2::CommandPtr autos::ExampleAuto(Swerve* drive, Superstructure* superstrucutre){
+  return frc2::cmd::Sequence();
 }

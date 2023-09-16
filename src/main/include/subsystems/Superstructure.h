@@ -6,26 +6,31 @@
 
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/SubsystemBase.h>
-#include <frc/AnalogInput.h>
-#include <frc/AnalogEncoder.h>
-#include <frc/controller/ArmFeedforward.h>
+// #include <frc/AnalogInput.h>
+// #include <frc/AnalogEncoder.h>
+// #include <frc/controller/ArmFeedforward.h>
 #include <frc/DigitalInput.h>
+// #include <frc/motorcontrol/
 
 #include <rev/CANSparkMax.h>
 #include <rev/CANSparkMaxLowLevel.h>
 #include <rev/RelativeEncoder.h>
 #include <rev/SparkMaxPIDController.h>
 
+#include <string>
+
 #include "armPose.h"
 #include "Constants.h"
 
 class Superstructure : public frc2::SubsystemBase {
  public:
-  Superstructure(int shoulderLeftPort, int shoulderRightPort, int elbowPort, int limitSwitchPort);
+  virtual ~Superstructure();
+  Superstructure();
 
-  armPose getPose();
-  void setPose(armPose pose);
+  armPose getCurPose();
+  void goToPose(armPose pose);
   void resetPose();
+  armPose getPose(string name);
 
   //intaking positions
   void groundCone();
@@ -52,11 +57,11 @@ class Superstructure : public frc2::SubsystemBase {
   /*** Example command factory method.*/
   frc2::CommandPtr ExampleMethodCommand();
   /*** An example method querying a boolean state of the subsystem (for example, a* digital sensor).** @return value of some boolean subsystem state, such as a digital sensor.*/
-  bool ExampleCondition();
+  // bool ExampleCondition();
   /*** Will be called periodically whenever the CommandScheduler runs.*/
   void Periodic() override;
   /*** Will be called periodically whenever the CommandScheduler runs during* simulation.*/
-  void SimulationPeriodic() override;
+  // void SimulationPeriodic() override;
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be
@@ -64,6 +69,7 @@ class Superstructure : public frc2::SubsystemBase {
   rev::CANSparkMax m_shoulderMotorLeft;
   rev::CANSparkMax m_shoulderMotorRight;
   rev::CANSparkMax m_elbowMotor;
+  // frc::MotorController::
 
   // frc::AnalogEncoder m_absoluteShoulderEncoder;
   // frc::AnalogEncoder m_absoluteElbowEncoder;
@@ -85,6 +91,9 @@ class Superstructure : public frc2::SubsystemBase {
 
   frc::DigitalInput shoulderLimitSwtich;
 
+  std::vector<armPose> poses;
+
+  std::string names[2] = {"stow", "ground cone"};
 
 
 

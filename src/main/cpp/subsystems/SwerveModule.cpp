@@ -116,7 +116,7 @@ using namespace rev;
     frc::Rotation2d curAngle = units::radian_t{getTurningPosition()};
 
     //copied cuz idk how it works
-    double delta = std::fmod(std::fmod((state.angle.Radians().value() -
+    double delta = std::fmod(std::fmod((optimizedState.angle.Radians().value() -
                                       curAngle.Radians().value() + M_PI),
                                      2 * M_PI) +
                                2 * M_PI,
@@ -126,7 +126,7 @@ using namespace rev;
     double adjustedAngle = delta + curAngle.Radians().value();
 
     m_turningController.SetReference(adjustedAngle, CANSparkMax::ControlType::kPosition);
-    m_driveController.SetReference(state.speed.value(), CANSparkMax::ControlType::kVelocity);
+    m_driveController.SetReference(optimizedState.speed.value(), CANSparkMax::ControlType::kVelocity);
     
 
   }

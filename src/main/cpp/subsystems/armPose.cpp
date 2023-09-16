@@ -1,4 +1,4 @@
-#include "subsystems/Superstructure/armPose.h"
+#include "subsystems/armPose.h"
 
 armPose::armPose(double shoulder, double elbow, int id, string name)
   : shoulderPosition(shoulder),
@@ -6,6 +6,7 @@ armPose::armPose(double shoulder, double elbow, int id, string name)
     poseID(id),
     poseName(name)
 {
+
 }
 
 armPose::armPose(){
@@ -15,9 +16,20 @@ armPose::armPose(){
     poseName = "";
 }
 
-void armPose::set(double shoulder, double elbow){
-    setShoulderPose(shoulder);
-    setElbowPose(elbow);
+double armPose::getShoulderPose(){
+    return shoulderPosition;
+}
+
+double armPose::getElbowPose(){
+    return elbowPosition;
+}
+
+int armPose::getPoseID(){
+    return poseID;
+}
+
+string armPose::getName(){
+    return poseName;
 }
 
 void armPose::setShoulderPose(double shoulder){
@@ -35,3 +47,9 @@ void armPose::setPoseID(int id){
 void armPose::setPoseName(string name){
     poseName = name;
 }
+
+// int armPose::getNextPose(string name){
+//     if(name.compare("ground cone")==0){
+
+//     }
+// }

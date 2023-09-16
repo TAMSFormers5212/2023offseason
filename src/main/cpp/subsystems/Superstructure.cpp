@@ -1,21 +1,23 @@
-#include "subsystems/Superstructure/Superstructure.h"
+#include "subsystems/Superstructure.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 
 using enum rev::CANSparkMaxLowLevel::MotorType;
 using namespace rev;
 using namespace ArmConstants;
 
-Superstructure::Superstructure(int shoulderLeftPort, int shoulderRightPort, int elbowPort, int limitSwitchPort)
-  : m_shoulderMotorLeft(shoulderLeftPort, kBrushless),
-    m_shoulderMotorRight(shoulderRightPort, kBrushless),
-    m_elbowMotor(elbowPort, kBrushless),
-    // m_absoluteShoulderEncoder(shoulderEncoderPort),
-    // m_absoluteElbowEncoder(elbowEncoderPort),
+Superstructure::~Superstructure()
+{
+}
+
+Superstructure::Superstructure()
+  : m_shoulderMotorLeft(shoulderConstants::armMotorLeft, kBrushless),
+    m_shoulderMotorRight(shoulderConstants::armMotorRight, kBrushless),
+    m_elbowMotor(elbowConstants::elbowMotor, kBrushless),
     m_relativeShoulderEncoder(m_shoulderMotorLeft.GetEncoder()),
     m_relativeElbowEncoder(m_elbowMotor.GetEncoder()),
-    m_shoulderController(m_shoulderMotorLeft.GetPIDController()),
-    m_elbowController(m_elbowMotor.GetPIDController()),
-    shoulderLimitSwtich(limitSwitchPort)
+    // m_shoulderController(m_shoulderMotorLeft.GetPIDController()),
+    // m_elbowController(m_elbowMotor.GetPIDController()),
+    shoulderLimitSwtich(shoulderConstants::limitSwtich)
 {
     m_shoulderController.SetP(shoulderConstants::kP);
     m_shoulderController.SetI(shoulderConstants::kI);
@@ -45,19 +47,27 @@ Superstructure::Superstructure(int shoulderLeftPort, int shoulderRightPort, int 
     m_elbowMotor.EnableVoltageCompensation(12.0);
     m_elbowMotor.SetSmartCurrentLimit(40);
 
-    m_pose.set(m_relativeShoulderEncoder.GetPosition(),m_relativeElbowEncoder.GetPosition());
+    m_pose.setShoulderPose(m_relativeShoulderEncoder.GetPosition());
+    m_pose.setElbowPose(m_relativeElbowEncoder.GetPosition());
 
     frc::SmartDashboard::PutNumber("Shoulder Position", m_relativeShoulderEncoder.GetPosition());
     frc::SmartDashboard::PutNumber("Elbow Position", m_relativeElbowEncoder.GetPosition());
     frc::SmartDashboard::PutNumber("Shoulder Speed", m_shoulderController.GetSmartMotionMaxVelocity());
+
+    for(int i =0;i<int(names->length());i++){
+        poses.push_back(armPose(ArmConstants::poseConstants::shoulderPositions[i], ArmConstants::poseConstants::elbowPositions[i], i, names[i]));
+    }
 }
 
-armPose Superstructure::getPose(){
+armPose Superstructure::getCurPose(){
+    m_pose.setElbowPose(m_relativeElbowEncoder.GetPosition());
+    m_pose.setShoulderPose(m_relativeShoulderEncoder.GetPosition());
     return m_pose;
 }
 
-void Superstructure::setPose(armPose pose){
-    
+void Superstructure::goToPose(armPose pose){
+    m_shoulderController.SetReference(pose.getShoulderPose(), rev::CANSparkMax::ControlType::kSmartMotion);
+    m_elbowController.SetReference(pose.getElbowPose(), rev::CANSparkMax::ControlType::kSmartMotion);
 }
 
 void Superstructure::resetPose(){
@@ -66,4 +76,27 @@ void Superstructure::resetPose(){
         m_shoulderController.SetReference(0, rev::CANSparkMax::ControlType::kVelocity);
         m_relativeShoulderEncoder.SetPosition(0);
     }
+}
+
+armPose Superstructure::getPose(std::string name){
+    if(name.compare("stow") == 0){
+        return poses.at(0);
+    }else if(name.compare("ground cone")==0){
+        return poses.at(1);
+    // }else if(name.compare("ground cube")==0){
+        // return poses.at(2);
+    // }
+    
+    
+    }else {
+        return poses.at(0);
+    }
+}
+
+void Superstructure::Periodic(){
+    getCurPose();
+}
+
+void Superstructure::groundCone(){
+    goToPose(getPose("ground cone"));
 }

@@ -1,4 +1,6 @@
 #include <string>
+#include <vector>
+
 
 using namespace std;
 
@@ -6,8 +8,6 @@ class armPose{
     public:
     armPose();
     armPose(double shoulder, double elbow, int id, string name);
-    void set(double shoulder, double elbow);
-    void getNextPose();
     double getShoulderPose();
     double getElbowPose();
     int getPoseID();
