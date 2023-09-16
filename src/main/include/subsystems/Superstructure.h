@@ -31,6 +31,7 @@ class Superstructure : public frc2::SubsystemBase {
   void goToPose(armPose pose);
   void resetPose();
   armPose getPose(string name);
+  void manualAdjust(double shoulder, double elbow);
 
   //intaking positions
   void groundCone();
@@ -93,10 +94,17 @@ class Superstructure : public frc2::SubsystemBase {
 
   std::vector<armPose> poses;
 
-  std::string names[2] = {"stow", "ground cone"};
-
-
-
+  std::string names[11] = {"stow",
+                           "ground cone",
+                           "ground cube",
+                           "single station",
+                           "double station",
+                           "mid cone align",
+                           "mid cone score",
+                           "mid cube",
+                           "high cone align",
+                           "high cone score",
+                           "high cube"};
 };
 
 

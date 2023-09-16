@@ -42,34 +42,42 @@ constexpr int kMXP = 2;
 
 namespace OIConstants {//Controller buttons 
 
-constexpr int kDriverControllerPort = 0;
-constexpr int kOperatorControllerPort = 1;
+    constexpr int kDriverControllerPort = 0;
+    constexpr int kOperatorControllerPort = 1;
 
-//joystick controller
+    //joystick controller
+    namespace Joystick{
+        //Axis
+        constexpr int XAxis = 0; 
+        constexpr int YAxis = 1; 
+        constexpr int RotAxis = 2; 
+        constexpr int ThrottleSlider = 3;
+        //Buttons
+        constexpr int Trigger = 1; 
+        constexpr int ButtonThree = 3;
 
-//axis
-namespace Joystick{
-    //Axis
-constexpr int XAxis = 0; 
-constexpr int YAxis = 1; 
-constexpr int RotAxis = 2; 
-constexpr int ThrottleSlider = 3;
+        constexpr double deadband = 0.05;
+    }
 
-    //Buttons
-constexpr int Trigger = 1; 
-constexpr int ButtonThree = 3;
-}
+    namespace Controller{//console controller
+        //axis
+        constexpr int leftXAxis = 0;
+        constexpr int leftYAxis = 1;
+        constexpr int rightXAxis = 4;
+        constexpr int rightYAxis = 5;
+        constexpr int leftTrigger = 2;
+        constexpr int rightTrigger = 3;
+        //buttons
+        constexpr int A = 1;
+        constexpr int B = 2;
+        constexpr int X = 3;
+        constexpr int Y = 4;
+        constexpr int leftBumper = 5;
+        constexpr int rightBumper = 6;
+        constexpr int LPress = 9;
+        constexpr int RPress = 10;
+    }
 
-
-//buttons
-
-
-
-//console controller
-
-//axis
-
-//buttons
 
 
 }
@@ -87,8 +95,11 @@ namespace SwerveModuleConstants {//per swerve module
 
     constexpr auto maxSpeed = 4.0_mps; // arbitrary values
     constexpr auto maxRotation = 2.0_rad_per_s;
-    constexpr double driveRatio = 1; //SDS Mk4 L1
-    constexpr double steerRatio = 1; //SDS Mk4 L1
+    constexpr double driveRatio = 8.14; //SDS Mk4 L1
+    constexpr double steerRatio = 12.8; //SDS Mk4 L1
+    constexpr units::inch_t wheelDiameter = 4_in;
+    constexpr units::inch_t wheelCircumfrence = 12.57_in;
+    constexpr units::inch_t centerDistance = 10.5_in;
 
     namespace drivebase{
         constexpr units::meter_t WheelBase = 0.6096_m; // for kinematics
@@ -147,7 +158,10 @@ namespace ArmConstants{
         constexpr double maxAcel = 1000;
         constexpr double maxVelo = 1000;
         constexpr double minVelo = 0;
-        constexpr double maxSpeed = 0.6; // 1 = 5500
+        // max free speed = 5500 rpm
+        // gear ratio = 560? unsure 5x7x4x() 
+        // i forgot - Tony
+        constexpr double maxSpeed = 0.6; 
         constexpr double minSpeed = -0.6;
 
         constexpr int limitSwtich = 6;
@@ -174,14 +188,50 @@ namespace ArmConstants{
         constexpr double kI = 0.0;
         constexpr double kD = 0.0;
         constexpr double kFF = 0.0;
-
+        //BAG motor: max free rpm - 14000, probable max rpm - 7000
+        //wheel circumfrence: 12.57 inches, gear ratio - unknown
+        //idk what gears are in the two planetaries - Tony
         constexpr double maxSpeed = 1.0;
         constexpr double minSpeed = -1.0;
     }
 
     namespace poseConstants{
-        constexpr std::array<double,2> elbowPositions = {0.0, 0.0};
-        constexpr std::array<double, 2> shoulderPositions = {0.0, 0.0};
+        /*
+        1. stow
+        2. ground cone
+        3. ground cube
+        4. single station
+        5. double station
+        6. mid cone align
+        7. mid cone score
+        8. mid cube
+        9. high cone align
+        10. high cone score
+        11. high cube
+        */
+        constexpr std::array<double, 11> elbowPositions = {0.0, // stow
+                                                           25.76173210144043*7/10, // ground cone 
+                                                           5.761898517608643*7/10, // ground cube
+                                                           0.0, // single station
+                                                           0.0, // double station
+                                                           0.0, // mid cone align
+                                                           0.0, // mid cone score
+                                                           0.0, // mid cube
+                                                           0.0, // high cone align
+                                                           0.0, // high cone score
+                                                           0.0};// high cube
+
+        constexpr std::array<double, 11> shoulderPositions = {0.0, // stow
+                                                              -73.6689224243164, // ground cone 
+                                                              -104.93070983886719, // ground cube
+                                                              0.0, // single station
+                                                              0.0, // double station
+                                                              0.0, // mid cone align
+                                                              0.0, // mid cone score
+                                                              -37.30916213989258, // mid cube
+                                                              0.0, // high cone align
+                                                              0.0, // high cone score
+                                                              0.0};// high cube
 
     }
 }

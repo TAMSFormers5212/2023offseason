@@ -79,18 +79,17 @@ void Superstructure::resetPose(){
 }
 
 armPose Superstructure::getPose(std::string name){
-    if(name.compare("stow") == 0){
-        return poses.at(0);
-    }else if(name.compare("ground cone")==0){
-        return poses.at(1);
-    // }else if(name.compare("ground cube")==0){
-        // return poses.at(2);
-    // }
-    
-    
-    }else {
-        return poses.at(0);
+    for(armPose pose: poses){
+        if(name.compare(pose.getName())==0){
+            return pose;
+        }
     }
+    return poses.at(0); // 0 is stowed position
+}
+
+void Superstructure::manualAdjust(double shoulder, double elbow){
+    m_shoulderController.SetReference(shoulder, rev::CANSparkMax::ControlType::kVelocity);
+    m_elbowController.SetReference(elbow, rev::CANSparkMax::ControlType::kVelocity);
 }
 
 void Superstructure::Periodic(){

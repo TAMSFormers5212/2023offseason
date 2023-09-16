@@ -32,6 +32,13 @@ RobotContainer::RobotContainer() {
       {&m_drive}  // requirements
       ));
 
+      m_superStructure.SetDefaultCommand(frc2::RunCommand(
+        [this] {
+          //
+        },
+        {&m_superStructure}
+      ));
+
   // Configure the button bindings
   ConfigureBindings();
 }
