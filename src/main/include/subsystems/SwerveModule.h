@@ -29,6 +29,7 @@ class SwerveModule : public frc2::SubsystemBase {
   double getTurningPosition();
   double getDriveVelocity();
   double getTurningVelocity();
+  double getAbsolutePosition();
   frc::SwerveModuleState getState();
   frc::SwerveModulePosition getPosition();
   void setState(const frc::SwerveModuleState state);

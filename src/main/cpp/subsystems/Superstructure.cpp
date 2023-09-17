@@ -17,7 +17,8 @@ Superstructure::Superstructure()
     m_relativeElbowEncoder(m_elbowMotor.GetEncoder()),
     // m_shoulderController(m_shoulderMotorLeft.GetPIDController()),
     // m_elbowController(m_elbowMotor.GetPIDController()),
-    shoulderLimitSwtich(shoulderConstants::limitSwtich)
+    shoulderLimitSwtich(shoulderConstants::limitSwtich),
+    m_grabberMotor(grabberConstants::grabberMotor)
 {
     m_shoulderController.SetP(shoulderConstants::kP);
     m_shoulderController.SetI(shoulderConstants::kI);
@@ -25,6 +26,7 @@ Superstructure::Superstructure()
     m_shoulderController.SetFF(shoulderConstants::kFF);
     m_shoulderController.SetOutputRange(shoulderConstants::minSpeed, shoulderConstants::maxSpeed);
     m_shoulderController.SetSmartMotionMaxAccel(shoulderConstants::maxAcel);
+    m_shoulderController.SetSmartMotionMaxVelocity(shoulderConstants::maxVelo);
     
     m_shoulderMotorLeft.SetIdleMode(CANSparkMax::IdleMode::kBrake);
     m_shoulderMotorLeft.EnableVoltageCompensation(12.0);
@@ -42,6 +44,9 @@ Superstructure::Superstructure()
     m_elbowController.SetI(elbowConstants::kI);
     m_elbowController.SetD(elbowConstants::kD);
     m_elbowController.SetFF(elbowConstants::kFF);
+    m_elbowController.SetOutputRange(elbowConstants::minSpeed, elbowConstants::maxSpeed);
+    m_elbowController.SetSmartMotionMaxAccel(elbowConstants::maxAcel);
+    m_elbowController.SetSmartMotionMaxVelocity(elbowConstants::maxVelo);
     
     m_elbowMotor.SetIdleMode(CANSparkMax::IdleMode::kBrake);
     m_elbowMotor.EnableVoltageCompensation(12.0);
@@ -50,9 +55,6 @@ Superstructure::Superstructure()
     m_pose.setShoulderPose(m_relativeShoulderEncoder.GetPosition());
     m_pose.setElbowPose(m_relativeElbowEncoder.GetPosition());
 
-    frc::SmartDashboard::PutNumber("Shoulder Position", m_relativeShoulderEncoder.GetPosition());
-    frc::SmartDashboard::PutNumber("Elbow Position", m_relativeElbowEncoder.GetPosition());
-    frc::SmartDashboard::PutNumber("Shoulder Speed", m_shoulderController.GetSmartMotionMaxVelocity());
 
     for(int i =0;i<int(names->length());i++){
         poses.push_back(armPose(ArmConstants::poseConstants::shoulderPositions[i], ArmConstants::poseConstants::elbowPositions[i], i, names[i]));
@@ -93,6 +95,9 @@ void Superstructure::manualAdjust(double shoulder, double elbow){
 }
 
 void Superstructure::Periodic(){
+    frc::SmartDashboard::PutNumber("Shoulder Position", m_relativeShoulderEncoder.GetPosition());
+    frc::SmartDashboard::PutNumber("Elbow Position", m_relativeElbowEncoder.GetPosition());
+    frc::SmartDashboard::PutNumber("Shoulder Speed", m_shoulderController.GetSmartMotionMaxVelocity());
     getCurPose();
 }
 

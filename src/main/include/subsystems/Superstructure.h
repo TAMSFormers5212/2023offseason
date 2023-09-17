@@ -12,6 +12,8 @@
 #include <frc/DigitalInput.h>
 // #include <frc/motorcontrol/
 
+#include <ctre/Phoenix.h>
+
 #include <rev/CANSparkMax.h>
 #include <rev/CANSparkMaxLowLevel.h>
 #include <rev/RelativeEncoder.h>
@@ -70,7 +72,7 @@ class Superstructure : public frc2::SubsystemBase {
   rev::CANSparkMax m_shoulderMotorLeft;
   rev::CANSparkMax m_shoulderMotorRight;
   rev::CANSparkMax m_elbowMotor;
-  // frc::MotorController::
+  ctre::phoenix::motorcontrol::can::VictorSPX m_grabberMotor;
 
   // frc::AnalogEncoder m_absoluteShoulderEncoder;
   // frc::AnalogEncoder m_absoluteElbowEncoder;

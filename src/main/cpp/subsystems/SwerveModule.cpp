@@ -92,6 +92,9 @@ using namespace rev;
   double SwerveModule::getTurningVelocity(){
     return m_turningEncoder.GetVelocity();
   }
+  double SwerveModule::getAbsolutePosition(){
+    return m_absoluteEncoder.GetAbsolutePosition()*M_PI/180;
+  }
 
   std::string SwerveModule::getName(int driveMotorID){
     if(driveMotorID == topleft::driveMotor){

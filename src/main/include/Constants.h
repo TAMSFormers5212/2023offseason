@@ -176,6 +176,9 @@ namespace ArmConstants{
         constexpr double kI = 0.0;
         constexpr double kD = 0.0;
         constexpr double kFF = 0.0;
+        constexpr double maxVelo = 1000;
+        constexpr double minVelo = 0;
+        constexpr double maxAcel = 1000;
 
         constexpr double maxSpeed = 0.9;
         constexpr double minSpeed = -0.6;
@@ -188,7 +191,7 @@ namespace ArmConstants{
         constexpr double kI = 0.0;
         constexpr double kD = 0.0;
         constexpr double kFF = 0.0;
-        //BAG motor: max free rpm - 14000, probable max rpm - 7000
+        //775pro: max free rpm - 18000, probable max rpm - 12000
         //wheel circumfrence: 12.57 inches, gear ratio - unknown
         //idk what gears are in the two planetaries - Tony
         constexpr double maxSpeed = 1.0;

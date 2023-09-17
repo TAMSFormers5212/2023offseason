@@ -96,8 +96,6 @@ using namespace units;
     for(size_t i  = 0; i<states.size(); ++i){
       m_modules[i].setState(states[i]);
     }
-
-
   }
 
 
@@ -121,7 +119,12 @@ using namespace units;
     frc::SmartDashboard::PutNumber("Drive/Pose Estimate/Y", pose.Y().value());
     frc::SmartDashboard::PutNumber("Drive/Pose Estimate/Theta",pose.Rotation().Radians().value());
 
-    
+    // frc::SmartDashboard::PutNumber("Top Left Module Value", m_modules[0].getPosition().angle());
+    frc::SmartDashboard::PutNumber("Top Left Value", m_modules[0].getTurningPosition());
+    frc::SmartDashboard::PutNumber("Top Left Value v2", m_modules[0].getAbsolutePosition());
+    frc::SmartDashboard::PutNumber("Heading", -m_gyro.GetYaw());
+    frc::SmartDashboard::PutNumber("Pose X", (double) AveragePose().X());
+    frc::SmartDashboard::PutNumber("Pose Y", (double) AveragePose().Y());
     
 
   } //update pose using gyro, vision, and odometry
