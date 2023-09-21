@@ -34,6 +34,7 @@ class Superstructure : public frc2::SubsystemBase {
   void resetPose();
   armPose getPose(string name);
   void manualAdjust(double shoulder, double elbow);
+  void setGrabber(double speed);
 
   //intaking positions
   void groundCone();

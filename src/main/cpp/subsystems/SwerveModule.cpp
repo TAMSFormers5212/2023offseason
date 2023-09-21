@@ -1,6 +1,7 @@
 
 
 #include "subsystems/SwerveModule.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 #include <cmath>
 #include <numbers>
 #include <string>
@@ -27,6 +28,8 @@ using namespace rev;
     m_driveMotor.SetIdleMode(CANSparkMax::IdleMode::kBrake);
     m_driveMotor.EnableVoltageCompensation(12.0);
     m_driveMotor.SetSmartCurrentLimit(40);
+    m_driveEncoder.SetPositionConversionFactor((SwerveModuleConstants::wheelCircumfrence/SwerveModuleConstants::driveRatio).value());
+    m_driveEncoder.SetVelocityConversionFactor((SwerveModuleConstants::wheelCircumfrence/ SwerveModuleConstants::driveRatio / 60_s).value());
 
     m_turningController.SetP(ktP);
     m_turningController.SetI(ktI);
@@ -35,6 +38,8 @@ using namespace rev;
     m_turningMotor.SetIdleMode(CANSparkMax::IdleMode::kBrake);
     m_turningMotor.EnableVoltageCompensation(12.0);
     m_turningMotor.SetSmartCurrentLimit(20);
+    m_turningEncoder.SetPositionConversionFactor((2*M_PI)/SwerveModuleConstants::steerRatio);
+
   }
 
   frc::SwerveModuleState SwerveModule::getState(){
@@ -128,7 +133,7 @@ using namespace rev;
 
     double adjustedAngle = delta + curAngle.Radians().value();
 
-    m_turningController.SetReference(adjustedAngle, CANSparkMax::ControlType::kPosition);
+    m_turningController.SetReference(adjustedAngle+encoffset, CANSparkMax::ControlType::kPosition);
     m_driveController.SetReference(optimizedState.speed.value(), CANSparkMax::ControlType::kVelocity);
     
 

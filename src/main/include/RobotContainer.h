@@ -13,6 +13,8 @@
 #include "subsystems/Swerve.h"
 #include "subsystems/SwerveModule.h"
 #include "subsystems/Superstructure.h"
+#include <pathplanner/lib/PathPlanner.h>
+#include <pathplanner/lib/auto/SwerveAutoBuilder.h>
 
 
 
@@ -37,6 +39,10 @@ class RobotContainer {
   // The robot's subsystems are defined here...
   Swerve m_drive;
   Superstructure m_superStructure;
+
+  // std::unordered_map<std::string, std::shared_ptr<frc2::Command>> m_eventMap;
+
+  // pathplanner::SwerveAutoBuilder m_autoBuilder;
 
 
 

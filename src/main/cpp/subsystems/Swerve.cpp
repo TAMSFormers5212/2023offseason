@@ -34,6 +34,7 @@ using namespace units;
     m_gyro.Calibrate();
     heading = frc::Rotation2d(degree_t{-m_gyro.GetYaw()});
     lastAngle = -m_gyro.GetYaw();
+
   }
 
   frc::Pose2d Swerve::AveragePose(){
@@ -125,6 +126,11 @@ using namespace units;
     frc::SmartDashboard::PutNumber("Heading", -m_gyro.GetYaw());
     frc::SmartDashboard::PutNumber("Pose X", (double) AveragePose().X());
     frc::SmartDashboard::PutNumber("Pose Y", (double) AveragePose().Y());
+
+    frc::SmartDashboard::PutNumber("top left", m_modules[0].getTurningPosition());
+    frc::SmartDashboard::PutNumber("top right", m_modules[1].getTurningPosition());
+    frc::SmartDashboard::PutNumber("bottom left", m_modules[2].getTurningPosition());
+    frc::SmartDashboard::PutNumber("bottom right", m_modules[3].getTurningPosition());
     
 
   } //update pose using gyro, vision, and odometry

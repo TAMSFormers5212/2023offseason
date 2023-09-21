@@ -23,9 +23,9 @@ RobotContainer::RobotContainer() {
         double YAxis = -m_driverController.GetRawAxis(OIConstants::Joystick::YAxis);
         double RotAxis = -m_driverController.GetRawAxis(OIConstants::Joystick::RotAxis);
         return m_drive.swerveDrive(
-            std::abs(XAxis) < 0.025 ? 0.0 : XAxis,
-            std::abs(YAxis) < 0.025 ? 0.0 : YAxis,
-            std::abs(RotAxis) < 0.025 ? 0.0 : RotAxis,
+            std::abs(XAxis) < OIConstants::Joystick::deadband ? 0.0 : XAxis,
+            std::abs(YAxis) < OIConstants::Joystick::deadband ? 0.0 : YAxis,
+            std::abs(RotAxis) < OIConstants::Joystick::deadband ? 0.0 : RotAxis,
             true
             );
       },
@@ -35,6 +35,8 @@ RobotContainer::RobotContainer() {
       m_superStructure.SetDefaultCommand(frc2::RunCommand(
         [this] {
           //
+          m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger) - m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
+          m_superStructure.goToPose(m_superStructure.getCurPose());
         },
         {&m_superStructure}
       ));
