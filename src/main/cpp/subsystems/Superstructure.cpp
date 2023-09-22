@@ -18,6 +18,7 @@ Superstructure::Superstructure()
     // m_shoulderController(m_shoulderMotorLeft.GetPIDController()),
     // m_elbowController(m_elbowMotor.GetPIDController()),
     shoulderLimitSwtich(shoulderConstants::limitSwtich),
+    elbowLimitSwitch(elbowConstants::limitSwtich),
     m_grabberMotor(grabberConstants::grabberMotor)
 {
     m_shoulderController.SetP(shoulderConstants::kP);
@@ -95,10 +96,11 @@ void Superstructure::manualAdjust(double shoulder, double elbow){
 }
 
 void Superstructure::Periodic(){
+    getCurPose();
+    frc::SmartDashboard::PutString("Arm Pose", this->getCurPose().getName());
     frc::SmartDashboard::PutNumber("Shoulder Position", m_relativeShoulderEncoder.GetPosition());
     frc::SmartDashboard::PutNumber("Elbow Position", m_relativeElbowEncoder.GetPosition());
     frc::SmartDashboard::PutNumber("Shoulder Speed", m_shoulderController.GetSmartMotionMaxVelocity());
-    getCurPose();
 }
 
 void Superstructure::groundCone(){

@@ -32,6 +32,8 @@ class Swerve : public frc2::SubsystemBase {
 
   frc::Rotation2d getGyroHeading();
 
+  void resetHeading();
+
   void resetOdometry(const frc::Pose2d pose);
 
   void swerveDrive(double x, double y, double theta, bool fieldCentric);

@@ -97,7 +97,7 @@ using namespace rev;
   double SwerveModule::getTurningVelocity(){
     return m_turningEncoder.GetVelocity();
   }
-  double SwerveModule::getAbsolutePosition(){
+  double SwerveModule::getAbsolutePosition(){ // get position of absolute encoder
     return m_absoluteEncoder.GetAbsolutePosition()*M_PI/180;
   }
 

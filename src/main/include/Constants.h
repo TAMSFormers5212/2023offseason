@@ -182,6 +182,7 @@ namespace ArmConstants{
 
         constexpr double maxSpeed = 0.9;
         constexpr double minSpeed = -0.6;
+        constexpr int limitSwtich = 7;
     }
 
     namespace grabberConstants{

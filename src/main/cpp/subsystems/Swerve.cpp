@@ -58,6 +58,10 @@ using namespace units;
     return heading;
   }
 
+  void Swerve::resetHeading(){
+    m_gyro.Reset();
+  }
+
   void Swerve::resetOdometry(const frc::Pose2d pose){
     m_odometry.ResetPosition(getGyroHeading(), {m_modules[0].getPosition(), m_modules[1].getPosition(), 
                              m_modules[2].getPosition(), m_modules[3].getPosition()}, pose);
@@ -96,6 +100,7 @@ using namespace units;
 
     for(size_t i  = 0; i<states.size(); ++i){
       m_modules[i].setState(states[i]);
+      // m_modules[i].setState(states[i], openloop);
     }
   }
 
@@ -127,10 +132,10 @@ using namespace units;
     frc::SmartDashboard::PutNumber("Pose X", (double) AveragePose().X());
     frc::SmartDashboard::PutNumber("Pose Y", (double) AveragePose().Y());
 
-    frc::SmartDashboard::PutNumber("top left", m_modules[0].getTurningPosition());
-    frc::SmartDashboard::PutNumber("top right", m_modules[1].getTurningPosition());
-    frc::SmartDashboard::PutNumber("bottom left", m_modules[2].getTurningPosition());
-    frc::SmartDashboard::PutNumber("bottom right", m_modules[3].getTurningPosition());
+    frc::SmartDashboard::PutNumber("top left position", m_modules[0].getTurningPosition());
+    frc::SmartDashboard::PutNumber("top right position", m_modules[1].getTurningPosition());
+    frc::SmartDashboard::PutNumber("bottom left position", m_modules[2].getTurningPosition());
+    frc::SmartDashboard::PutNumber("bottom right position", m_modules[3].getTurningPosition());
     
 
   } //update pose using gyro, vision, and odometry
