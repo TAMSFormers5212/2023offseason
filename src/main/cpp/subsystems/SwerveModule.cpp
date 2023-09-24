@@ -2,6 +2,7 @@
 
 #include "subsystems/SwerveModule.h"
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/RobotController.h>
 #include <cmath>
 #include <numbers>
 #include <string>
@@ -81,9 +82,9 @@ using namespace rev;
   void SwerveModule::resetDriveEncoder(){
     m_driveEncoder.SetPosition(0.0);
   }
-  void SwerveModule::resetTurningEncoder(){
-    // encoffset = m_absoluteEncoder.GetValue();
-    m_turningEncoder.SetPosition(m_absoluteEncoder.GetAbsolutePosition()* M_PI/180);
+  void SwerveModule::resetTurningEncoder(){  
+    double rotations = (m_absoluteEncoder.GetVoltage() / frc::RobotController::GetVoltage5V());
+    m_turningEncoder.SetPosition(rotations * -1);
   }
   double SwerveModule::getDrivePosition(){
     return m_driveEncoder.GetPosition();
@@ -98,7 +99,8 @@ using namespace rev;
     return m_turningEncoder.GetVelocity();
   }
   double SwerveModule::getAbsolutePosition(){ // get position of absolute encoder
-    return m_absoluteEncoder.GetAbsolutePosition()*M_PI/180;
+    double rotations = (m_absoluteEncoder.GetVoltage() / frc::RobotController::GetVoltage5V());
+    return rotations;
   }
 
   std::string SwerveModule::getName(int driveMotorID){

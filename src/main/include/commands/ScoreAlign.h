@@ -8,25 +8,23 @@
 #include <frc2/command/SubsystemBase.h>
 #include <subsystems/Swerve.h>
 
-class PositionSubsystem : public frc2::SubsystemBase {
+class ScoreAlign : public frc2::CommandBase {
  public:
   frc::Pose2d GetPosition();
+  frc::Pose2d GoalPose();
+  frc2::CommandPtr Align();
+  
 
 
   /*** Example command factory method.*/
-frc2::CommandPtr ExampleMethodCommand();
+// frc2::CommandPtr ExampleMethodCommand();
 
   /*** An example method querying a boolean state of the subsystem (for example, a* digital sensor).** @return value of some boolean subsystem state, such as a digital sensor.*/
-  bool ExampleCondition();
-
+  // bool ExampleCondition();
   /*** Will be called periodically whenever the CommandScheduler runs.*/
-  void Periodic() override;
-
-  /**
-   * Will be called periodically whenever the CommandScheduler runs during
-   * simulation.
-   */
-  void SimulationPeriodic() override;
+  // void Periodic() override;
+  /*** Will be called periodically whenever the CommandScheduler runs during* simulation.*/
+  // void SimulationPeriodic() override;
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be
@@ -34,4 +32,6 @@ frc2::CommandPtr ExampleMethodCommand();
   double x;
   double y;
   double rotation;
+  int column;
+  int row;
 };
