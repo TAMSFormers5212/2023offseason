@@ -41,6 +41,8 @@ using namespace rev;
     m_turningMotor.SetSmartCurrentLimit(20);
     m_turningEncoder.SetPositionConversionFactor((2*M_PI)/SwerveModuleConstants::steerRatio);
 
+    m_turningController.SetPositionPIDWrappingEnabled(true);
+
   }
 
   frc::SwerveModuleState SwerveModule::getState(){

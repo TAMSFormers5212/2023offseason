@@ -93,8 +93,8 @@ class Superstructure : public frc2::SubsystemBase {
   armPose m_pose; // current pose
   int poseID;
 
-  frc::DigitalInput shoulderLimitSwtich;
-  frc::DigitalInput elbowLimitSwitch;
+  // frc::DigitalInput shoulderLimitSwtich;
+  // frc::DigitalInput elbowLimitSwitch;
 
   std::vector<armPose> poses;
 

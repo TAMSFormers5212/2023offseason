@@ -7,12 +7,15 @@
 #include <frc2/command/button/Trigger.h>
 #include <frc2/command/Command.h>
 #include <frc2/command/RunCommand.h>
+#include <frc2/command/button/JoystickButton.h>
+#include <frc2/command/InstantCommand.h>
 
 #include "commands/Autos.h"
 
 RobotContainer::RobotContainer() {
   // Initialize all of your commands and subsystems here
   // m_drive = Swerve(0);
+
   
     m_drive.SetDefaultCommand(frc2::RunCommand(
       [this] {  // onExecute
@@ -34,9 +37,7 @@ RobotContainer::RobotContainer() {
 
       m_superStructure.SetDefaultCommand(frc2::RunCommand(
         [this] {
-          //
-          m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger) - m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
-          m_superStructure.goToPose(m_superStructure.getCurPose());
+          return m_superStructure.goToPose(m_superStructure.getCurPose());
         },
         {&m_superStructure}
       ));
@@ -56,6 +57,40 @@ void RobotContainer::ConfigureBindings() {
   // Schedule `ExampleMethodCommand` when the Xbox controller's B button is
   // pressed, cancelling on release.
   // m_driverController.B().WhileTrue(m_subsystem.ExampleMethodCommand());
+
+  frc2::JoystickButton(&m_driverController, OIConstants::Joystick::Trigger).WhenReleased(
+    frc2::InstantCommand(
+      [this]{
+        m_drive.resetAbsoluteEncoders();
+      }
+    )
+  );
+
+  frc2::JoystickButton(&m_driverController, OIConstants::Joystick::ButtonThree).WhenReleased(
+    frc2::InstantCommand(
+      [this]{
+        m_drive.resetHeading();
+      }
+    )
+  );
+
+  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::leftTrigger).WhileHeld(
+    frc2::InstantCommand(
+      [this]{
+        m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger));
+      }
+    )
+  );
+
+  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::rightTrigger).WhileHeld(
+    frc2::InstantCommand(
+      [this]{
+        m_superStructure.setGrabber(-m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
+      }
+    )
+  );
+  //m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger) - m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
+          
 }
 
 frc2::CommandPtr RobotContainer::GetAutonomousCommand() {

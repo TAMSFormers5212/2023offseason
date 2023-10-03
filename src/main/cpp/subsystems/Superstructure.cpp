@@ -17,8 +17,8 @@ Superstructure::Superstructure()
     m_relativeElbowEncoder(m_elbowMotor.GetEncoder()),
     // m_shoulderController(m_shoulderMotorLeft.GetPIDController()),
     // m_elbowController(m_elbowMotor.GetPIDController()),
-    shoulderLimitSwtich(shoulderConstants::limitSwtich),
-    elbowLimitSwitch(elbowConstants::limitSwtich),
+    // shoulderLimitSwtich(shoulderConstants::limitSwtich),
+    // elbowLimitSwitch(elbowConstants::limitSwtich),
     m_grabberMotor(grabberConstants::grabberMotor)
 {
     m_shoulderController.SetP(shoulderConstants::kP);
@@ -74,11 +74,13 @@ void Superstructure::goToPose(armPose pose){
 }
 
 void Superstructure::resetPose(){
-    m_shoulderController.SetReference(-10, rev::CANSparkMax::ControlType::kVelocity);
-    if(shoulderLimitSwtich.Get()){
-        m_shoulderController.SetReference(0, rev::CANSparkMax::ControlType::kVelocity);
-        m_relativeShoulderEncoder.SetPosition(0);
-    }
+    // m_shoulderController.SetReference(-10, rev::CANSparkMax::ControlType::kVelocity);
+    // if(shoulderLimitSwtich.Get()){
+    //     m_shoulderController.SetReference(0, rev::CANSparkMax::ControlType::kVelocity);
+    //     m_relativeShoulderEncoder.SetPosition(0);
+    // }
+    m_relativeShoulderEncoder.SetPosition(0);
+    m_relativeElbowEncoder.SetPosition(0);
 }
 
 armPose Superstructure::getPose(std::string name){
