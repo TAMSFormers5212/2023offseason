@@ -77,7 +77,7 @@ void RobotContainer::ConfigureBindings() {
   frc2::JoystickButton(&m_operatorController, OIConstants::Controller::leftTrigger).WhileHeld(
     frc2::InstantCommand(
       [this]{
-        m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger));
+        // m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger));
       }
     )
   );
@@ -85,7 +85,7 @@ void RobotContainer::ConfigureBindings() {
   frc2::JoystickButton(&m_operatorController, OIConstants::Controller::rightTrigger).WhileHeld(
     frc2::InstantCommand(
       [this]{
-        m_superStructure.setGrabber(-m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
+        // m_superStructure.setGrabber(-m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
       }
     )
   );
