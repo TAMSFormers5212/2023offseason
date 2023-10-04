@@ -1,4 +1,5 @@
 #include "subsystems/armPose.h"
+#include <iostream>
 
 armPose::armPose(double shoulder, double elbow, int id, string name)
   : shoulderPosition(shoulder),
@@ -6,7 +7,7 @@ armPose::armPose(double shoulder, double elbow, int id, string name)
     poseID(id),
     poseName(name)
 {
-
+    std::cout<<"arm pose initalized"<<std::endl;
 }
 
 armPose::armPose(){

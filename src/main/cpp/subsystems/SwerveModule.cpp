@@ -6,6 +6,7 @@
 #include <cmath>
 #include <numbers>
 #include <string>
+#include <iostream>
 
 using enum rev::CANSparkMaxLowLevel::MotorType;
 using namespace SwerveModuleConstants;
@@ -43,6 +44,7 @@ using namespace rev;
 
     m_turningController.SetPositionPIDWrappingEnabled(true);
 
+    std::cout<<"Swerve Module "<< getName(driveMotorPort)<<" initalized correctly"<<std::endl; 
   }
 
   frc::SwerveModuleState SwerveModule::getState(){

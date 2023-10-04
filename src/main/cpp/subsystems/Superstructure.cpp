@@ -1,5 +1,6 @@
 #include "subsystems/Superstructure.h"
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <iostream>
 
 using enum rev::CANSparkMaxLowLevel::MotorType;
 using namespace rev;
@@ -7,6 +8,7 @@ using namespace ArmConstants;
 
 Superstructure::~Superstructure()
 {
+    std::cout<<"superstructure initalized correctly"<<std::endl;
 }
 
 Superstructure::Superstructure()
@@ -60,6 +62,7 @@ Superstructure::Superstructure()
     // for(int i =0;i<int(names->length());i++){
     //     poses.push_back(armPose(ArmConstants::poseConstants::shoulderPositions[i], ArmConstants::poseConstants::elbowPositions[i], i, names[i]));
     // }
+    std::cout<<"superstructure initalized correctly"<<std::endl;
 }
 
 armPose Superstructure::getCurPose(){

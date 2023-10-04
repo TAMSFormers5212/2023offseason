@@ -1,6 +1,7 @@
 #include "subsystems/Swerve.h"
 #include <frc/kinematics/ChassisSpeeds.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <iostream>
 
 
 
@@ -34,7 +35,7 @@ using namespace units;
     m_gyro.Calibrate();
     heading = frc::Rotation2d(degree_t{-m_gyro.GetYaw()});
     lastAngle = -m_gyro.GetYaw();
-
+    std::cout<<"Swerve subsystem initalized correctly"<<std::endl;
   }
 
   frc::Pose2d Swerve::AveragePose(){
@@ -52,9 +53,6 @@ using namespace units;
       180;  // NOLINT
     lastAngle = newAngle;
     heading = heading + frc::Rotation2d(degree_t{delta * 1.02466666667});
-    //SmartDashboard::PutNumber("Raw angle", newAngle);
-    //SmartDashboard::PutNumber("Fused angle", -m_gyro.GetFusedHeading());
-    //SmartDashboard::PutNumber("Angle", angle.Degrees().value());
     return heading;
   }
 

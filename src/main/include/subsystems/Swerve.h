@@ -24,6 +24,9 @@
 
 class Swerve : public frc2::SubsystemBase {
  public:
+
+  AHRS m_gyro{frc::SPI::Port::kMXP};
+  
   Swerve();
 
   frc::Pose2d AveragePose(); //vision and odometry pose
@@ -66,8 +69,6 @@ class Swerve : public frc2::SubsystemBase {
   frc::SwerveDriveOdometry<4> m_odometry;
 
   frc::SwerveDrivePoseEstimator<4> m_poseEstimator;
-
-  AHRS m_gyro{frc::SPI::Port::kMXP};
 
   frc::Rotation2d heading;
 
