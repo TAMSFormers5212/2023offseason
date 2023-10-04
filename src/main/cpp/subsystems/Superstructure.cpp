@@ -57,9 +57,9 @@ Superstructure::Superstructure()
     m_pose.setElbowPose(m_relativeElbowEncoder.GetPosition());
 
 
-    for(int i =0;i<int(names->length());i++){
-        poses.push_back(armPose(ArmConstants::poseConstants::shoulderPositions[i], ArmConstants::poseConstants::elbowPositions[i], i, names[i]));
-    }
+    // for(int i =0;i<int(names->length());i++){
+    //     poses.push_back(armPose(ArmConstants::poseConstants::shoulderPositions[i], ArmConstants::poseConstants::elbowPositions[i], i, names[i]));
+    // }
 }
 
 armPose Superstructure::getCurPose(){
