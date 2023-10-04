@@ -101,6 +101,8 @@ namespace SwerveModuleConstants {//per swerve module
     constexpr units::inch_t wheelCircumfrence = 12.57_in;
     constexpr units::inch_t centerDistance = 10.5_in;
 
+    constexpr double kRampTimeSeconds = 0.1;
+
     namespace drivebase{
         constexpr units::meter_t WheelBase = 0.6096_m; // for kinematics
         constexpr units::meter_t TrackWidth = 0.5588_m;
@@ -214,8 +216,8 @@ namespace ArmConstants{
         11. high cube
         */
         constexpr std::array<double, 11> elbowPositions = {0.0, // stow
-                                                           25.76173210144043*7/10, // ground cone 
-                                                           5.761898517608643*7/10, // ground cube
+                                                           18.0332124, // ground cone 
+                                                           4.01223290, // ground cube
                                                            0.0, // single station
                                                            0.0, // double station
                                                            0.0, // mid cone align
