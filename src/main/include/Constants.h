@@ -83,12 +83,12 @@ namespace OIConstants {//Controller buttons
 }
 
 namespace SwerveModuleConstants {//per swerve module
-    constexpr double ktP = 0.0; // Turning PID
+    constexpr double ktP = 0.1; // Turning PID
     constexpr double ktI = 0.0;
     constexpr double ktD = 0.0;
     constexpr double ktFF = 0.0;
     
-    constexpr double kdP = 0.0; // Driving Speed PID
+    constexpr double kdP = 0.1; // Driving Speed PID
     constexpr double kdI = 0.0;
     constexpr double kdD = 0.0;
     constexpr double kdFF = 0.0;

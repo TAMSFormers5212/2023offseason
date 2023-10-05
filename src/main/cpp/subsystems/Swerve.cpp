@@ -96,7 +96,7 @@ using namespace units;
     //   moduleState.speed *= scale * SwerveModuleConstants::maxSpeed / maxWheelSpeed;
     // }
     for(size_t i  = 0; i<states.size(); ++i){
-      frc::SmartDashboard::PutNumber(i+" speed", (double)states[i].speed);
+      // frc::SmartDashboard::PutNumber(i+" speed", (double)states[i].speed);
       m_modules[i].setState(states[i]);
       // m_modules[i].setState(states[i], openloop);
     }
@@ -134,6 +134,8 @@ using namespace units;
     frc::SmartDashboard::PutNumber("top right position", m_modules[1].getTurningPosition());
     frc::SmartDashboard::PutNumber("bottom left position", m_modules[2].getTurningPosition());
     frc::SmartDashboard::PutNumber("bottom right position", m_modules[3].getTurningPosition());
+    frc::SmartDashboard::PutNumber("bottom left turning voltage", m_modules[2].getTurningVelocity());
+    frc::SmartDashboard::PutNumber("top left turning voltage", m_modules[0].getTurningVelocity());
     
 
   } //update pose using gyro, vision, and odometry

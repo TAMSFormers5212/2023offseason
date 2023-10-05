@@ -16,34 +16,12 @@ using namespace rev;
   : encoffset(offset),
     m_driveMotor(driveMotorPort, kBrushless), 
     m_turningMotor(turningMotorPort, kBrushless), 
-    m_driveEncoder(m_driveMotor.GetEncoder()),
-    m_turningEncoder(m_turningMotor.GetEncoder()),
-    m_driveController(m_driveMotor.GetPIDController()),
-    m_turningController(m_turningMotor.GetPIDController()),
     m_absoluteEncoder(encoderPort),
     m_moduleName(getName(driveMotorPort))
   {
-    m_driveController.SetP(kdP);
-    m_driveController.SetI(kdI);
-    m_driveController.SetD(kdD);
-    m_driveController.SetFF(kdFF);
-    m_driveMotor.SetIdleMode(CANSparkMax::IdleMode::kBrake);
-    m_driveMotor.EnableVoltageCompensation(12.0);
-    m_driveMotor.SetSmartCurrentLimit(40);
-    m_driveEncoder.SetPositionConversionFactor((SwerveModuleConstants::wheelCircumfrence/SwerveModuleConstants::driveRatio).value());
-    m_driveEncoder.SetVelocityConversionFactor((SwerveModuleConstants::wheelCircumfrence/ SwerveModuleConstants::driveRatio / 60_s).value());
-
-    m_turningController.SetP(ktP);
-    m_turningController.SetI(ktI);
-    m_turningController.SetD(ktD);
-    m_turningController.SetFF(ktFF);
-    m_turningMotor.SetIdleMode(CANSparkMax::IdleMode::kBrake);
-    m_turningMotor.EnableVoltageCompensation(12.0);
-    m_turningMotor.SetSmartCurrentLimit(20);
-    m_turningEncoder.SetPositionConversionFactor((2*M_PI)/SwerveModuleConstants::steerRatio);
+    resetModule();
     // m_absoluteEncoder.SetOversampleBits(2);
     // m_absoluteEncoder.SetAverageBits(2);
-    m_turningController.SetPositionPIDWrappingEnabled(true);
 
     std::cout<<"Swerve Module "<< getName(driveMotorPort)<<" initalized correctly"<<std::endl; 
   }
@@ -70,6 +48,9 @@ using namespace rev;
     m_driveMotor.SetIdleMode(CANSparkMax::IdleMode::kBrake);
     m_driveMotor.EnableVoltageCompensation(12.0);
     m_driveMotor.SetSmartCurrentLimit(25, 50);
+    m_driveEncoder.SetPositionConversionFactor((SwerveModuleConstants::wheelCircumfrence/SwerveModuleConstants::driveRatio).value());
+    m_driveEncoder.SetVelocityConversionFactor((SwerveModuleConstants::wheelCircumfrence/ SwerveModuleConstants::driveRatio / 60_s).value());
+
     resetDriveEncoder();
   }
   void SwerveModule::resetTurningMotor(){
@@ -80,7 +61,9 @@ using namespace rev;
     m_turningController.SetFF(ktFF);
     m_turningMotor.SetIdleMode(CANSparkMax::IdleMode::kBrake);
     m_turningMotor.EnableVoltageCompensation(12.0);
-    m_turningMotor.SetSmartCurrentLimit(20);
+    m_turningMotor.SetSmartCurrentLimit(20, 30);
+    m_turningController.SetPositionPIDWrappingEnabled(true);
+    m_turningEncoder.SetPositionConversionFactor((2*M_PI)/SwerveModuleConstants::steerRatio);
     resetTurningEncoder();
   }
 
@@ -143,6 +126,7 @@ using namespace rev;
     m_turningController.SetReference(adjustedAngle+encoffset, CANSparkMax::ControlType::kPosition);
     // m_driveController.SetReference(optimizedState.speed.value(), CANSparkMax::ControlType::kVelocity);
     m_driveMotor.Set(optimizedState.speed.value()/7);
+    // m_turningMotor.
     frc::SmartDashboard::PutNumber(getName(m_driveMotor.GetDeviceId())+" voltage", m_driveMotor.GetBusVoltage());
   }
 
