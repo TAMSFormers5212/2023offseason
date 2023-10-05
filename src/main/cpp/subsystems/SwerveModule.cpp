@@ -142,8 +142,7 @@ using namespace rev;
 
     m_turningController.SetReference(adjustedAngle+encoffset, CANSparkMax::ControlType::kPosition);
     m_driveController.SetReference(optimizedState.speed.value(), CANSparkMax::ControlType::kVelocity);
-    
-
+    frc::SmartDashboard::PutNumber(getName(m_driveMotor.GetDeviceId())+" speed", optimizedState.speed.value());
   }
 
   
