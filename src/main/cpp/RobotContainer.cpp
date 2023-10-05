@@ -29,7 +29,7 @@ RobotContainer::RobotContainer() {
         double XAxis = -m_driverController.GetRawAxis(OIConstants::Joystick::XAxis);
         double YAxis = -m_driverController.GetRawAxis(OIConstants::Joystick::YAxis);
         double RotAxis = -m_driverController.GetRawAxis(OIConstants::Joystick::RotAxis);
-        cout<<XAxis<<" "<<YAxis<<" "<<RotAxis<<endl;
+        // cout<<XAxis<<" "<<YAxis<<" "<<RotAxis<<endl;
         frc::SmartDashboard::PutNumber("X axis", XAxis);
         frc::SmartDashboard::PutNumber("Y axis", YAxis);
         frc::SmartDashboard::PutNumber("Rotation axis", RotAxis);

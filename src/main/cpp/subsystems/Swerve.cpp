@@ -82,25 +82,25 @@ using namespace units;
 
     auto states = m_driveKinematics.ToSwerveModuleStates(speeds);
     //scale the values based on the largest one
-    double scale = std::max({x, y, theta});
-    //adjust speeds
-    auto maxWheelSpeed = 0.0_mps;
-    for (auto& moduleState : states) { // find max wheel speeds
-      maxWheelSpeed = meters_per_second_t{std::max(
-          maxWheelSpeed.value(), std::abs(moduleState.speed.value()))};
-    }
+    // double scale = std::max({x, y, theta});
+    // //adjust speeds
+    // auto maxWheelSpeed = 0.0_mps;
+    // for (auto& moduleState : states) { // find max wheel speeds
+    //   maxWheelSpeed = meters_per_second_t{std::max(
+    //       maxWheelSpeed.value(), std::abs(moduleState.speed.value()))};
+    // }
 
-    if (maxWheelSpeed.value() != 0.0 && // scale wheel speeds accordingly
-      (maxWheelSpeed / scale).value() > SwerveModuleConstants::maxSpeed.value()) {
-    for (auto moduleState : states) {
-      moduleState.speed *= scale * SwerveModuleConstants::maxSpeed / maxWheelSpeed;
-    }
+    // if (maxWheelSpeed.value() != 0.0 && // scale wheel speeds accordingly
+    //   (maxWheelSpeed / scale).value() > SwerveModuleConstants::maxSpeed.value()) {
+    // for (auto moduleState : states) {
+    //   moduleState.speed *= scale * SwerveModuleConstants::maxSpeed / maxWheelSpeed;
+    // }
     for(size_t i  = 0; i<states.size(); ++i){
       frc::SmartDashboard::PutNumber(i+" speed", (double)states[i].speed);
       m_modules[i].setState(states[i]);
       // m_modules[i].setState(states[i], openloop);
     }
-  }
+  // }
 
 
 
