@@ -134,8 +134,8 @@ using namespace units;
     frc::SmartDashboard::PutNumber("top right position", m_modules[1].getTurningPosition());
     frc::SmartDashboard::PutNumber("bottom left position", m_modules[2].getTurningPosition());
     frc::SmartDashboard::PutNumber("bottom right position", m_modules[3].getTurningPosition());
-    frc::SmartDashboard::PutNumber("bottom left turning voltage", m_modules[2].getTurningVelocity());
-    frc::SmartDashboard::PutNumber("top left turning voltage", m_modules[0].getTurningVelocity());
+    frc::SmartDashboard::PutNumber("bottom left turning velocity", m_modules[2].getTurningVelocity());
+    frc::SmartDashboard::PutNumber("top left turning velocity", m_modules[0].getTurningVelocity());
     
 
   } //update pose using gyro, vision, and odometry

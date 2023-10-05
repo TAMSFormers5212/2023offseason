@@ -131,3 +131,9 @@ using namespace rev;
   }
 
   
+void SwerveModule::Periodic(){
+  if(m_driveMotor.GetDeviceId()==bottomleft::driveMotor){
+    frc::SmartDashboard::PutNumber("bottomr left voltage",m_turningMotor.GetBusVoltage());
+    frc::SmartDashboard::PutNumber("bottomr left voltage",m_turningMotor.GetOutputCurrent());
+  }
+}
