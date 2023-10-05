@@ -9,8 +9,12 @@
 #include <frc2/command/RunCommand.h>
 #include <frc2/command/button/JoystickButton.h>
 #include <frc2/command/InstantCommand.h>
+#include <iostream>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 #include "commands/Autos.h"
+
+using namespace std;
 
 RobotContainer::RobotContainer() {
   // Initialize all of your commands and subsystems here
@@ -25,7 +29,11 @@ RobotContainer::RobotContainer() {
         double XAxis = -m_driverController.GetRawAxis(OIConstants::Joystick::XAxis);
         double YAxis = -m_driverController.GetRawAxis(OIConstants::Joystick::YAxis);
         double RotAxis = -m_driverController.GetRawAxis(OIConstants::Joystick::RotAxis);
-        return m_drive.swerveDrive(
+        cout<<XAxis<<" "<<YAxis<<" "<<RotAxis<<endl;
+        frc::SmartDashboard::PutNumber("X axis", XAxis);
+        frc::SmartDashboard::PutNumber("Y axis", YAxis);
+        frc::SmartDashboard::PutNumber("Rotation axis", RotAxis);
+        m_drive.swerveDrive(
             std::abs(XAxis) < OIConstants::Joystick::deadband ? 0.0 : XAxis,
             std::abs(YAxis) < OIConstants::Joystick::deadband ? 0.0 : YAxis,
             std::abs(RotAxis) < OIConstants::Joystick::deadband ? 0.0 : RotAxis,
@@ -77,7 +85,7 @@ void RobotContainer::ConfigureBindings() {
   frc2::JoystickButton(&m_operatorController, OIConstants::Controller::leftTrigger).WhileHeld(
     frc2::InstantCommand(
       [this]{
-        // m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger));
+        m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger));
       }
     )
   );
@@ -85,7 +93,7 @@ void RobotContainer::ConfigureBindings() {
   frc2::JoystickButton(&m_operatorController, OIConstants::Controller::rightTrigger).WhileHeld(
     frc2::InstantCommand(
       [this]{
-        // m_superStructure.setGrabber(-m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
+        m_superStructure.setGrabber(-m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
       }
     )
   );

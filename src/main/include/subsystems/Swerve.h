@@ -22,6 +22,8 @@
 #include <frc/simulation/SimDeviceSim.h>
 #include <frc/smartdashboard/Field2d.h>
 
+using namespace SwerveModuleConstants;
+
 class Swerve : public frc2::SubsystemBase {
  public:
 
@@ -61,6 +63,9 @@ class Swerve : public frc2::SubsystemBase {
   // declared private and exposed only through public methods.
 
   // wpi::array<frc::SwerveModulePosition, 4> GetPositions() const;
+
+
+
 
   std::array<SwerveModule, 4> m_modules;
 

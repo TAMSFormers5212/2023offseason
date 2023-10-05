@@ -95,8 +95,8 @@ using namespace units;
     for (auto moduleState : states) {
       moduleState.speed *= scale * SwerveModuleConstants::maxSpeed / maxWheelSpeed;
     }
-
     for(size_t i  = 0; i<states.size(); ++i){
+      frc::SmartDashboard::PutNumber(i+" speed", (double)states[i].speed);
       m_modules[i].setState(states[i]);
       // m_modules[i].setState(states[i], openloop);
     }

@@ -41,8 +41,8 @@ using namespace rev;
     m_turningMotor.EnableVoltageCompensation(12.0);
     m_turningMotor.SetSmartCurrentLimit(20);
     m_turningEncoder.SetPositionConversionFactor((2*M_PI)/SwerveModuleConstants::steerRatio);
-    m_absoluteEncoder.SetOversampleBits(4);
-    m_absoluteEncoder.SetAverageBits(4);
+    // m_absoluteEncoder.SetOversampleBits(2);
+    // m_absoluteEncoder.SetAverageBits(2);
     m_turningController.SetPositionPIDWrappingEnabled(true);
 
     std::cout<<"Swerve Module "<< getName(driveMotorPort)<<" initalized correctly"<<std::endl; 
