@@ -125,7 +125,7 @@ using namespace rev;
 
     m_turningController.SetReference(adjustedAngle+encoffset, CANSparkMax::ControlType::kPosition);
     // m_driveController.SetReference(optimizedState.speed.value(), CANSparkMax::ControlType::kVelocity);
-    m_driveMotor.Set(optimizedState.speed.value()/7);
+    m_driveMotor.Set(optimizedState.speed / SwerveModuleConstants::maxSpeed);
     // m_turningMotor.
     frc::SmartDashboard::PutNumber(getName(m_driveMotor.GetDeviceId())+" voltage", m_driveMotor.GetBusVoltage());
   }

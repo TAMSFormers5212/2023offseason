@@ -157,7 +157,7 @@ namespace ArmConstants{
         constexpr double kI = 0.0;
         constexpr double kD = 0.0;
         constexpr double kFF = 0.0;
-        constexpr double maxAcel = 1000;
+        constexpr double maxAcel = 500;
         constexpr double maxVelo = 1000;
         constexpr double minVelo = 0;
         // max free speed = 5500 rpm
@@ -215,9 +215,8 @@ namespace ArmConstants{
         10. high cone score
         11. high cube
         */
-        constexpr std::array<double, 11> elbowPositions = {0.0, // stow
-                                                           18.0332124, // ground cone 
-                                                           4.01223290, // ground cube
+        constexpr std::array<double, 10> elbowPositions = {0.0, // stow
+                                                           18.0332124, // ground pickup
                                                            0.0, // single station
                                                            0.0, // double station
                                                            0.0, // mid cone align
@@ -227,9 +226,8 @@ namespace ArmConstants{
                                                            0.0, // high cone score
                                                            0.0};// high cube
 
-        constexpr std::array<double, 11> shoulderPositions = {0.0, // stow
-                                                              -73.6689224243164, // ground cone 
-                                                              -104.93070983886719, // ground cube
+        constexpr std::array<double, 10> shoulderPositions = {0.0, // stow
+                                                              -73.6689224243164, // ground pickup
                                                               0.0, // single station
                                                               0.0, // double station
                                                               0.0, // mid cone align

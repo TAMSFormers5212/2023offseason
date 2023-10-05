@@ -100,20 +100,19 @@ armPose Superstructure::getPose(std::string name){
 }
 
 void Superstructure::manualAdjust(double shoulder, double elbow){
-    m_shoulderController.SetReference(shoulder, rev::CANSparkMax::ControlType::kVelocity);
-    m_elbowController.SetReference(elbow, rev::CANSparkMax::ControlType::kVelocity);
+    // m_shoulderController.SetReference(shoulder*shoulderConstants::maxVelo, rev::CANSparkMax::ControlType::kVelocity);
+    // m_elbowController.SetReference(elbow*elbowConstants::maxVel, rev::CANSparkMax::ControlType::kVelocity);
+
+    m_shoulderMotorLeft.Set(shoulder*0.5);
+    m_elbowMotor.Set(elbow*0.5);
 }
 
 void Superstructure::Periodic(){
     getCurPose();
     frc::SmartDashboard::PutString("Arm Pose", this->getCurPose().getName());
-    frc::SmartDashboard::PutNumber("Shoulder Position", m_relativeShoulderEncoder.GetPosition());
+    // frc::SmartDashboard::PutNumber("Shoulder Position", m_relativeShoulderEncoder.GetPosition());
     frc::SmartDashboard::PutNumber("Elbow Position", m_relativeElbowEncoder.GetPosition());
-    frc::SmartDashboard::PutNumber("Shoulder Speed", m_shoulderController.GetSmartMotionMaxVelocity());
-}
-
-void Superstructure::groundCone(){
-    goToPose(getPose("ground cone"));
+    frc::SmartDashboard::PutNumber("Shoulder Position", m_relativeShoulderEncoder.GetPosition());
 }
 
 void Superstructure::setGrabber(double speed){

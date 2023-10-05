@@ -36,25 +36,6 @@ class Superstructure : public frc2::SubsystemBase {
   void manualAdjust(double shoulder, double elbow);
   void setGrabber(double speed);
 
-  //intaking positions
-  void groundCone();
-  void groundCube();
-  void singleStation();
-  void doubleStation();
-
-  //low
-  void hybridNode();
-
-  //mid cone, cube
-  void midCone(); // move arm to right above cone pole
-  void midCube();
-
-  //high cone, cube
-  void highCone(); // move arm to right above cone pole
-  void highCube();
-
-  void scoreCone();// place cone down
-  
 
 
 
@@ -98,9 +79,8 @@ class Superstructure : public frc2::SubsystemBase {
 
   std::vector<armPose> poses;
 
-  std::string names[11] = {"stow",
-                           "ground cone",
-                           "ground cube",
+  std::string names[10] = {"stow",
+                           "ground pickup",
                            "single station",
                            "double station",
                            "mid cone align",
