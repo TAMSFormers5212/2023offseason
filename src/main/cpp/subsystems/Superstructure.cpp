@@ -116,9 +116,27 @@ void Superstructure::Periodic(){
 }
 
 void Superstructure::setGrabber(double speed){
-    if(m_grabberMotor.GetTemperature()>50){
-        m_grabberMotor.Set(VictorSPXControlMode::PercentOutput, 0);
-    }else{
+    // if(m_grabberMotor.GetTemperature()>50){
+        // m_grabberMotor.Set(VictorSPXControlMode::PercentOutput, 0);
+    // }else{
         m_grabberMotor.Set(VictorSPXControlMode::PercentOutput, speed);
-    }
+    // }
+    frc::SmartDashboard::PutNumber("grabber speed", speed);
+}
+
+void Superstructure::setManual(bool man){
+    manual = man;
+}
+
+bool Superstructure::getManual(){
+    return manual;
+}
+
+void Superstructure::setPose(armPose pose){
+    this->m_pose = pose;
+}
+
+void Superstructure::resetEncoders(){
+    m_relativeElbowEncoder.SetPosition(0);
+    m_relativeShoulderEncoder.SetPosition(0);
 }

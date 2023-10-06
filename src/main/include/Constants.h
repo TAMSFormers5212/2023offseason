@@ -131,7 +131,7 @@ namespace SwerveModuleConstants {//per swerve module
         constexpr int turningMotor = 3; //CAN Port/NEO ID
         constexpr int absencoder = 2; //PWM Port
 
-        constexpr double offset = 0;
+        constexpr double offset = 0.25;
         
     }
     namespace bottomright{
@@ -156,7 +156,7 @@ namespace ArmConstants{
         constexpr double kP = 0.0; // PID
         constexpr double kI = 0.0;
         constexpr double kD = 0.0;
-        constexpr double kFF = 0.0;
+        constexpr double kFF = 0.1;
         constexpr double maxAcel = 500;
         constexpr double maxVelo = 1000;
         constexpr double minVelo = 0;
@@ -174,10 +174,10 @@ namespace ArmConstants{
 
         // constexpr double encoderOffset;
 
-        constexpr double kP = 0.0; // PID
+        constexpr double kP = 0.1; // PID
         constexpr double kI = 0.0;
         constexpr double kD = 0.0;
-        constexpr double kFF = 0.0;
+        constexpr double kFF = 0.1;
         constexpr double maxVelo = 1000;
         constexpr double minVelo = 0;
         constexpr double maxAcel = 1000;
@@ -215,26 +215,22 @@ namespace ArmConstants{
         10. high cone score
         11. high cube
         */
-        constexpr std::array<double, 10> elbowPositions = {0.0, // stow
+        constexpr std::array<double, 8> elbowPositions = {0.0, // stow
                                                            18.0332124, // ground pickup
                                                            0.0, // single station
                                                            0.0, // double station
-                                                           0.0, // mid cone align
-                                                           0.0, // mid cone score
+                                                           0.0, // mid cone 
                                                            0.0, // mid cube
-                                                           0.0, // high cone align
-                                                           0.0, // high cone score
+                                                           0.0, // high cone 
                                                            0.0};// high cube
 
-        constexpr std::array<double, 10> shoulderPositions = {0.0, // stow
+        constexpr std::array<double, 8> shoulderPositions = {0.0, // stow
                                                               -73.6689224243164, // ground pickup
                                                               0.0, // single station
                                                               0.0, // double station
-                                                              0.0, // mid cone align
-                                                              0.0, // mid cone score
+                                                              0.0, // mid cone 
                                                               -37.30916213989258, // mid cube
-                                                              0.0, // high cone align
-                                                              0.0, // high cone score
+                                                              0.0, // high cone 
                                                               0.0};// high cube
 
     }

@@ -32,9 +32,14 @@ class Superstructure : public frc2::SubsystemBase {
   armPose getCurPose();
   void goToPose(armPose pose);
   void resetPose();
+  void setPose(armPose pose);
   armPose getPose(string name);
   void manualAdjust(double shoulder, double elbow);
   void setGrabber(double speed);
+  void resetEncoders();
+
+  void setManual(bool man);
+  bool getManual();
 
 
 
@@ -74,20 +79,20 @@ class Superstructure : public frc2::SubsystemBase {
   armPose m_pose; // current pose
   int poseID;
 
+  bool manual = false;
+
   // frc::DigitalInput shoulderLimitSwtich;
   // frc::DigitalInput elbowLimitSwitch;
 
   std::vector<armPose> poses;
 
-  std::string names[10] = {"stow",
+  std::string names[8] = {"stow",
                            "ground pickup",
                            "single station",
                            "double station",
-                           "mid cone align",
-                           "mid cone score",
+                           "mid cone",
                            "mid cube",
-                           "high cone align",
-                           "high cone score",
+                           "high cone",
                            "high cube"};
 };
 

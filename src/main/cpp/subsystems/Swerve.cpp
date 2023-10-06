@@ -96,7 +96,9 @@ using namespace units;
     //   moduleState.speed *= scale * SwerveModuleConstants::maxSpeed / maxWheelSpeed;
     // }
     for(size_t i  = 0; i<states.size(); ++i){
-      // frc::SmartDashboard::PutNumber(i+" speed", (double)states[i].speed);
+      // if(i==2){
+      //   frc::SmartDashboard::PutNumber(i+" speed", (double)states[i]);
+      // }
       m_modules[i].setState(states[i]);
       // m_modules[i].setState(states[i], openloop);
     }
@@ -134,8 +136,8 @@ using namespace units;
     frc::SmartDashboard::PutNumber("tr rotation", m_modules[1].getTurningPosition());
     frc::SmartDashboard::PutNumber("bl rotation", m_modules[2].getTurningPosition());
     frc::SmartDashboard::PutNumber("br rotation", m_modules[3].getTurningPosition());
-    frc::SmartDashboard::PutNumber("bottom left turning velocity", m_modules[2].getTurningVelocity());
-    frc::SmartDashboard::PutNumber("top left turning velocity", m_modules[0].getTurningVelocity());
+    frc::SmartDashboard::PutNumber("bl t velocity", m_modules[2].getTurningVelocity());
+    frc::SmartDashboard::PutNumber("tl t velocity", m_modules[0].getTurningVelocity());
     frc::SmartDashboard::PutNumber("tl speed", m_modules[0].getDriveVelocity());
     frc::SmartDashboard::PutNumber("tr speed", m_modules[1].getDriveVelocity());
     frc::SmartDashboard::PutNumber("bl speed", m_modules[2].getDriveVelocity());

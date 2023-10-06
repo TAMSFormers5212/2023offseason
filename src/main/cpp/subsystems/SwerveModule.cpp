@@ -122,18 +122,20 @@ using namespace rev;
                  M_PI;  // NOLINT
 
     double adjustedAngle = delta + curAngle.Radians().value();
-
+  if(m_driveMotor.GetDeviceId()==bottomleft::driveMotor){
+    frc::SmartDashboard::PutNumber("turn ref", adjustedAngle+encoffset);
+  }
     m_turningController.SetReference(adjustedAngle+encoffset, CANSparkMax::ControlType::kPosition);
     // m_driveController.SetReference(optimizedState.speed.value(), CANSparkMax::ControlType::kVelocity);
     m_driveMotor.Set(optimizedState.speed / SwerveModuleConstants::maxSpeed);
     // m_turningMotor.
-    frc::SmartDashboard::PutNumber(getName(m_driveMotor.GetDeviceId())+" voltage", m_driveMotor.GetBusVoltage());
+    // frc::SmartDashboard::PutNumber(getName(m_driveMotor.GetDeviceId())+" voltage", m_driveMotor.GetBusVoltage());
   }
 
   
 void SwerveModule::Periodic(){
   if(m_driveMotor.GetDeviceId()==bottomleft::driveMotor){
-    frc::SmartDashboard::PutNumber("bottomr left voltage",m_turningMotor.GetBusVoltage());
-    frc::SmartDashboard::PutNumber("bottomr left voltage",m_turningMotor.GetOutputCurrent());
+    frc::SmartDashboard::PutNumber("bus voltage",m_turningMotor.GetBusVoltage());
+    frc::SmartDashboard::PutNumber("output current",m_turningMotor.GetOutputCurrent());
   }
 }

@@ -47,7 +47,38 @@ RobotContainer::RobotContainer() {
 
       m_superStructure.SetDefaultCommand(frc2::RunCommand(
         [this] {
-          return m_superStructure.goToPose(m_superStructure.getCurPose());
+          // return m_superStructure.goToPose(m_superStructure.getCurPose());
+        m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger)-m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
+        
+        if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::LPress)){
+          m_superStructure.setManual(!m_superStructure.getManual());
+        }
+        if(m_superStructure.getManual()){
+          m_superStructure.manualAdjust(
+            m_operatorController.GetRawAxis(OIConstants::Controller::leftYAxis),
+            m_operatorController.GetRawAxis(OIConstants::Controller::rightYAxis));
+        }else{
+          m_superStructure.goToPose(m_superStructure.getCurPose());
+        }
+        if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::A)){
+          m_superStructure.setPose(m_superStructure.getPose("stow"));
+        }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::B)){
+          m_superStructure.setPose(m_superStructure.getPose("ground pickup"));
+        }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::X)){
+          m_superStructure.setPose(m_superStructure.getPose("single station"));
+        }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::Y)){
+          m_superStructure.setPose(m_superStructure.getPose("double station"));
+        }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>315||m_operatorController.GetPOV()<=45)){
+          m_superStructure.setPose(m_superStructure.getPose("high cone"));
+        }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>45||m_operatorController.GetPOV()<=135)){
+          m_superStructure.setPose(m_superStructure.getPose("high cube"));
+        }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>135||m_operatorController.GetPOV()<=225)){
+          m_superStructure.setPose(m_superStructure.getPose("mid cube"));
+        }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>225||m_operatorController.GetPOV()<315)){
+          m_superStructure.setPose(m_superStructure.getPose("mid cone"));
+        }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::RPress)){
+          m_superStructure.resetEncoders();
+        }
         },
         {&m_superStructure}
       ));
@@ -72,7 +103,7 @@ void RobotContainer::ConfigureBindings() {
     frc2::InstantCommand(
       [this]{
         m_drive.resetAbsoluteEncoders();
-      }
+      }, {&m_drive}
     )
   );
 
@@ -80,121 +111,11 @@ void RobotContainer::ConfigureBindings() {
     frc2::InstantCommand(
       [this]{
         m_drive.resetHeading();
-      }
+      }, {&m_drive}
     )
   );
 
-  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::leftTrigger).WhileHeld(
-    frc2::InstantCommand(
-      [this]{
-        m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger));
-      }
-    )
-  );
 
-  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::rightTrigger).WhileHeld(
-    frc2::InstantCommand(
-      [this]{
-        m_superStructure.setGrabber(-m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
-      }
-    )
-  );
-
-  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::A).WhenPressed(
-    frc2::InstantCommand(
-      [this]{
-        if(m_superStructure.getCurPose().getName().compare("mid cone score")){
-          m_superStructure.goToPose(m_superStructure.getPose("mid cone align"));
-        }else if(m_superStructure.getCurPose().getName().compare("mid cone align")){
-          m_superStructure.goToPose(m_superStructure.getPose("stow"));
-        }else if(m_superStructure.getCurPose().getName().compare("high cone score")){
-          m_superStructure.goToPose(m_superStructure.getPose("high cone align"));
-        }else if(m_superStructure.getCurPose().getName().compare("high cone align")){
-          m_superStructure.goToPose(m_superStructure.getPose("stow"));
-        }else{
-          m_superStructure.goToPose(m_superStructure.getPose("stow"));
-        }
-      }
-    )
-  );
-
-  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::B).WhenPressed(
-    frc2::InstantCommand(
-      [this]{
-        m_superStructure.goToPose(m_superStructure.getPose("ground pickup"));//cone and cube are the same
-      }
-    )
-  );
-
-  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::X).WhenPressed(
-    frc2::InstantCommand(
-      [this]{
-        m_superStructure.goToPose(m_superStructure.getPose("single station"));//cone and cube are the same
-      }
-    )
-  );
-
-  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::Y).WhenPressed(
-    frc2::InstantCommand(
-      [this]{
-        m_superStructure.goToPose(m_superStructure.getPose("double station"));//cone and cube are the same
-      }
-    )
-  );
-
-  frc2::POVButton(&m_operatorController, 0).WhenPressed(
-    frc2::InstantCommand(
-      [this]{
-        m_superStructure.goToPose(m_superStructure.getPose("high cone align"));//press score afterwards
-      }
-    )
-  );
-
-  frc2::POVButton(&m_operatorController, 90).WhenPressed(
-    frc2::InstantCommand(
-      [this]{
-        m_superStructure.goToPose(m_superStructure.getPose("high cube"));
-      }
-    )
-  );
-
-  frc2::POVButton(&m_operatorController, 180).WhenPressed(
-    frc2::InstantCommand(
-      [this]{
-        m_superStructure.goToPose(m_superStructure.getPose("mid cone align"));
-      }
-    )
-  );
-
-  frc2::POVButton(&m_operatorController, 270).WhenPressed(
-    frc2::InstantCommand(
-      [this]{
-        m_superStructure.goToPose(m_superStructure.getPose("mid cube"));
-      }
-    )
-  );
-
-  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::leftBumper).WhenPressed(
-    frc2::InstantCommand(
-      [this]{
-        if(m_superStructure.getCurPose().getName().compare("mid cone align")){
-          m_superStructure.goToPose(m_superStructure.getPose("mid cone score"));
-        }else if(m_superStructure.getCurPose().getName().compare("high cone align")){
-          m_superStructure.goToPose(m_superStructure.getPose("high cone align"));
-        }
-      }
-    )
-  );
-
-  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::LPress).ToggleWhenPressed(
-    frc2::InstantCommand(
-      [this]{
-        m_superStructure.manualAdjust(
-          m_operatorController.GetRawAxis(OIConstants::Controller::leftYAxis),
-          m_operatorController.GetRawAxis(OIConstants::Controller::rightYAxis));
-      }
-    )
-  );
 
   //m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger) - m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
           
