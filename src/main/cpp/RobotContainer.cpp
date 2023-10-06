@@ -13,7 +13,7 @@
 #include <iostream>
 #include <frc/smartdashboard/SmartDashboard.h>
 
-#include "commands/Autos.h"
+#include "commands/Autos/onechigh.h"
 
 using namespace std;
 
@@ -48,18 +48,35 @@ RobotContainer::RobotContainer() {
       m_superStructure.SetDefaultCommand(frc2::RunCommand(
         [this] {
           // return m_superStructure.goToPose(m_superStructure.getCurPose());
-        m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger)-m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
-        
-        if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::LPress)){
-          m_superStructure.setManual(!m_superStructure.getManual());
-        }
-        if(m_superStructure.getManual()){
-          m_superStructure.manualAdjust(
-            m_operatorController.GetRawAxis(OIConstants::Controller::leftYAxis),
-            m_operatorController.GetRawAxis(OIConstants::Controller::rightYAxis));
-        }else{
-          m_superStructure.goToPose(m_superStructure.getCurPose());
-        }
+          if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::leftBumper)){
+            m_superStructure.setGrabber(0.05);
+          }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::rightBumper)){
+            m_superStructure.setGrabber(-0.05);
+          }else{
+            m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger)-m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
+          }
+
+          if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::LPress)){
+            m_superStructure.setManual(!m_superStructure.getManual());
+          }
+
+          if(m_superStructure.getManual()){
+            m_superStructure.manualAdjust(
+              m_operatorController.GetRawAxis(OIConstants::Controller::leftYAxis),
+              m_operatorController.GetRawAxis(OIConstants::Controller::rightYAxis));
+          }else{
+            m_superStructure.goToPose(m_superStructure.getPose());
+          }
+
+          if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::View)){
+            if(m_superStructure.getSoftLimitEnabled()){
+              m_superStructure.setSoftLimitEnabled(false);
+            }else{
+              m_superStructure.setSoftLimitEnabled(true);
+            }
+          }
+
+
         if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::A)){
           m_superStructure.setPose(m_superStructure.getPose("stow"));
         }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::B)){
@@ -123,5 +140,5 @@ void RobotContainer::ConfigureBindings() {
 
 frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
-  return autos::ExampleAuto(&m_drive, &m_superStructure);
+  return onechigh(&m_drive, &m_superStructure).ToPtr();
 }

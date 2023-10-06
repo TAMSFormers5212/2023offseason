@@ -74,6 +74,8 @@ namespace OIConstants {//Controller buttons
         constexpr int Y = 4;
         constexpr int leftBumper = 5;
         constexpr int rightBumper = 6;
+        constexpr int View = 7;
+        constexpr int Menu = 8;
         constexpr int LPress = 9;
         constexpr int RPress = 10;
     }
@@ -88,10 +90,10 @@ namespace SwerveModuleConstants {//per swerve module
     constexpr double ktD = 0.0;
     constexpr double ktFF = 0.0;
     
-    constexpr double kdP = 0.1; // Driving Speed PID
+    constexpr double kdP = 0.6; // Driving Speed PID
     constexpr double kdI = 0.0;
     constexpr double kdD = 0.0;
-    constexpr double kdFF = 0.0;
+    constexpr double kdFF = 0.0075;
 
     constexpr auto maxSpeed = 4.0_mps; // arbitrary values
     constexpr auto maxRotation = 2.0_rad_per_s;
@@ -153,13 +155,13 @@ namespace ArmConstants{
 
         // constexpr double encoderOffset;
 
-        constexpr double kP = 0.0; // PID
+        constexpr double kP = 0.6; // PID
         constexpr double kI = 0.0;
-        constexpr double kD = 0.0;
-        constexpr double kFF = 0.1;
+        constexpr double kD = 0.1;
+        constexpr double kFF = 0.0075;
         constexpr double maxAcel = 500;
         constexpr double maxVelo = 1000;
-        constexpr double minVelo = 0;
+        constexpr double minVelo = -1000;
         // max free speed = 5500 rpm
         // gear ratio = 560? unsure 5x7x4x() 
         // i forgot - Tony
@@ -179,7 +181,7 @@ namespace ArmConstants{
         constexpr double kD = 0.0;
         constexpr double kFF = 0.1;
         constexpr double maxVelo = 1000;
-        constexpr double minVelo = 0;
+        constexpr double minVelo = -1000;
         constexpr double maxAcel = 1000;
 
         constexpr double maxSpeed = 0.9;

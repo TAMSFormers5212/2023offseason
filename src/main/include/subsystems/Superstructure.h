@@ -29,17 +29,20 @@ class Superstructure : public frc2::SubsystemBase {
   virtual ~Superstructure();
   Superstructure();
 
-  armPose getCurPose();
-  void goToPose(armPose pose);
-  void resetPose();
-  void setPose(armPose pose);
-  armPose getPose(string name);
-  void manualAdjust(double shoulder, double elbow);
-  void setGrabber(double speed);
-  void resetEncoders();
+  armPose getCurPose(); // get current position of arm
+  void goToPose(armPose pose); // got to arm pose
+  void resetPose(); // set arm pose to current pose
+  void setPose(armPose pose); // set goal pose to new pose
+  armPose getPose(string name); // get the pose with name
+  armPose getPose();
+  void manualAdjust(double shoulder, double elbow); // adjust arm with joysticks
+  void setGrabber(double speed); // spin intake
+  void resetEncoders(); // set pose to 0,0
 
   void setManual(bool man);
   bool getManual();
+  void setSoftLimitEnabled(bool enable);
+  bool getSoftLimitEnabled();
 
 
 
@@ -80,6 +83,7 @@ class Superstructure : public frc2::SubsystemBase {
   int poseID;
 
   bool manual = false;
+  bool softLimitEnabled = true;
 
   // frc::DigitalInput shoulderLimitSwtich;
   // frc::DigitalInput elbowLimitSwitch;

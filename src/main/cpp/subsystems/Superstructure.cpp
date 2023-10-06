@@ -132,6 +132,20 @@ bool Superstructure::getManual(){
     return manual;
 }
 
+void Superstructure::setSoftLimitEnabled(bool enable){
+    softLimitEnabled = enable;
+    m_elbowMotor.EnableSoftLimit(CANSparkMax::SoftLimitDirection::kForward,softLimitEnabled);
+    m_elbowMotor.EnableSoftLimit(CANSparkMax::SoftLimitDirection::kReverse,softLimitEnabled);
+    m_shoulderMotorLeft.EnableSoftLimit(CANSparkMax::SoftLimitDirection::kForward,softLimitEnabled);
+    m_shoulderMotorLeft.EnableSoftLimit(CANSparkMax::SoftLimitDirection::kReverse,softLimitEnabled);
+    m_shoulderMotorRight.EnableSoftLimit(CANSparkMax::SoftLimitDirection::kForward,softLimitEnabled);
+    m_shoulderMotorRight.EnableSoftLimit(CANSparkMax::SoftLimitDirection::kReverse,softLimitEnabled);
+}
+
+bool Superstructure::getSoftLimitEnabled(){
+    return softLimitEnabled;
+}
+
 void Superstructure::setPose(armPose pose){
     this->m_pose = pose;
 }
@@ -139,4 +153,8 @@ void Superstructure::setPose(armPose pose){
 void Superstructure::resetEncoders(){
     m_relativeElbowEncoder.SetPosition(0);
     m_relativeShoulderEncoder.SetPosition(0);
+}
+
+armPose Superstructure::getPose(){
+    return m_pose;
 }

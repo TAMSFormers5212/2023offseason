@@ -5,13 +5,13 @@
 #pragma once
 
 #include <frc2/command/CommandPtr.h>
+#include <frc2/command/CommandHelper.h>
+#include <frc2/command/SequentialCommandGroup.h>
 #include <subsystems/Swerve.h>
 #include <subsystems/Superstructure.h>
 
 
-namespace autos {
-/**
- * Example static factory for an autonomous command.
- */
-frc2::CommandPtr ExampleAuto(Swerve* drive, Superstructure* superstructure);
-}  // namespace autos
+class onechigh : public frc2::CommandHelper<frc2::SequentialCommandGroup, onechigh> {
+    public:
+    onechigh(Swerve* swerve, Superstructure* structure);
+};
