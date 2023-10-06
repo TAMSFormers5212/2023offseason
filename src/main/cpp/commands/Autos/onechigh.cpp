@@ -25,8 +25,8 @@ onechigh::onechigh(Swerve* drive, Superstructure* arm) {
         },
         frc2::ParallelRaceGroup{
             frc2::RunCommand([arm]() {arm->goToPose(arm->getPose("stow"));}),
-            frc2::RunCommand([drive]() {drive->swerveDrive(0, 0.5, 0, true);}),
-            frc2::WaitCommand(4_s)
+            frc2::RunCommand([drive]() {drive->swerveDrive(0, -0.5, 0, true);}),
+            frc2::WaitCommand(1.5_s)
         }
     );
     

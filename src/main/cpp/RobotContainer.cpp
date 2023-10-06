@@ -85,7 +85,7 @@ RobotContainer::RobotContainer() {
           m_superStructure.setPose(m_superStructure.getPose("single station"));
         }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::Y)){
           m_superStructure.setPose(m_superStructure.getPose("double station"));
-        }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>315||m_operatorController.GetPOV()<=45)){
+        }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>315||(m_operatorController.GetPOV()<=45&&m_operatorController.GetPOV()>=0))){
           m_superStructure.setPose(m_superStructure.getPose("high cone"));
         }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>45||m_operatorController.GetPOV()<=135)){
           m_superStructure.setPose(m_superStructure.getPose("high cube"));

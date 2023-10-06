@@ -93,7 +93,7 @@ namespace SwerveModuleConstants {//per swerve module
     constexpr double kdP = 0.6; // Driving Speed PID
     constexpr double kdI = 0.0;
     constexpr double kdD = 0.0;
-    constexpr double kdFF = 0.0075;
+    constexpr double kdFF = 0.00;
 
     constexpr auto maxSpeed = 4.0_mps; // arbitrary values
     constexpr auto maxRotation = 2.0_rad_per_s;
@@ -158,7 +158,7 @@ namespace ArmConstants{
         constexpr double kP = 0.6; // PID
         constexpr double kI = 0.0;
         constexpr double kD = 0.1;
-        constexpr double kFF = 0.0075;
+        constexpr double kFF = 0.00;
         constexpr double maxAcel = 500;
         constexpr double maxVelo = 1000;
         constexpr double minVelo = -1000;
@@ -179,7 +179,7 @@ namespace ArmConstants{
         constexpr double kP = 0.1; // PID
         constexpr double kI = 0.0;
         constexpr double kD = 0.0;
-        constexpr double kFF = 0.1;
+        constexpr double kFF = 0.0;
         constexpr double maxVelo = 1000;
         constexpr double minVelo = -1000;
         constexpr double maxAcel = 1000;
