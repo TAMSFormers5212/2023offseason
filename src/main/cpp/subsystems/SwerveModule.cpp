@@ -27,7 +27,9 @@ using namespace rev;
   }
 
   frc::SwerveModuleState SwerveModule::getState(){
-    return {units::meters_per_second_t{m_driveEncoder.GetVelocity()},units::radian_t{m_turningEncoder.GetPosition()}};
+    // return {units::meters_per_second_t{m_driveEncoder.GetVelocity()},units::radian_t{m_turningEncoder.GetPosition()}};
+    return {units::meters_per_second_t{m_driveEncoder.GetVelocity()},units::radian_t{getAbsolutePosition()}};
+    
   }
 
   frc::SwerveModulePosition SwerveModule::getPosition(){
@@ -50,7 +52,7 @@ using namespace rev;
     m_driveMotor.SetSmartCurrentLimit(25, 50);
     m_driveEncoder.SetPositionConversionFactor((SwerveModuleConstants::wheelCircumfrence/SwerveModuleConstants::driveRatio).value());
     m_driveEncoder.SetVelocityConversionFactor((SwerveModuleConstants::wheelCircumfrence/ SwerveModuleConstants::driveRatio / 60_s).value());
-
+    
     resetDriveEncoder();
   }
   void SwerveModule::resetTurningMotor(){
@@ -64,6 +66,7 @@ using namespace rev;
     m_turningMotor.SetSmartCurrentLimit(20, 30);
     m_turningController.SetPositionPIDWrappingEnabled(true);
     m_turningEncoder.SetPositionConversionFactor((2*M_PI)/SwerveModuleConstants::steerRatio);
+    // m_turningEncoder.SetPosition(getAbsolutePosition()*M_2_PI);
     resetTurningEncoder();
   }
 
@@ -72,7 +75,7 @@ using namespace rev;
   }
   void SwerveModule::resetTurningEncoder(){  
     double rotations = (m_absoluteEncoder.GetVoltage() / frc::RobotController::GetVoltage5V());
-    m_turningEncoder.SetPosition(rotations);
+    m_turningEncoder.SetPosition(rotations * -1);
   }
   double SwerveModule::getDrivePosition(){
     return m_driveEncoder.GetPosition();
@@ -88,10 +91,6 @@ using namespace rev;
   }
   double SwerveModule::getAbsolutePosition(){ // get position of absolute encoder
     double rotations = (m_absoluteEncoder.GetVoltage() / frc::RobotController::GetVoltage5V());
-    // if (m_driveMotor.GetDeviceId()==9){
-    //     frc::SmartDashboard::PutNumber("Encoder Voltage", m_absoluteEncoder.GetVoltage());
-
-    // }
     return rotations;
   }
 
@@ -126,10 +125,10 @@ using namespace rev;
                  M_PI;  // NOLINT
 
     double adjustedAngle = delta + curAngle.Radians().value();
-  if(m_driveMotor.GetDeviceId()==bottomleft::driveMotor){
-    frc::SmartDashboard::PutNumber("turn ref", adjustedAngle+encoffset);
-  }
-    m_turningController.SetReference(adjustedAngle+(encoffset/**M_2_PI*/), CANSparkMax::ControlType::kPosition);
+  // if(m_driveMotor.GetDeviceId()==bottomleft::driveMotor){
+  //   frc::SmartDashboard::PutNumber("turn ref", adjustedAngle+encoffset);
+  // }
+    m_turningController.SetReference((adjustedAngle+encoffset), CANSparkMax::ControlType::kPosition);
     // m_driveController.SetReference(optimizedState.speed.value(), CANSparkMax::ControlType::kVelocity);
     m_driveMotor.Set(optimizedState.speed / SwerveModuleConstants::maxSpeed);
     // m_turningMotor.
