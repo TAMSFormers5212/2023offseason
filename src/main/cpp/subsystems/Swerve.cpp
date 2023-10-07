@@ -33,8 +33,10 @@ using namespace units;
     }
   {
     m_gyro.Calibrate();
+    m_gyro.ZeroYaw();
     heading = frc::Rotation2d(degree_t{-m_gyro.GetYaw()});
     lastAngle = -m_gyro.GetYaw();
+    resetOdometry(m_poseEstimator.GetEstimatedPosition());
     std::cout<<"Swerve subsystem initalized correctly"<<std::endl;
   }
 
