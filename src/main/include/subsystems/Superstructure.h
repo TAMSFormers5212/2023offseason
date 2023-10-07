@@ -59,7 +59,7 @@ class Superstructure : public frc2::SubsystemBase {
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
-  rev::CANSparkMax m_shoulderMotorLeft;
+  // rev::CANSparkMax m_shoulderMotorLeft;
   rev::CANSparkMax m_shoulderMotorRight;
   rev::CANSparkMax m_elbowMotor;
   ctre::phoenix::motorcontrol::can::VictorSPX m_grabberMotor;
@@ -70,7 +70,7 @@ class Superstructure : public frc2::SubsystemBase {
   // double shoulderOffset;
   // double elbowOffset;
 
-  rev::SparkMaxPIDController m_shoulderController = m_shoulderMotorLeft.GetPIDController();
+  rev::SparkMaxPIDController m_shoulderController = m_shoulderMotorRight.GetPIDController();
   rev::SparkMaxPIDController m_elbowController = m_elbowMotor.GetPIDController();
 
   rev::SparkMaxRelativeEncoder m_relativeShoulderEncoder;

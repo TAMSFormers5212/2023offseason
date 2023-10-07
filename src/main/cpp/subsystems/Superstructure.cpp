@@ -12,12 +12,12 @@ Superstructure::~Superstructure()
 }
 
 Superstructure::Superstructure()
-  : m_shoulderMotorLeft(shoulderConstants::armMotorLeft, kBrushless),
-    m_shoulderMotorRight(shoulderConstants::armMotorRight, kBrushless),
+//   : m_shoulderMotorLeft(shoulderConstants::armMotorLeft, kBrushless),
+    : m_shoulderMotorRight(shoulderConstants::armMotorRight, kBrushless),
     m_elbowMotor(elbowConstants::elbowMotor, kBrushless),
-    m_relativeShoulderEncoder(m_shoulderMotorLeft.GetEncoder()),
+    m_relativeShoulderEncoder(m_shoulderMotorRight.GetEncoder()),
     m_relativeElbowEncoder(m_elbowMotor.GetEncoder()),
-    m_shoulderController(m_shoulderMotorLeft.GetPIDController()),
+    m_shoulderController(m_shoulderMotorRight.GetPIDController()),
     m_elbowController(m_elbowMotor.GetPIDController()),
     // shoulderLimitSwtich(shoulderConstants::limitSwtich),
     // elbowLimitSwitch(elbowConstants::limitSwtich),
@@ -32,19 +32,19 @@ Superstructure::Superstructure()
     m_shoulderController.SetSmartMotionMaxVelocity(shoulderConstants::maxVelo);
     m_shoulderController.SetSmartMotionAccelStrategy(CANPIDController::AccelStrategy::kTrapezoidal);
     
-    m_shoulderMotorLeft.SetIdleMode(CANSparkMax::IdleMode::kBrake);
-    m_shoulderMotorLeft.EnableVoltageCompensation(12.0);
-    m_shoulderMotorLeft.SetSmartCurrentLimit(40);
-    m_shoulderMotorLeft.SetSoftLimit(CANSparkMax::SoftLimitDirection::kForward, 26);
-    m_shoulderMotorLeft.SetSoftLimit(CANSparkMax::SoftLimitDirection::kReverse,-150);
+    // m_shoulderMotorLeft.SetIdleMode(CANSparkMax::IdleMode::kBrake);
+    // m_shoulderMotorLeft.EnableVoltageCompensation(12.0);
+    // m_shoulderMotorLeft.SetSmartCurrentLimit(40);
+    // m_shoulderMotorLeft.SetSoftLimit(CANSparkMax::SoftLimitDirection::kForward, 26);
+    // m_shoulderMotorLeft.SetSoftLimit(CANSparkMax::SoftLimitDirection::kReverse,-150);
 
     m_shoulderMotorRight.SetIdleMode(CANSparkMax::IdleMode::kBrake);
     m_shoulderMotorRight.EnableVoltageCompensation(12.0);
     m_shoulderMotorRight.SetSmartCurrentLimit(40);
-    m_shoulderMotorLeft.SetSoftLimit(CANSparkMax::SoftLimitDirection::kForward, 26);
-    m_shoulderMotorLeft.SetSoftLimit(CANSparkMax::SoftLimitDirection::kReverse,-150);
+    m_shoulderMotorRight.SetSoftLimit(CANSparkMax::SoftLimitDirection::kForward, 26);
+    m_shoulderMotorRight.SetSoftLimit(CANSparkMax::SoftLimitDirection::kReverse,-150);
 
-    m_shoulderMotorRight.Follow(m_shoulderMotorLeft, true);
+    // m_shoulderMotorRight.Follow(m_shoulderMotorLeft, true);
 
     m_elbowController.SetP(elbowConstants::kP);
     m_elbowController.SetI(elbowConstants::kI);
@@ -103,7 +103,7 @@ void Superstructure::manualAdjust(double shoulder, double elbow){
     // m_shoulderController.SetReference(shoulder*shoulderConstants::maxVelo, rev::CANSparkMax::ControlType::kVelocity);
     // m_elbowController.SetReference(elbow*elbowConstants::maxVel, rev::CANSparkMax::ControlType::kVelocity);
 
-    m_shoulderMotorLeft.Set(shoulder*0.5);
+    m_shoulderMotorRight.Set(shoulder*0.5);
     m_elbowMotor.Set(elbow*0.5);
 }
 
@@ -136,8 +136,8 @@ void Superstructure::setSoftLimitEnabled(bool enable){
     softLimitEnabled = enable;
     m_elbowMotor.EnableSoftLimit(CANSparkMax::SoftLimitDirection::kForward,softLimitEnabled);
     m_elbowMotor.EnableSoftLimit(CANSparkMax::SoftLimitDirection::kReverse,softLimitEnabled);
-    m_shoulderMotorLeft.EnableSoftLimit(CANSparkMax::SoftLimitDirection::kForward,softLimitEnabled);
-    m_shoulderMotorLeft.EnableSoftLimit(CANSparkMax::SoftLimitDirection::kReverse,softLimitEnabled);
+    // m_shoulderMotor.EnableSoftLimit(CANSparkMax::SoftLimitDirection::kForward,softLimitEnabled);
+    // m_shoulderMotorLeft.EnableSoftLimit(CANSparkMax::SoftLimitDirection::kReverse,softLimitEnabled);
     m_shoulderMotorRight.EnableSoftLimit(CANSparkMax::SoftLimitDirection::kForward,softLimitEnabled);
     m_shoulderMotorRight.EnableSoftLimit(CANSparkMax::SoftLimitDirection::kReverse,softLimitEnabled);
 }
