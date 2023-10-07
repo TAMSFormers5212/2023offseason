@@ -65,7 +65,7 @@ using namespace rev;
     m_turningMotor.EnableVoltageCompensation(12.0);
     m_turningMotor.SetSmartCurrentLimit(20, 30);
     m_turningController.SetPositionPIDWrappingEnabled(true);
-    m_turningEncoder.SetPositionConversionFactor((2*M_PI)/SwerveModuleConstants::steerRatio);
+    m_turningEncoder.SetPositionConversionFactor(2*M_PI/SwerveModuleConstants::steerRatio);
     // m_turningEncoder.SetPosition(getAbsolutePosition()*M_2_PI);
     resetTurningEncoder();
   }
@@ -81,7 +81,7 @@ using namespace rev;
     return m_driveEncoder.GetPosition();
   }
   double SwerveModule::getTurningPosition(){
-    return m_turningEncoder.GetPosition();
+    return -m_turningEncoder.GetPosition();
   }
   double SwerveModule::getDriveVelocity(){
     return m_driveEncoder.GetVelocity();
