@@ -65,7 +65,7 @@ RobotContainer::RobotContainer() {
               m_operatorController.GetRawAxis(OIConstants::Controller::leftYAxis),
               m_operatorController.GetRawAxis(OIConstants::Controller::rightYAxis));
           }else{
-            m_superStructure.goToPose(m_superStructure.getPose());
+            // m_superStructure.goToPose(m_superStructure.getPose());
           }
 
           if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::View)){
