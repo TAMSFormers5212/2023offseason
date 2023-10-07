@@ -75,7 +75,7 @@ using namespace rev;
   }
   void SwerveModule::resetTurningEncoder(){  
     double rotations = (m_absoluteEncoder.GetVoltage() / frc::RobotController::GetVoltage5V());
-    m_turningEncoder.SetPosition(rotations * -1);
+    m_turningEncoder.SetPosition(rotations * -M_2_PI);
   }
   double SwerveModule::getDrivePosition(){
     return m_driveEncoder.GetPosition();
@@ -112,11 +112,10 @@ using namespace rev;
     frc::SwerveModuleState optimizedState = frc::SwerveModuleState::Optimize(state, units::radian_t{getTurningPosition()});
 
     //since the driving motor is relative it doesn't wrap around 2 pi and 0. Therefore we need to calculate the position 
-    //delta to be within those bounds. 
+    //delta to be within those bounds. (frc 2363)
 
     frc::Rotation2d curAngle = units::radian_t{getTurningPosition()};
 
-    //copied cuz idk how it works
     double delta = std::fmod(std::fmod((optimizedState.angle.Radians().value() -
                                       curAngle.Radians().value() + M_PI),
                                      2 * M_PI) +

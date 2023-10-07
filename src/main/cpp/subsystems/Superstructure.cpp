@@ -23,14 +23,22 @@ Superstructure::Superstructure()
     // elbowLimitSwitch(elbowConstants::limitSwtich),
     m_grabberMotor(grabberConstants::grabberMotor)
 {
+
+
+    m_shoulderMotorRight.SetIdleMode(CANSparkMax::IdleMode::kBrake);
+    m_shoulderMotorRight.EnableVoltageCompensation(12.0);
+    m_shoulderMotorRight.SetSmartCurrentLimit(40);
+    m_shoulderMotorRight.SetSoftLimit(CANSparkMax::SoftLimitDirection::kForward, 26);
+    m_shoulderMotorRight.SetSoftLimit(CANSparkMax::SoftLimitDirection::kReverse,-150);
+    
     m_shoulderController.SetP(shoulderConstants::kP);
     m_shoulderController.SetI(shoulderConstants::kI);
     m_shoulderController.SetD(shoulderConstants::kD);
     m_shoulderController.SetFF(shoulderConstants::kFF);
     m_shoulderController.SetOutputRange(shoulderConstants::minSpeed, shoulderConstants::maxSpeed);
-    m_shoulderController.SetSmartMotionMaxAccel(shoulderConstants::maxAcel);
-    m_shoulderController.SetSmartMotionMaxVelocity(shoulderConstants::maxVelo);
-    m_shoulderController.SetSmartMotionAccelStrategy(CANPIDController::AccelStrategy::kTrapezoidal);
+    // m_shoulderController.SetSmartMotionMaxAccel(shoulderConstants::maxAcel);
+    // m_shoulderController.SetSmartMotionMaxVelocity(shoulderConstants::maxVelo);
+    // m_shoulderController.SetSmartMotionAccelStrategy(CANPIDController::AccelStrategy::kTrapezoidal);
     
     // m_shoulderMotorLeft.SetIdleMode(CANSparkMax::IdleMode::kBrake);
     // m_shoulderMotorLeft.EnableVoltageCompensation(12.0);
@@ -38,11 +46,6 @@ Superstructure::Superstructure()
     // m_shoulderMotorLeft.SetSoftLimit(CANSparkMax::SoftLimitDirection::kForward, 26);
     // m_shoulderMotorLeft.SetSoftLimit(CANSparkMax::SoftLimitDirection::kReverse,-150);
 
-    m_shoulderMotorRight.SetIdleMode(CANSparkMax::IdleMode::kBrake);
-    m_shoulderMotorRight.EnableVoltageCompensation(12.0);
-    m_shoulderMotorRight.SetSmartCurrentLimit(40);
-    m_shoulderMotorRight.SetSoftLimit(CANSparkMax::SoftLimitDirection::kForward, 26);
-    m_shoulderMotorRight.SetSoftLimit(CANSparkMax::SoftLimitDirection::kReverse,-150);
 
     // m_shoulderMotorRight.Follow(m_shoulderMotorLeft, true);
 
@@ -51,9 +54,9 @@ Superstructure::Superstructure()
     m_elbowController.SetD(elbowConstants::kD);
     m_elbowController.SetFF(elbowConstants::kFF);
     m_elbowController.SetOutputRange(elbowConstants::minSpeed, elbowConstants::maxSpeed);
-    m_elbowController.SetSmartMotionMaxAccel(elbowConstants::maxAcel);
-    m_elbowController.SetSmartMotionMaxVelocity(elbowConstants::maxVelo);
-    m_elbowController.SetSmartMotionAccelStrategy(CANPIDController::AccelStrategy::kTrapezoidal);
+    // m_elbowController.SetSmartMotionMaxAccel(elbowConstants::maxAcel);
+    // m_elbowController.SetSmartMotionMaxVelocity(elbowConstants::maxVelo);
+    // m_elbowController.SetSmartMotionAccelStrategy(CANPIDController::AccelStrategy::kTrapezoidal);
     
     m_elbowMotor.SetIdleMode(CANSparkMax::IdleMode::kBrake);
     m_elbowMotor.EnableVoltageCompensation(12.0);
@@ -76,8 +79,8 @@ armPose Superstructure::getCurPose(){
 }
 
 void Superstructure::goToPose(armPose pose){
-    m_shoulderController.SetReference(pose.getShoulderPose(), rev::CANSparkMax::ControlType::kSmartMotion);
-    m_elbowController.SetReference(pose.getElbowPose(), rev::CANSparkMax::ControlType::kSmartMotion);
+    m_shoulderController.SetReference(pose.getShoulderPose(), rev::CANSparkMax::ControlType::kPosition);
+    m_elbowController.SetReference(pose.getElbowPose(), rev::CANSparkMax::ControlType::kPosition);
 }
 
 void Superstructure::resetPose(){

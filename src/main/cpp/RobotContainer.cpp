@@ -27,9 +27,9 @@ RobotContainer::RobotContainer() {
         // Right stick up on xbox is negative, right stick down is postive.
         // Right stick right on xbox is negative, right stick left is postive.
         // Left stick right is positive, left stick left is negative.
-        double XAxis = 0;//-m_driverController.GetRawAxis(OIConstants::Joystick::XAxis);
+        double XAxis = -m_driverController.GetRawAxis(OIConstants::Joystick::XAxis);
         double YAxis = -m_driverController.GetRawAxis(OIConstants::Joystick::YAxis);
-        double RotAxis = 0;//-m_driverController.GetRawAxis(OIConstants::Joystick::RotAxis);
+        double RotAxis = -m_driverController.GetRawAxis(OIConstants::Joystick::RotAxis);
         // cout<<XAxis<<" "<<YAxis<<" "<<RotAxis<<endl;
         // frc::SmartDashboard::PutNumber("X axis", XAxis);
         // frc::SmartDashboard::PutNumber("Y axis", YAxis);
@@ -65,7 +65,7 @@ RobotContainer::RobotContainer() {
               m_operatorController.GetRawAxis(OIConstants::Controller::leftYAxis),
               m_operatorController.GetRawAxis(OIConstants::Controller::rightYAxis));
           }else{
-            // m_superStructure.goToPose(m_superStructure.getPose());
+            m_superStructure.goToPose(m_superStructure.getPose());
           }
 
           if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::View)){
@@ -85,7 +85,7 @@ RobotContainer::RobotContainer() {
           m_superStructure.setPose(m_superStructure.getPose("single station"));
         }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::Y)){
           m_superStructure.setPose(m_superStructure.getPose("double station"));
-        }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>315||(m_operatorController.GetPOV()<=45&&m_operatorController.GetPOV()>=0))){
+        }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>315||m_operatorController.GetPOV()<=45)){
           m_superStructure.setPose(m_superStructure.getPose("high cone"));
         }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>45||m_operatorController.GetPOV()<=135)){
           m_superStructure.setPose(m_superStructure.getPose("high cube"));
@@ -96,6 +96,7 @@ RobotContainer::RobotContainer() {
         }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::RPress)){
           m_superStructure.resetEncoders();
         }
+        
         },
         {&m_superStructure}
       ));
