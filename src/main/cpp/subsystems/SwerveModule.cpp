@@ -114,7 +114,7 @@ using namespace rev;
     //since the driving motor is relative it doesn't wrap around 2 pi and 0. Therefore we need to calculate the position 
     //delta to be within those bounds. (frc 2363)
 
-    frc::Rotation2d curAngle = units::radian_t{getTurningPosition()};
+    frc::Rotation2d curAngle = units::radian_t{getTurningPosition()-0.25};
 
     double delta = std::fmod(std::fmod((optimizedState.angle.Radians().value() -
                                       curAngle.Radians().value() + M_PI),

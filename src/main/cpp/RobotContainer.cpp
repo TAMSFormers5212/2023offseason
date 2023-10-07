@@ -27,9 +27,9 @@ RobotContainer::RobotContainer() {
         // Right stick up on xbox is negative, right stick down is postive.
         // Right stick right on xbox is negative, right stick left is postive.
         // Left stick right is positive, left stick left is negative.
-        double XAxis = m_driverController.GetRawAxis(OIConstants::Joystick::XAxis);
-        double YAxis = -m_driverController.GetRawAxis(OIConstants::Joystick::YAxis);
-        double RotAxis = -m_driverController.GetRawAxis(OIConstants::Joystick::RotAxis);
+        double YAxis = m_driverController.GetRawAxis(OIConstants::Joystick::XAxis);
+        double XAxis = m_driverController.GetRawAxis(OIConstants::Joystick::YAxis);
+        double RotAxis = m_driverController.GetRawAxis(OIConstants::Joystick::RotAxis);
         // cout<<XAxis<<" "<<YAxis<<" "<<RotAxis<<endl;
         // frc::SmartDashboard::PutNumber("X axis", XAxis);
         // frc::SmartDashboard::PutNumber("Y axis", YAxis);
