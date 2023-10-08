@@ -17,8 +17,8 @@ Superstructure::Superstructure()
     m_elbowMotor(elbowConstants::elbowMotor, kBrushless),
     m_relativeShoulderEncoder(m_shoulderMotorRight.GetEncoder()),
     m_relativeElbowEncoder(m_elbowMotor.GetEncoder()),
-    m_shoulderController(m_shoulderMotorRight.GetPIDController()),
-    m_elbowController(m_elbowMotor.GetPIDController()),
+    // m_shoulderController(m_shoulderMotorRight.GetPIDController()),
+    // m_elbowController(m_elbowMotor.GetPIDController()),
     // shoulderLimitSwtich(shoulderConstants::limitSwtich),
     // elbowLimitSwitch(elbowConstants::limitSwtich),
     m_grabberMotor(grabberConstants::grabberMotor)

@@ -143,7 +143,7 @@ using namespace rev;
     //   frc::SmartDashboard::PutNumber("BR Adjusted Angle",adjustedAngle+encoffset);
 
     // }
-    // m_turningController.SetReference((adjustedAngle+encoffset), CANSparkMax::ControlType::kPosition);
+    m_turningController.SetReference((adjustedAngle+encoffset), CANSparkMax::ControlType::kPosition);
     // if (m_driveMotor.GetDeviceId()==9){
     //   frc::SmartDashboard::PutNumber("Encoder offset", encoffset);
     // }
