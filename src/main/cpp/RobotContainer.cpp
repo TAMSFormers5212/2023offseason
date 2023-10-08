@@ -41,7 +41,7 @@ RobotContainer::RobotContainer() {
         m_drive.swerveDrive(
             std::abs(XAxis) < OIConstants::Joystick::deadband ? 0.0 : XAxis*speedMultiplier,
             std::abs(YAxis) < OIConstants::Joystick::deadband ? 0.0 : YAxis*speedMultiplier,
-            std::abs(RotAxis) < OIConstants::Joystick::deadband ? 0.0 : RotAxis*speedMultiplier,
+            std::abs(RotAxis) < OIConstants::Joystick::deadband/2 ? 0.0 : RotAxis*speedMultiplier,
             true
             );
       },
@@ -136,7 +136,7 @@ void RobotContainer::ConfigureBindings() {
   frc2::JoystickButton(&m_operatorController, OIConstants::Controller::leftBumper).WhileHeld(
     frc2::RunCommand{
       [this]{
-        m_superStructure.setGrabber(0.1);
+        m_superStructure.setGrabber(0.1+m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger));
       },
       {&m_superStructure}
     } 
@@ -146,7 +146,7 @@ void RobotContainer::ConfigureBindings() {
   frc2::JoystickButton(&m_operatorController, OIConstants::Controller::rightBumper).WhileHeld(
     frc2::RunCommand{
       [this]{
-        m_superStructure.setGrabber(-0.1);
+        m_superStructure.setGrabber(-0.1-m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
       },
       {&m_superStructure}
     } 
@@ -160,15 +160,17 @@ void RobotContainer::ConfigureBindings() {
   //   } 
   // ); 
 
-  frc2::JoystickButton(&m_operatorController, 8).WhileHeld(
-    frc2::RunCommand{
-      [this]{
-        m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger)-m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
+  // frc2::JoystickButton(&m_operatorController, 8).WhileHeld(
+  //   frc2::RunCommand{
+  //     [this]{
+  //       m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger)-m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
         
-      },
-      {&m_superStructure}
-    } 
-  ); 
+  //     },
+  //     {&m_superStructure}
+  //   } 
+  // ); 
+
+
   frc2::JoystickButton(&m_operatorController, 7).WhileHeld(
     frc2::RunCommand{
       [this]{

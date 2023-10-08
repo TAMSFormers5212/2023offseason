@@ -56,7 +56,7 @@ namespace OIConstants {//Controller buttons
         constexpr int Trigger = 1; 
         constexpr int ButtonThree = 3;
 
-        constexpr double deadband = 0.1;
+        constexpr double deadband = 0.3;
     }
 
     namespace Controller{//console controller
@@ -234,6 +234,7 @@ namespace ArmConstants{
                                                               -37.30916213989258, // mid cube
                                                               -126.996, // high cone 
                                                               -69};// high cube
+        
         constexpr int stow = 0;
         constexpr int groundpickup = 1;
         constexpr int singlestation = 2;
