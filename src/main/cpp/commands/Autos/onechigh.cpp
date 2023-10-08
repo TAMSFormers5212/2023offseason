@@ -20,7 +20,7 @@ onechigh::onechigh(Swerve* drive, Superstructure* arm) {
         frc2::ParallelRaceGroup{
             frc2::RunCommand(
                 [this, arm] {
-                    arm->setGrabber(1.0);  
+                    arm->setGrabber(0.5);  
                 },
                 {}
             ),

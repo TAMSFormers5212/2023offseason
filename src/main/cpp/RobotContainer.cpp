@@ -67,13 +67,13 @@ RobotContainer::RobotContainer() {
           //   m_superStructure.goToPose(m_superStructure.getPose());
           // }
 
-          if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::View)){
-            if(m_superStructure.getSoftLimitEnabled()){
-              m_superStructure.setSoftLimitEnabled(false);
-            }else{
-              m_superStructure.setSoftLimitEnabled(true);
-            }
-          }
+          // if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::View)){
+          //   if(m_superStructure.getSoftLimitEnabled()){
+          //     m_superStructure.setSoftLimitEnabled(false);
+          //   }else{
+          //     m_superStructure.setSoftLimitEnabled(true);
+          //   }
+          // }
 
 
         // if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::A)){
@@ -136,7 +136,7 @@ void RobotContainer::ConfigureBindings() {
   frc2::JoystickButton(&m_operatorController, OIConstants::Controller::leftBumper).WhileHeld(
     frc2::RunCommand{
       [this]{
-        m_superStructure.setGrabber(0.1+m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger));
+        m_superStructure.setGrabber(0.1+0.5*m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger));
       },
       {&m_superStructure}
     } 
@@ -146,7 +146,7 @@ void RobotContainer::ConfigureBindings() {
   frc2::JoystickButton(&m_operatorController, OIConstants::Controller::rightBumper).WhileHeld(
     frc2::RunCommand{
       [this]{
-        m_superStructure.setGrabber(-0.1-m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
+        m_superStructure.setGrabber(-0.1-0.5*m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
       },
       {&m_superStructure}
     } 

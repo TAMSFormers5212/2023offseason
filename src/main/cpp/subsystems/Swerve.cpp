@@ -122,7 +122,7 @@ using namespace units;
     m_poseEstimator.Update(getGyroHeading(), {m_modules[0].getPosition(), m_modules[1].getPosition(), 
                                               m_modules[2].getPosition(), m_modules[3].getPosition()});
 
-    auto pose = m_poseEstimator.GetEstimatedPosition();
+    // auto pose = m_poseEstimator.GetEstimatedPosition();
     // frc::SmartDashboard::PutNumber("Drive/Pose Estimate/X", pose.X().value());
     // frc::SmartDashboard::PutNumber("Drive/Pose Estimate/Y", pose.Y().value());
     // frc::SmartDashboard::PutNumber("Drive/Pose Estimate/Theta",pose.Rotation().Radians().value());
@@ -130,9 +130,9 @@ using namespace units;
     // frc::SmartDashboard::PutNumber("Top Left Module Value", m_modules[0].getPosition().angle());
     // frc::SmartDashboard::PutNumber("Top Left Value", m_modules[0].getTurningPosition());
     // frc::SmartDashboard::PutNumber("Top Left Value v2", m_modules[0].getAbsolutePosition());
-    frc::SmartDashboard::PutNumber("Heading", -m_gyro.GetYaw());
-    frc::SmartDashboard::PutNumber("Pose X", (double) AveragePose().X());
-    frc::SmartDashboard::PutNumber("Pose Y", (double) AveragePose().Y());
+    // frc::SmartDashboard::PutNumber("Heading", -m_gyro.GetYaw());
+    // frc::SmartDashboard::PutNumber("Pose X", (double) AveragePose().X());
+    // frc::SmartDashboard::PutNumber("Pose Y", (double) AveragePose().Y());
 
     // frc::SmartDashboard::PutNumber("tl rotation", m_modules[0].getTurningPosition());
     // frc::SmartDashboard::PutNumber("tr rotation", m_modules[1].getTurningPosition());
