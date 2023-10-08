@@ -14,7 +14,7 @@ using namespace ArmConstants::poseConstants;
 onechigh::onechigh(Swerve* drive, Superstructure* arm) {    
     AddCommands(
         frc2::ParallelRaceGroup{
-            SetArmPose(arm, armPose(shoulderPositions[highcube], elbowPositions[highcube])),
+            SetArmPose(arm, armPose(shoulderPositions[midcube], elbowPositions[midcube])),
             frc2::WaitCommand(4_s)
         },
         frc2::ParallelRaceGroup{

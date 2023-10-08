@@ -220,7 +220,7 @@ namespace ArmConstants{
         constexpr std::array<double, 8> elbowPositions = {0.0, // stow
                                                            -78.6689224243164, // ground pickup
                                                            0.0, // single station
-                                                           0.0, // double station
+                                                           -174.8501, // double station
                                                            -107.572, // mid cone 
                                                            -42.8091, // mid cube
                                                            -172.447, // high cone 
@@ -229,7 +229,7 @@ namespace ArmConstants{
         constexpr std::array<double, 8> shoulderPositions = {0.0, // stow
                                                               18.0332124, // ground pickup
                                                               0.0, // single station
-                                                              0.0, // double station
+                                                              -101.0025, // double station
                                                               -75.738, // mid cone 
                                                               3.0952, // mid cube
                                                               -126.996, // high cone 
