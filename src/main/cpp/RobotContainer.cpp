@@ -48,10 +48,10 @@ RobotContainer::RobotContainer() {
       m_superStructure.SetDefaultCommand(frc2::RunCommand(
         [this] {
           // return m_superStructure.goToPose(m_superStructure.getCurPose());
-          if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::leftBumper)){
-            m_superStructure.setGrabber(0.05);
-          }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::rightBumper)){
-            m_superStructure.setGrabber(-0.05);
+          if(m_operatorController.GetRawButton(OIConstants::Controller::leftBumper)){
+            m_superStructure.setGrabber(0.1);
+          }else if(m_operatorController.GetRawButton(OIConstants::Controller::rightBumper)){
+            m_superStructure.setGrabber(-0.1);
           }else{
             m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger)-m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
           }
@@ -59,7 +59,7 @@ RobotContainer::RobotContainer() {
           if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::LPress)){
             m_superStructure.setManual(!m_superStructure.getManual());
           }
-
+          frc::SmartDashboard::PutBoolean("manual", m_superStructure.getManual());
           if(m_superStructure.getManual()){
             m_superStructure.manualAdjust(
               m_operatorController.GetRawAxis(OIConstants::Controller::leftYAxis),
@@ -87,11 +87,12 @@ RobotContainer::RobotContainer() {
           m_superStructure.setPose(m_superStructure.getPose("double station"));
         }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>315||m_operatorController.GetPOV()<=45)){
           m_superStructure.setPose(m_superStructure.getPose("high cone"));
+          // m_operatorController
         }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>45||m_operatorController.GetPOV()<=135)){
           m_superStructure.setPose(m_superStructure.getPose("high cube"));
         }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>135||m_operatorController.GetPOV()<=225)){
           m_superStructure.setPose(m_superStructure.getPose("mid cube"));
-        }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>225||m_operatorController.GetPOV()<315)){
+        }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>225||m_operatorController.GetPOV()<=315)){
           m_superStructure.setPose(m_superStructure.getPose("mid cone"));
         }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::RPress)){
           m_superStructure.resetEncoders();

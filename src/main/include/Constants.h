@@ -221,19 +221,19 @@ namespace ArmConstants{
                                                            18.0332124, // ground pickup
                                                            0.0, // single station
                                                            0.0, // double station
-                                                           0.0, // mid cone 
+                                                           -107.572, // mid cone 
                                                            0.0, // mid cube
-                                                           0.0, // high cone 
-                                                           0.0};// high cube
+                                                           -172.447, // high cone 
+                                                           -117};// high cube
 
         constexpr std::array<double, 8> shoulderPositions = {0.0, // stow
                                                               -73.6689224243164, // ground pickup
                                                               0.0, // single station
                                                               0.0, // double station
-                                                              0.0, // mid cone 
+                                                              -75.738, // mid cone 
                                                               -37.30916213989258, // mid cube
-                                                              0.0, // high cone 
-                                                              0.0};// high cube
+                                                              -126.996, // high cone 
+                                                              -76};// high cube
 
     }
 }
