@@ -127,26 +127,26 @@ using namespace rev;
   // if(m_driveMotor.GetDeviceId()==bottomleft::driveMotor){
   //   frc::SmartDashboard::PutNumber("turn ref", adjustedAngle+encoffset);
   // }
-    if (m_driveMotor.GetDeviceId()==9){
-      frc::SmartDashboard::PutNumber("TL Adjusted Angle",adjustedAngle+encoffset);
+    // if (m_driveMotor.GetDeviceId()==9){
+    //   frc::SmartDashboard::PutNumber("TL Adjusted Angle",adjustedAngle+encoffset);
 
-    }
-    if (m_driveMotor.GetDeviceId()==5){
-      frc::SmartDashboard::PutNumber("TR Adjusted Angle",adjustedAngle+encoffset);
+    // }
+    // if (m_driveMotor.GetDeviceId()==5){
+    //   frc::SmartDashboard::PutNumber("TR Adjusted Angle",adjustedAngle+encoffset);
 
-    }
-    if (m_driveMotor.GetDeviceId()==4){
-      frc::SmartDashboard::PutNumber("BL Adjusted Angle",adjustedAngle+encoffset);
+    // }
+    // if (m_driveMotor.GetDeviceId()==4){
+    //   frc::SmartDashboard::PutNumber("BL Adjusted Angle",adjustedAngle+encoffset);
 
-    }
-    if (m_driveMotor.GetDeviceId()==7){
-      frc::SmartDashboard::PutNumber("BR Adjusted Angle",adjustedAngle+encoffset);
+    // }
+    // if (m_driveMotor.GetDeviceId()==7){
+    //   frc::SmartDashboard::PutNumber("BR Adjusted Angle",adjustedAngle+encoffset);
 
-    }
-    m_turningController.SetReference((adjustedAngle+encoffset), CANSparkMax::ControlType::kPosition);
-    if (m_driveMotor.GetDeviceId()==9){
-      frc::SmartDashboard::PutNumber("Encoder offset", encoffset);
-    }
+    // }
+    // m_turningController.SetReference((adjustedAngle+encoffset), CANSparkMax::ControlType::kPosition);
+    // if (m_driveMotor.GetDeviceId()==9){
+    //   frc::SmartDashboard::PutNumber("Encoder offset", encoffset);
+    // }
     
     // m_driveController.SetReference(optimizedState.speed.value(), CANSparkMax::ControlType::kVelocity);
     m_driveMotor.Set(optimizedState.speed / SwerveModuleConstants::maxSpeed);

@@ -30,7 +30,7 @@ Superstructure::Superstructure()
     m_shoulderMotorRight.SetSmartCurrentLimit(40);
     m_shoulderMotorRight.SetSoftLimit(CANSparkMax::SoftLimitDirection::kForward, 26);
     m_shoulderMotorRight.SetSoftLimit(CANSparkMax::SoftLimitDirection::kReverse,-150);
-    
+
     m_shoulderController.SetP(shoulderConstants::kP);
     m_shoulderController.SetI(shoulderConstants::kI);
     m_shoulderController.SetD(shoulderConstants::kD);
@@ -66,9 +66,6 @@ Superstructure::Superstructure()
     m_pose.setElbowPose(m_relativeElbowEncoder.GetPosition());
 
 
-    for(int i =0;i<int(names->length());i++){
-        poses.push_back(armPose(ArmConstants::poseConstants::shoulderPositions[i], ArmConstants::poseConstants::elbowPositions[i], i, names[i]));
-    }
     std::cout<<"superstructure initalized correctly"<<std::endl;
 }
 
@@ -79,6 +76,8 @@ armPose Superstructure::getCurPose(){
 }
 
 void Superstructure::goToPose(armPose pose){
+    frc::SmartDashboard::PutNumber("goal shoulder", pose.getShoulderPose());
+    frc::SmartDashboard::PutNumber("goal elbow", pose.getElbowPose());
     m_shoulderController.SetReference(pose.getShoulderPose(), rev::CANSparkMax::ControlType::kPosition);
     m_elbowController.SetReference(pose.getElbowPose(), rev::CANSparkMax::ControlType::kPosition);
 }
@@ -93,14 +92,6 @@ void Superstructure::resetPose(){
     m_relativeElbowEncoder.SetPosition(0);
 }
 
-armPose Superstructure::getPose(std::string name){
-    for(armPose pose: poses){
-        if(name.compare(pose.getName())==0){
-            return pose;
-        }
-    }
-    return poses.at(0); // 0 is stowed position
-}
 
 void Superstructure::manualAdjust(double shoulder, double elbow){
     // m_shoulderController.SetReference(shoulder*shoulderConstants::maxVelo, rev::CANSparkMax::ControlType::kVelocity);
@@ -111,8 +102,6 @@ void Superstructure::manualAdjust(double shoulder, double elbow){
 }
 
 void Superstructure::Periodic(){
-    getCurPose();
-    frc::SmartDashboard::PutString("Arm Pose", this->getCurPose().getName());
     // frc::SmartDashboard::PutNumber("Shoulder Position", m_relativeShoulderEncoder.GetPosition());
     frc::SmartDashboard::PutNumber("Elbow Position", m_relativeElbowEncoder.GetPosition());
     frc::SmartDashboard::PutNumber("Shoulder Position", m_relativeShoulderEncoder.GetPosition());

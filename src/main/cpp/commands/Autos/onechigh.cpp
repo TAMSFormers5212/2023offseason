@@ -6,13 +6,15 @@
 #include <frc2/command/InstantCommand.h>
 
 #include "commands/Autos/onechigh.h"
+#include "commands/SetArmPose.h"
 #include "Constants.h"
 
+using namespace ArmConstants::poseConstants;
 
 onechigh::onechigh(Swerve* drive, Superstructure* arm) {    
     AddCommands(
         frc2::ParallelRaceGroup{
-            frc2::RunCommand([arm]() {arm->goToPose(arm->getPose("high cube"));}),
+            SetArmPose(arm, armPose(elbowPositions[highcube], shoulderPositions[highcube])),
             frc2::WaitCommand(4_s)
         },
         frc2::ParallelRaceGroup{

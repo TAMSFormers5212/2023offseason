@@ -13,9 +13,11 @@
 #include <iostream>
 #include <frc/smartdashboard/SmartDashboard.h>
 
+#include "commands/SetArmPose.h"
 #include "commands/Autos/onechigh.h"
 
 using namespace std;
+using namespace ArmConstants::poseConstants;
 
 RobotContainer::RobotContainer() {
   // Initialize all of your commands and subsystems here
@@ -64,9 +66,10 @@ RobotContainer::RobotContainer() {
             m_superStructure.manualAdjust(
               m_operatorController.GetRawAxis(OIConstants::Controller::leftYAxis),
               m_operatorController.GetRawAxis(OIConstants::Controller::rightYAxis));
-          }else{
-            m_superStructure.goToPose(m_superStructure.getPose());
           }
+          // else{
+          //   m_superStructure.goToPose(m_superStructure.getPose());
+          // }
 
           if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::View)){
             if(m_superStructure.getSoftLimitEnabled()){
@@ -77,26 +80,26 @@ RobotContainer::RobotContainer() {
           }
 
 
-        if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::A)){
-          m_superStructure.setPose(m_superStructure.getPose("stow"));
-        }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::B)){
-          m_superStructure.setPose(m_superStructure.getPose("ground pickup"));
-        }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::X)){
-          m_superStructure.setPose(m_superStructure.getPose("single station"));
-        }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::Y)){
-          m_superStructure.setPose(m_superStructure.getPose("double station"));
-        }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>315||m_operatorController.GetPOV()<=45)){
-          m_superStructure.setPose(m_superStructure.getPose("high cone"));
-          // m_operatorController
-        }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>45||m_operatorController.GetPOV()<=135)){
-          m_superStructure.setPose(m_superStructure.getPose("high cube"));
-        }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>135||m_operatorController.GetPOV()<=225)){
-          m_superStructure.setPose(m_superStructure.getPose("mid cube"));
-        }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>225||m_operatorController.GetPOV()<=315)){
-          m_superStructure.setPose(m_superStructure.getPose("mid cone"));
-        }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::RPress)){
-          m_superStructure.resetEncoders();
-        }
+        // if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::A)){
+        //   m_superStructure.setPose(m_superStructure.getPose("stow"));
+        // }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::B)){
+        //   m_superStructure.setPose(m_superStructure.getPose("ground pickup"));
+        // }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::X)){
+        //   m_superStructure.setPose(m_superStructure.getPose("single station"));
+        // }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::Y)){
+        //   m_superStructure.setPose(m_superStructure.getPose("double station"));
+        // }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>315||m_operatorController.GetPOV()<=45)){
+        //   m_superStructure.setPose(m_superStructure.getPose("high cone"));
+        //   // m_operatorController
+        // }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>45||m_operatorController.GetPOV()<=135)){
+        //   m_superStructure.setPose(m_superStructure.getPose("high cube"));
+        // }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>135||m_operatorController.GetPOV()<=225)){
+        //   m_superStructure.setPose(m_superStructure.getPose("mid cube"));
+        // }else if(m_operatorController.GetPOV()>=0&&(m_operatorController.GetPOV()>225||m_operatorController.GetPOV()<=315)){
+        //   m_superStructure.setPose(m_superStructure.getPose("mid cone"));
+        // }else if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::RPress)){
+        //   m_superStructure.resetEncoders();
+        // }
         
         },
         {&m_superStructure}
@@ -134,8 +137,30 @@ void RobotContainer::ConfigureBindings() {
     )
   );
 
-
-
+  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::A).WhenPressed(
+    SetArmPose(&m_superStructure, armPose{elbowPositions[stow], shoulderPositions[stow]})
+  );
+  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::B).WhenPressed(
+    SetArmPose(&m_superStructure, armPose{elbowPositions[groundpickup], shoulderPositions[groundpickup]})
+  );
+  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::X).WhenPressed(
+    SetArmPose(&m_superStructure, armPose{elbowPositions[singlestation], shoulderPositions[singlestation]})
+  );
+  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::Y).WhenPressed(
+    SetArmPose(&m_superStructure, armPose{elbowPositions[doublestation], shoulderPositions[doublestation]})
+  );
+  // frc2::POVButton(&m_operatorController, 90)
+  frc2::POVButton(&m_operatorController, 0).WhenPressed(
+    SetArmPose(&m_superStructure, armPose{elbowPositions[highcone], shoulderPositions[highcone]})
+  );
+  frc2::POVButton(&m_operatorController, 90).WhenPressed(
+    SetArmPose(&m_superStructure, armPose{elbowPositions[highcube], shoulderPositions[highcube]})
+  );frc2::POVButton(&m_operatorController, 180).WhenPressed(
+    SetArmPose(&m_superStructure, armPose{elbowPositions[midcube], shoulderPositions[midcube]})
+  );
+  frc2::POVButton(&m_operatorController, 270).WhenPressed(
+    SetArmPose(&m_superStructure, armPose{elbowPositions[midcone], shoulderPositions[midcone]})
+  );
   //m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger) - m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
           
 }

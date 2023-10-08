@@ -134,20 +134,20 @@ using namespace units;
     frc::SmartDashboard::PutNumber("Pose X", (double) AveragePose().X());
     frc::SmartDashboard::PutNumber("Pose Y", (double) AveragePose().Y());
 
-    frc::SmartDashboard::PutNumber("tl rotation", m_modules[0].getTurningPosition());
-    frc::SmartDashboard::PutNumber("tr rotation", m_modules[1].getTurningPosition());
-    frc::SmartDashboard::PutNumber("bl rotation", m_modules[2].getTurningPosition());
-    frc::SmartDashboard::PutNumber("br rotation", m_modules[3].getTurningPosition());
-    frc::SmartDashboard::PutNumber("tl apos", m_modules[0].getAbsolutePosition());
-    frc::SmartDashboard::PutNumber("tr apos", m_modules[1].getAbsolutePosition());
-    frc::SmartDashboard::PutNumber("bl apos", m_modules[2].getAbsolutePosition());
-    frc::SmartDashboard::PutNumber("br apos", m_modules[3].getAbsolutePosition());
+    // frc::SmartDashboard::PutNumber("tl rotation", m_modules[0].getTurningPosition());
+    // frc::SmartDashboard::PutNumber("tr rotation", m_modules[1].getTurningPosition());
+    // frc::SmartDashboard::PutNumber("bl rotation", m_modules[2].getTurningPosition());
+    // frc::SmartDashboard::PutNumber("br rotation", m_modules[3].getTurningPosition());
+    // frc::SmartDashboard::PutNumber("tl apos", m_modules[0].getAbsolutePosition());
+    // frc::SmartDashboard::PutNumber("tr apos", m_modules[1].getAbsolutePosition());
+    // frc::SmartDashboard::PutNumber("bl apos", m_modules[2].getAbsolutePosition());
+    // frc::SmartDashboard::PutNumber("br apos", m_modules[3].getAbsolutePosition());
     // frc::SmartDashboard::PutNumber("bl t velocity", m_modules[2].getTurningVelocity());
     // frc::SmartDashboard::PutNumber("tl t velocity", m_modules[0].getTurningVelocity());
-    frc::SmartDashboard::PutNumber("tl speed", m_modules[0].getDriveVelocity());
-    frc::SmartDashboard::PutNumber("tr speed", m_modules[1].getDriveVelocity());
-    frc::SmartDashboard::PutNumber("bl speed", m_modules[2].getDriveVelocity());
-    frc::SmartDashboard::PutNumber("br speed", m_modules[3].getDriveVelocity());
+    // frc::SmartDashboard::PutNumber("tl speed", m_modules[0].getDriveVelocity());
+    // frc::SmartDashboard::PutNumber("tr speed", m_modules[1].getDriveVelocity());
+    // frc::SmartDashboard::PutNumber("bl speed", m_modules[2].getDriveVelocity());
+    // frc::SmartDashboard::PutNumber("br speed", m_modules[3].getDriveVelocity());
     
 
   } //update pose using gyro, vision, and odometry

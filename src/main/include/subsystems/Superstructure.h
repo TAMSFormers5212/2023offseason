@@ -33,7 +33,6 @@ class Superstructure : public frc2::SubsystemBase {
   void goToPose(armPose pose); // got to arm pose
   void resetPose(); // set arm pose to current pose
   void setPose(armPose pose); // set goal pose to new pose
-  armPose getPose(string name); // get the pose with name
   armPose getPose();
   void manualAdjust(double shoulder, double elbow); // adjust arm with joysticks
   void setGrabber(double speed); // spin intake
@@ -88,16 +87,6 @@ class Superstructure : public frc2::SubsystemBase {
   // frc::DigitalInput shoulderLimitSwtich;
   // frc::DigitalInput elbowLimitSwitch;
 
-  std::vector<armPose> poses;
-
-  std::string names[8] = {"stow",
-                           "ground pickup",
-                           "single station",
-                           "double station",
-                           "mid cone",
-                           "mid cube",
-                           "high cone",
-                           "high cube"};
 };
 
 
