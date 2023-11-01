@@ -130,7 +130,7 @@ using namespace units;
     // frc::SmartDashboard::PutNumber("Top Left Module Value", m_modules[0].getPosition().angle());
     // frc::SmartDashboard::PutNumber("Top Left Value", m_modules[0].getTurningPosition());
     // frc::SmartDashboard::PutNumber("Top Left Value v2", m_modules[0].getAbsolutePosition());
-    // frc::SmartDashboard::PutNumber("Heading", -m_gyro.GetYaw());
+    frc::SmartDashboard::PutNumber("Heading", -m_gyro.GetYaw());
     // frc::SmartDashboard::PutNumber("Pose X", (double) AveragePose().X());
     // frc::SmartDashboard::PutNumber("Pose Y", (double) AveragePose().Y());
 
