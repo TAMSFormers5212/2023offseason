@@ -131,6 +131,7 @@ using namespace units;
     // frc::SmartDashboard::PutNumber("Top Left Value", m_modules[0].getTurningPosition());
     // frc::SmartDashboard::PutNumber("Top Left Value v2", m_modules[0].getAbsolutePosition());
     frc::SmartDashboard::PutNumber("Heading", -m_gyro.GetYaw());
+    frc::SmartDashboard::PutBoolean("Connection", m_gyro.IsConnected());
     // frc::SmartDashboard::PutNumber("Pose X", (double) AveragePose().X());
     // frc::SmartDashboard::PutNumber("Pose Y", (double) AveragePose().Y());
 
