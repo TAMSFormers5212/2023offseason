@@ -45,6 +45,8 @@ class Swerve : public frc2::SubsystemBase {
 
   void brake();
 
+  void moveToAngle(double x, double y);
+
   void Periodic() override; //update pose using gyro, vision, and odometry
 
   void resetAbsoluteEncoders();

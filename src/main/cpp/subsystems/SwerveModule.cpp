@@ -116,14 +116,14 @@ using namespace rev;
 
     frc::Rotation2d curAngle = units::radian_t{getTurningPosition()-0.25};
 
-    double delta = std::fmod(std::fmod((optimizedState.angle.Radians().value() -
+    /*double delta = std::fmod(std::fmod((optimizedState.angle.Radians().value() -
                                       curAngle.Radians().value() + M_PI),
                                      2 * M_PI) +
                                2 * M_PI,
                            2 * M_PI) -
-                 M_PI;  // NOLINT
+                 M_PI;  */ // NOLINT
 
-    double adjustedAngle = delta + curAngle.Radians().value();
+    double adjustedAngle = /*delta + */curAngle.Radians().value();
   // if(m_driveMotor.GetDeviceId()==bottomleft::driveMotor){
   //   frc::SmartDashboard::PutNumber("turn ref", adjustedAngle+encoffset);
   // }

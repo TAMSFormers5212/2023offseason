@@ -32,8 +32,8 @@ using namespace units;
                     frc::Pose2d()
     }
   {
-    m_gyro.Calibrate();
-    m_gyro.ZeroYaw();
+    //m_gyro.Calibrate();
+    //m_gyro.ZeroYaw();
     heading = frc::Rotation2d(degree_t{-m_gyro.GetYaw()});
     lastAngle = -m_gyro.GetYaw();
     resetOdometry(m_poseEstimator.GetEstimatedPosition());
@@ -115,7 +115,15 @@ using namespace units;
       module.setState(frc::SwerveModuleState{0.0_mps, module.getState().angle});
     }
   }
-
+  void Swerve::moveToAngle(double x, double y){
+    double r = sqrt(pow(x,2)+pow(y,2));
+    double angle = atan(y/x);
+    frc::SmartDashboard::PutNumber("Magnitude", r);
+    frc::SmartDashboard::PutNumber("angle", angle);
+    for (auto& module : m_modules){
+        module.setState(frc::SwerveModuleState{meters_per_second_t(r), frc::Rotation2d(radian_t(angle))});
+    }
+  }
   void Swerve::Periodic(){
     m_odometry.Update(getGyroHeading(), {m_modules[0].getPosition(), m_modules[1].getPosition(), 
                                          m_modules[2].getPosition(), m_modules[3].getPosition()});
@@ -126,12 +134,13 @@ using namespace units;
     // frc::SmartDashboard::PutNumber("Drive/Pose Estimate/X", pose.X().value());
     // frc::SmartDashboard::PutNumber("Drive/Pose Estimate/Y", pose.Y().value());
     // frc::SmartDashboard::PutNumber("Drive/Pose Estimate/Theta",pose.Rotation().Radians().value());
-
+    
     // frc::SmartDashboard::PutNumber("Top Left Module Value", m_modules[0].getPosition().angle());
     // frc::SmartDashboard::PutNumber("Top Left Value", m_modules[0].getTurningPosition());
     // frc::SmartDashboard::PutNumber("Top Left Value v2", m_modules[0].getAbsolutePosition());
     frc::SmartDashboard::PutNumber("Heading", -m_gyro.GetYaw());
     frc::SmartDashboard::PutBoolean("Connection", m_gyro.IsConnected());
+    frc::SmartDashboard::PutBoolean("Calibration", m_gyro.IsCalibrating());
     // frc::SmartDashboard::PutNumber("Pose X", (double) AveragePose().X());
     // frc::SmartDashboard::PutNumber("Pose Y", (double) AveragePose().Y());
 
@@ -139,10 +148,10 @@ using namespace units;
     // frc::SmartDashboard::PutNumber("tr rotation", m_modules[1].getTurningPosition());
     // frc::SmartDashboard::PutNumber("bl rotation", m_modules[2].getTurningPosition());
     // frc::SmartDashboard::PutNumber("br rotation", m_modules[3].getTurningPosition());
-    // frc::SmartDashboard::PutNumber("tl apos", m_modules[0].getAbsolutePosition());
-    // frc::SmartDashboard::PutNumber("tr apos", m_modules[1].getAbsolutePosition());
-    // frc::SmartDashboard::PutNumber("bl apos", m_modules[2].getAbsolutePosition());
-    // frc::SmartDashboard::PutNumber("br apos", m_modules[3].getAbsolutePosition());
+    frc::SmartDashboard::PutNumber("tl apos", m_modules[0].getAbsolutePosition());
+    frc::SmartDashboard::PutNumber("tr apos", m_modules[1].getAbsolutePosition());
+    frc::SmartDashboard::PutNumber("bl apos", m_modules[2].getAbsolutePosition());
+    frc::SmartDashboard::PutNumber("br apos", m_modules[3].getAbsolutePosition());
     // frc::SmartDashboard::PutNumber("bl t velocity", m_modules[2].getTurningVelocity());
     // frc::SmartDashboard::PutNumber("tl t velocity", m_modules[0].getTurningVelocity());
     // frc::SmartDashboard::PutNumber("tl speed", m_modules[0].getDriveVelocity());
