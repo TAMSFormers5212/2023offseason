@@ -30,8 +30,8 @@ RobotContainer::RobotContainer() {
         // Right stick up on xbox is negative, right stick down is postive.
         // Right stick right on xbox is negative, right stick left is postive.
         // Left stick right is positive, left stick left is negative.
-        double YAxis = m_driverController.GetRawAxis(OIConstants::Joystick::XAxis);
-        double XAxis = m_driverController.GetRawAxis(OIConstants::Joystick::YAxis);
+        double XAxis = m_driverController.GetRawAxis(OIConstants::Joystick::XAxis);
+        double YAxis = m_driverController.GetRawAxis(OIConstants::Joystick::YAxis);
         double RotAxis = m_driverController.GetRawAxis(OIConstants::Joystick::RotAxis);
         // cout<<XAxis<<" "<<YAxis<<" "<<RotAxis<<endl;
         // frc::SmartDashboard::PutNumber("X axis", XAxis);
@@ -50,16 +50,16 @@ RobotContainer::RobotContainer() {
       {&m_drive}  // requirements
       ));
 
-      m_superStructure.SetDefaultCommand(frc2::RunCommand(
-        [this] {
-          // return m_superStructure.goToPose(m_superStructure.getCurPose());]
-          // m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger)-m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
+      // m_superStructure.SetDefaultCommand(frc2::RunCommand(
+      //   [this] {
+      //     // return m_superStructure.goToPose(m_superStructure.getCurPose());]
+      //     // m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger)-m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
           
 
-          // if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::LPress)){
-          //   m_superStructure.setManual(!m_superStructure.getManual());
-          // }
-          frc::SmartDashboard::PutBoolean("manual", m_superStructure.getManual());
+      //     // if(m_operatorController.GetRawButtonPressed(OIConstants::Controller::LPress)){
+      //     //   m_superStructure.setManual(!m_superStructure.getManual());
+      //     // }
+      //     frc::SmartDashboard::PutBoolean("manual", m_superStructure.getManual());
           // if(m_superStructure.getManual()){
           //   m_superStructure.manualAdjust(
           //     m_operatorController.GetRawAxis(OIConstants::Controller::leftYAxis),
@@ -99,9 +99,9 @@ RobotContainer::RobotContainer() {
         //   m_superStructure.resetEncoders();
         // }
         
-        },
-        {&m_superStructure}
-      ));
+      //   },
+      //   {&m_superStructure}
+      // ));
 
   // Configure the button bindings
   ConfigureBindings();
@@ -135,24 +135,24 @@ void RobotContainer::ConfigureBindings() {
     )
   );
 
-  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::leftBumper).WhileHeld(
-    frc2::RunCommand{
-      [this]{
-        m_superStructure.setGrabber(0.1+0.5*m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger));
-      },
-      {&m_superStructure}
-    } 
-  ); 
+  // frc2::JoystickButton(&m_operatorController, OIConstants::Controller::leftBumper).WhileHeld(
+  //   frc2::RunCommand{
+  //     [this]{
+  //       m_superStructure.setGrabber(0.1+0.5*m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger));
+  //     },
+  //     {&m_superStructure}
+  //   } 
+  // ); 
 
   
-  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::rightBumper).WhileHeld(
-    frc2::RunCommand{
-      [this]{
-        m_superStructure.setGrabber(-0.1-0.5*m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
-      },
-      {&m_superStructure}
-    } 
-  ); 
+  // frc2::JoystickButton(&m_operatorController, OIConstants::Controller::rightBumper).WhileHeld(
+  //   frc2::RunCommand{
+  //     [this]{
+  //       m_superStructure.setGrabber(-0.1-0.5*m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
+  //     },
+  //     {&m_superStructure}
+  //   } 
+  // ); 
   // frc2::JoystickButton(&m_operatorController, OIConstants::Controller::LPress).WhenPressed(
   //   frc2::InstantCommand{
   //     [this]{
@@ -173,59 +173,59 @@ void RobotContainer::ConfigureBindings() {
   // ); 
 
 
-  frc2::JoystickButton(&m_operatorController, 7).WhileHeld(
-    frc2::RunCommand{
-      [this]{
-           m_superStructure.manualAdjust(
-              m_operatorController.GetRawAxis(OIConstants::Controller::leftYAxis),
-              m_operatorController.GetRawAxis(OIConstants::Controller::rightYAxis));
+  // frc2::JoystickButton(&m_operatorController, 7).WhileHeld(
+  //   frc2::RunCommand{
+  //     [this]{
+  //          m_superStructure.manualAdjust(
+  //             m_operatorController.GetRawAxis(OIConstants::Controller::leftYAxis),
+  //             m_operatorController.GetRawAxis(OIConstants::Controller::rightYAxis));
           
-      },
-      {&m_superStructure}
-    } 
-  ); 
+  //     },
+  //     {&m_superStructure}
+  //   } 
+  // ); 
 
-  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::RPress).WhenPressed(
-    frc2::InstantCommand{
-      [this]{
-        m_superStructure.resetEncoders();
-      }
-    }
-  );
+  // frc2::JoystickButton(&m_operatorController, OIConstants::Controller::RPress).WhenPressed(
+  //   frc2::InstantCommand{
+  //     [this]{
+  //       m_superStructure.resetEncoders();
+  //     }
+  //   }
+  // );
 
 
 
   // frc2::JoystickButton
 
-  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::A).WhenPressed(
-    SetArmPose(&m_superStructure, armPose{shoulderPositions[stow], shoulderPositions[stow]})
-  );
-  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::B).WhenPressed(
-    SetArmPose(&m_superStructure, armPose{shoulderPositions[groundpickup], elbowPositions[groundpickup]})
-  );
-  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::X).WhenPressed(
-    SetArmPose(&m_superStructure, armPose{shoulderPositions[singlestation], elbowPositions[singlestation]})
-  );
-  frc2::JoystickButton(&m_operatorController, OIConstants::Controller::Y).WhenPressed(
-    SetArmPose(&m_superStructure, armPose{shoulderPositions[doublestation], elbowPositions[doublestation]})
-  );
-  // frc2::POVButton(&m_operatorController, 90)
-  frc2::POVButton(&m_operatorController, 0).WhenPressed(
-    SetArmPose(&m_superStructure, armPose{shoulderPositions[highcone], elbowPositions[highcone]})
-  );
-  frc2::POVButton(&m_operatorController, 90).WhenPressed(
-    SetArmPose(&m_superStructure, armPose{shoulderPositions[highcube], elbowPositions[highcube]})
-  );frc2::POVButton(&m_operatorController, 180).WhenPressed(
-    SetArmPose(&m_superStructure, armPose{shoulderPositions[midcube], elbowPositions[midcube]})
-  );
-  frc2::POVButton(&m_operatorController, 270).WhenPressed(
-    SetArmPose(&m_superStructure, armPose{shoulderPositions[midcone], elbowPositions[midcone]})
-  );
-  //m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger) - m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
+//   frc2::JoystickButton(&m_operatorController, OIConstants::Controller::A).WhenPressed(
+//     SetArmPose(&m_superStructure, armPose{shoulderPositions[stow], shoulderPositions[stow]})
+//   );
+//   frc2::JoystickButton(&m_operatorController, OIConstants::Controller::B).WhenPressed(
+//     SetArmPose(&m_superStructure, armPose{shoulderPositions[groundpickup], elbowPositions[groundpickup]})
+//   );
+//   frc2::JoystickButton(&m_operatorController, OIConstants::Controller::X).WhenPressed(
+//     SetArmPose(&m_superStructure, armPose{shoulderPositions[singlestation], elbowPositions[singlestation]})
+//   );
+//   frc2::JoystickButton(&m_operatorController, OIConstants::Controller::Y).WhenPressed(
+//     SetArmPose(&m_superStructure, armPose{shoulderPositions[doublestation], elbowPositions[doublestation]})
+//   );
+//   // frc2::POVButton(&m_operatorController, 90)
+//   frc2::POVButton(&m_operatorController, 0).WhenPressed(
+//     SetArmPose(&m_superStructure, armPose{shoulderPositions[highcone], elbowPositions[highcone]})
+//   );
+//   frc2::POVButton(&m_operatorController, 90).WhenPressed(
+//     SetArmPose(&m_superStructure, armPose{shoulderPositions[highcube], elbowPositions[highcube]})
+//   );frc2::POVButton(&m_operatorController, 180).WhenPressed(
+//     SetArmPose(&m_superStructure, armPose{shoulderPositions[midcube], elbowPositions[midcube]})
+//   );
+//   frc2::POVButton(&m_operatorController, 270).WhenPressed(
+//     SetArmPose(&m_superStructure, armPose{shoulderPositions[midcone], elbowPositions[midcone]})
+//   );
+//   //m_superStructure.setGrabber(m_operatorController.GetRawAxis(OIConstants::Controller::leftTrigger) - m_operatorController.GetRawAxis(OIConstants::Controller::rightTrigger));
           
 }
 
-frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
-  // An example command will be run in autonomous
-  return onechigh(&m_drive, &m_superStructure).ToPtr();
-}
+// frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
+//   // An example command will be run in autonomous
+//   return onechigh(&m_drive, &m_superStructure).ToPtr();
+// }

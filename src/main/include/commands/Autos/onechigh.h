@@ -11,7 +11,7 @@
 #include <subsystems/Superstructure.h>
 
 
-class onechigh : public frc2::CommandHelper<frc2::SequentialCommandGroup, onechigh> {
-    public:
-    onechigh(Swerve* swerve, Superstructure* structure);
-};
+// class onechigh : public frc2::CommandHelper<frc2::SequentialCommandGroup, onechigh> {
+//     public:
+//     onechigh(Swerve* swerve, Superstructure* structure);
+// };

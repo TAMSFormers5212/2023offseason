@@ -7,6 +7,7 @@
 #include <numbers>
 #include <string>
 #include <iostream>
+#define M_PI 3.14159265358
 
 using enum rev::CANSparkMaxLowLevel::MotorType;
 using namespace SwerveModuleConstants;
@@ -65,7 +66,7 @@ using namespace rev;
     m_turningMotor.EnableVoltageCompensation(12.0);
     m_turningMotor.SetSmartCurrentLimit(20, 30);
     m_turningController.SetPositionPIDWrappingEnabled(true);
-    m_turningEncoder.SetPositionConversionFactor(2*M_PI/SwerveModuleConstants::steerRatio);
+    m_turningEncoder.SetPositionConversionFactor(2*M_PI / SwerveModuleConstants::steerRatio);
     // m_turningEncoder.SetPosition(getAbsolutePosition()*M_2_PI);
     resetTurningEncoder();
   }

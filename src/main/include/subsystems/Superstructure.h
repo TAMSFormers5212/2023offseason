@@ -24,69 +24,69 @@
 #include "armPose.h"
 #include "Constants.h"
 
-class Superstructure : public frc2::SubsystemBase {
- public:
-  virtual ~Superstructure();
-  Superstructure();
+// class Superstructure : public frc2::SubsystemBase {
+//  public:
+//   virtual ~Superstructure();
+//   Superstructure();
 
-  armPose getCurPose(); // get current position of arm
-  void goToPose(armPose pose); // got to arm pose
-  void resetPose(); // set arm pose to current pose
-  void setPose(armPose pose); // set goal pose to new pose
-  armPose getPose();
-  void manualAdjust(double shoulder, double elbow); // adjust arm with joysticks
-  void setGrabber(double speed); // spin intake
-  void resetEncoders(); // set pose to 0,0
+//   armPose getCurPose(); // get current position of arm
+//   void goToPose(armPose pose); // got to arm pose
+//   void resetPose(); // set arm pose to current pose
+//   void setPose(armPose pose); // set goal pose to new pose
+//   armPose getPose();
+//   void manualAdjust(double shoulder, double elbow); // adjust arm with joysticks
+//   void setGrabber(double speed); // spin intake
+//   void resetEncoders(); // set pose to 0,0
 
-  void setManual(bool man);
-  bool getManual();
-  void setSoftLimitEnabled(bool enable);
-  bool getSoftLimitEnabled();
-
-
+//   void setManual(bool man);
+//   bool getManual();
+//   void setSoftLimitEnabled(bool enable);
+//   bool getSoftLimitEnabled();
 
 
-  /*** Example command factory method.*/
-//   frc2::CommandPtr ExampleMethodCommand();
-  /*** An example method querying a boolean state of the subsystem (for example, a* digital sensor).** @return value of some boolean subsystem state, such as a digital sensor.*/
-  // bool ExampleCondition();
-  /*** Will be called periodically whenever the CommandScheduler runs.*/
-  void Periodic() override;
-  /*** Will be called periodically whenever the CommandScheduler runs during* simulation.*/
-  // void SimulationPeriodic() override;
 
- private:
-  // Components (e.g. motor controllers and sensors) should generally be
-  // declared private and exposed only through public methods.
-  // rev::CANSparkMax m_shoulderMotorLeft;
-  rev::CANSparkMax m_shoulderMotorRight;
-  rev::CANSparkMax m_elbowMotor;
-  ctre::phoenix::motorcontrol::can::VictorSPX m_grabberMotor;
 
-  // frc::AnalogEncoder m_absoluteShoulderEncoder;
-  // frc::AnalogEncoder m_absoluteElbowEncoder;
+//   /*** Example command factory method.*/
+// //   frc2::CommandPtr ExampleMethodCommand();
+//   /*** An example method querying a boolean state of the subsystem (for example, a* digital sensor).** @return value of some boolean subsystem state, such as a digital sensor.*/
+//   // bool ExampleCondition();
+//   /*** Will be called periodically whenever the CommandScheduler runs.*/
+//   void Periodic() override;
+//   /*** Will be called periodically whenever the CommandScheduler runs during* simulation.*/
+//   // void SimulationPeriodic() override;
 
-  // double shoulderOffset;
-  // double elbowOffset;
+//  private:
+//   // Components (e.g. motor controllers and sensors) should generally be
+//   // declared private and exposed only through public methods.
+//   // rev::CANSparkMax m_shoulderMotorLeft;
+//   rev::CANSparkMax m_shoulderMotorRight;
+//   rev::CANSparkMax m_elbowMotor;
+//   ctre::phoenix::motorcontrol::can::VictorSPX m_grabberMotor;
 
-  rev::SparkMaxPIDController m_shoulderController = m_shoulderMotorRight.GetPIDController();
-  rev::SparkMaxPIDController m_elbowController = m_elbowMotor.GetPIDController();
+//   // frc::AnalogEncoder m_absoluteShoulderEncoder;
+//   // frc::AnalogEncoder m_absoluteElbowEncoder;
 
-  rev::SparkMaxRelativeEncoder m_relativeShoulderEncoder;
-  rev::SparkMaxRelativeEncoder m_relativeElbowEncoder;
+//   // double shoulderOffset;
+//   // double elbowOffset;
 
-  // frc::ArmFeedforward m_shoulderFeedforward();
-  // frc::ArmFeedforward m_elbowFeedforward;
+//   rev::SparkMaxPIDController m_shoulderController = m_shoulderMotorRight.GetPIDController();
+//   rev::SparkMaxPIDController m_elbowController = m_elbowMotor.GetPIDController();
 
-  armPose m_pose; // current pose
-  int poseID;
+//   rev::SparkMaxRelativeEncoder m_relativeShoulderEncoder;
+//   rev::SparkMaxRelativeEncoder m_relativeElbowEncoder;
 
-  bool manual = false;
-  bool softLimitEnabled = true;
+//   // frc::ArmFeedforward m_shoulderFeedforward();
+//   // frc::ArmFeedforward m_elbowFeedforward;
 
-  // frc::DigitalInput shoulderLimitSwtich;
-  // frc::DigitalInput elbowLimitSwitch;
+//   armPose m_pose; // current pose
+//   int poseID;
 
-};
+//   bool manual = false;
+//   bool softLimitEnabled = true;
+
+//   // frc::DigitalInput shoulderLimitSwtich;
+//   // frc::DigitalInput elbowLimitSwitch;
+
+// };
 
 

@@ -34,11 +34,11 @@ class RobotContainer {
  private:
   // Replace with CommandPS4Controller or CommandJoystick if needed
   frc::GenericHID m_driverController{0};
-  frc::GenericHID m_operatorController{1};
+  // frc::GenericHID m_operatorController{1};
 
   // The robot's subsystems are defined here...
   Swerve m_drive;
-  Superstructure m_superStructure;
+  // Superstructure m_superStructure;
 
   // std::unordered_map<std::string, std::shared_ptr<frc2::Command>> m_eventMap;
 

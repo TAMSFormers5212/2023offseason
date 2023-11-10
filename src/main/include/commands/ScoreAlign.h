@@ -10,9 +10,9 @@
 
 class ScoreAlign : public frc2::CommandBase {
  public:
-  frc::Pose2d GetPosition();
-  frc::Pose2d GoalPose();
-  frc2::CommandPtr Align();
+  // frc::Pose2d GetPosition();
+  // frc::Pose2d GoalPose();
+  // frc2::CommandPtr Align();
   
 
 

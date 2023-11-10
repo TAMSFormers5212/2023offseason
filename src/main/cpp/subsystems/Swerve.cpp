@@ -2,7 +2,7 @@
 #include <frc/kinematics/ChassisSpeeds.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <iostream>
-
+#define M_PI 3.14159265358
 
 
 using namespace SwerveModuleConstants;
@@ -117,9 +117,20 @@ using namespace units;
   }
   void Swerve::moveToAngle(double x, double y){
     double r = sqrt(pow(x,2)+pow(y,2));
-    double angle = atan(y/x);
+    double angle;
+    if(x>=0&&y>=0){
+       angle = atan(y/x)+M_PI/2;
+    }else if(x<0&&y>=0){
+      angle = atan(-x/y)+M_PI;
+    }else if(x<0&&y<0){
+      angle = atan(-y/-x)+3*M_PI/2;
+    }else if(x>=0&&y<0){
+      angle = atan(-x/y);
+    }
     frc::SmartDashboard::PutNumber("Magnitude", r);
-    frc::SmartDashboard::PutNumber("angle", angle);
+    frc::SmartDashboard::PutNumber("angle", angle*(180/M_PI));
+    frc::SmartDashboard::PutNumber("x", x);
+    frc::SmartDashboard::PutNumber("y", y);
     for (auto& module : m_modules){
         module.setState(frc::SwerveModuleState{meters_per_second_t(r), frc::Rotation2d(radian_t(angle))});
     }
