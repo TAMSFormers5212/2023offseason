@@ -38,13 +38,16 @@ RobotContainer::RobotContainer() {
         // frc::SmartDashboard::PutNumber("Y axis", YAxis);
         // frc::SmartDashboard::PutNumber("Rotation axis", RotAxis);
         double speedMultiplier = (1-m_driverController.GetRawAxis(OIConstants::Joystick::ThrottleSlider))*0.5;
+        XAxis*=speedMultiplier;
+        YAxis*=speedMultiplier;
+        RotAxis*=speedMultiplier;
         // m_drive.swerveDrive(
         //     std::abs(XAxis) < OIConstants::Joystick::deadband ? 0.0 : XAxis*speedMultiplier,
         //     std::abs(YAxis) < OIConstants::Joystick::deadband ? 0.0 : YAxis*speedMultiplier,
         //     std::abs(RotAxis) < OIConstants::Joystick::deadband/2 ? 0.0 : RotAxis*speedMultiplier,
         //     true
         //     );
-        m_drive.moveToAngle(XAxis,YAxis);
+        m_drive.moveToAngle(XAxis, YAxis);
       },
 
       {&m_drive}  // requirements

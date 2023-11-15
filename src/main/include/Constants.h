@@ -85,10 +85,10 @@ namespace OIConstants {//Controller buttons
 }
 
 namespace SwerveModuleConstants {//per swerve module
-    constexpr double ktP = 0.1; // Turning PID
+    constexpr double ktP = 0.2; // Turning PID
     constexpr double ktI = 0.0;
     constexpr double ktD = 0.0;
-    constexpr double ktFF = 0.0;
+    constexpr double ktFF = 0.00000;
     
     constexpr double kdP = 0.6; // Driving Speed PID
     constexpr double kdI = 0.0;
@@ -116,7 +116,7 @@ namespace SwerveModuleConstants {//per swerve module
         constexpr int turningMotor = 2; //CAN Port/NEO ID
         constexpr int absencoder = 3; //PWM Port
 
-        constexpr double offset =  0.125;
+        constexpr double offset =  0;
 //2.2009 
 
     }
@@ -125,7 +125,7 @@ namespace SwerveModuleConstants {//per swerve module
         constexpr int turningMotor = 6; //CAN Port/NEO ID
         constexpr int absencoder = 0; //PWM Port
 
-        constexpr double offset = 0.125;//0.534055-0.828717-0.1;//(149.056526933-120.869343735-5)/360;
+        constexpr double offset = 0;//0.534055-0.828717-0.1;//(149.056526933-120.869343735-5)/360;
         // 4.07
     }
     namespace bottomleft{
@@ -133,7 +133,7 @@ namespace SwerveModuleConstants {//per swerve module
         constexpr int turningMotor = 3; //CAN Port/NEO ID
         constexpr int absencoder = 2; //PWM Port
 
-        constexpr double offset = 0.125-.033;//0.6101363-0.58127+0.1;// (343.800190846-229.081278318-15)/360;
+        constexpr double offset = 0;//0.6101363-0.58127+0.1;// (343.800190846-229.081278318-15)/360;
         //7.48
     }
     namespace bottomright{          
@@ -141,7 +141,7 @@ namespace SwerveModuleConstants {//per swerve module
         constexpr int turningMotor = 8; //CAN Port/NEO ID
         constexpr int absencoder = 1; //PWM Port
 
-        constexpr double offset = 0.125-0.021;
+        constexpr double offset = 0;
         //2.253189
     }
 

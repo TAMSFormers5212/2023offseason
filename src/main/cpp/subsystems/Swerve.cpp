@@ -118,13 +118,13 @@ using namespace units;
   void Swerve::moveToAngle(double x, double y){
     double r = sqrt(pow(x,2)+pow(y,2));
     double angle;
-    if(x>=0&&y>=0){
+    if(x>0&&y>0){
        angle = atan(y/x)+M_PI/2;
-    }else if(x<0&&y>=0){
+    }else if(x<0&&y>0){
       angle = atan(-x/y)+M_PI;
     }else if(x<0&&y<0){
       angle = atan(-y/-x)+3*M_PI/2;
-    }else if(x>=0&&y<0){
+    }else if(x>0&&y<0){
       angle = atan(-x/y);
     }
     frc::SmartDashboard::PutNumber("Magnitude", r);

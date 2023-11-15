@@ -76,7 +76,7 @@ using namespace rev;
   }
   void SwerveModule::resetTurningEncoder(){  
     double rotations = (m_absoluteEncoder.GetVoltage() / frc::RobotController::GetVoltage5V());
-    m_turningEncoder.SetPosition(0/*rotations * -M_2_PI*/);
+    m_turningEncoder.SetPosition(rotations);
   }
   double SwerveModule::getDrivePosition(){
     return m_driveEncoder.GetPosition();
@@ -115,16 +115,16 @@ using namespace rev;
     //since the driving motor is relative it doesn't wrap around 2 pi and 0. Therefore we need to calculate the position 
     //delta to be within those bounds. (frc 2363)
 
-    frc::Rotation2d curAngle = units::radian_t{getTurningPosition()-0.25};
+    frc::Rotation2d curAngle = units::radian_t{getTurningPosition()};
 
-    /*double delta = std::fmod(std::fmod((optimizedState.angle.Radians().value() -
+    double delta = std::fmod(std::fmod((optimizedState.angle.Radians().value() -
                                       curAngle.Radians().value() + M_PI),
                                      2 * M_PI) +
                                2 * M_PI,
                            2 * M_PI) -
-                 M_PI;  */ // NOLINT
+                 M_PI;   // NOLINT
 
-    double adjustedAngle = /*delta + */curAngle.Radians().value();
+    double adjustedAngle = delta + curAngle.Radians().value();
   // if(m_driveMotor.GetDeviceId()==bottomleft::driveMotor){
   //   frc::SmartDashboard::PutNumber("turn ref", adjustedAngle+encoffset);
   // }
