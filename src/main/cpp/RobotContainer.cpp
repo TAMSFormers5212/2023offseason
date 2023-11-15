@@ -41,13 +41,18 @@ RobotContainer::RobotContainer() {
         XAxis*=speedMultiplier;
         YAxis*=speedMultiplier;
         RotAxis*=speedMultiplier;
+
         // m_drive.swerveDrive(
         //     std::abs(XAxis) < OIConstants::Joystick::deadband ? 0.0 : XAxis*speedMultiplier,
         //     std::abs(YAxis) < OIConstants::Joystick::deadband ? 0.0 : YAxis*speedMultiplier,
         //     std::abs(RotAxis) < OIConstants::Joystick::deadband/2 ? 0.0 : RotAxis*speedMultiplier,
         //     true
         //     );
-        m_drive.moveToAngle(XAxis, YAxis);
+        if(m_driverController.GetRawButton(OIConstants::Joystick::Trigger)){
+          m_drive.moveToAngle(0, 0.7);
+        }else{        
+          m_drive.moveToAngle(XAxis, YAxis);
+        }
       },
 
       {&m_drive}  // requirements

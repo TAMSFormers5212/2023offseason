@@ -66,7 +66,7 @@ using namespace rev;
     m_turningMotor.EnableVoltageCompensation(12.0);
     m_turningMotor.SetSmartCurrentLimit(20, 30);
     m_turningController.SetPositionPIDWrappingEnabled(true);
-    m_turningEncoder.SetPositionConversionFactor(2*M_PI / SwerveModuleConstants::steerRatio);
+    m_turningEncoder.SetPositionConversionFactor(2*M_PI/ SwerveModuleConstants::steerRatio);
     // m_turningEncoder.SetPosition(getAbsolutePosition()*M_2_PI);
     resetTurningEncoder();
   }
@@ -76,7 +76,7 @@ using namespace rev;
   }
   void SwerveModule::resetTurningEncoder(){  
     double rotations = (m_absoluteEncoder.GetVoltage() / frc::RobotController::GetVoltage5V());
-    m_turningEncoder.SetPosition(rotations);
+    m_turningEncoder.SetPosition(rotations*2*M_PI);
   }
   double SwerveModule::getDrivePosition(){
     return m_driveEncoder.GetPosition();
@@ -92,7 +92,7 @@ using namespace rev;
   }
   double SwerveModule::getAbsolutePosition(){ // get position of absolute encoder
     double rotations = (m_absoluteEncoder.GetVoltage() / frc::RobotController::GetVoltage5V());
-    return rotations;
+    return rotations * 2 * M_PI;
   }
 
   std::string SwerveModule::getName(int driveMotorID){
@@ -122,7 +122,7 @@ using namespace rev;
                                      2 * M_PI) +
                                2 * M_PI,
                            2 * M_PI) -
-                 M_PI;   // NOLINT
+                 M_PI;   // NOLINT  
 
     double adjustedAngle = delta + curAngle.Radians().value();
   // if(m_driveMotor.GetDeviceId()==bottomleft::driveMotor){
@@ -144,6 +144,7 @@ using namespace rev;
     //   frc::SmartDashboard::PutNumber("BR Adjusted Angle",adjustedAngle+encoffset);
 
     // }
+    // m_turningEncoder.SetPosition(getAbsolutePosition());
     m_turningController.SetReference((adjustedAngle+encoffset), CANSparkMax::ControlType::kPosition);
     // if (m_driveMotor.GetDeviceId()==9){
     //   frc::SmartDashboard::PutNumber("Encoder offset", encoffset);
