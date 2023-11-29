@@ -38,6 +38,7 @@ RobotContainer::RobotContainer() {
         // frc::SmartDashboard::PutNumber("Y axis", YAxis);
         // frc::SmartDashboard::PutNumber("Rotation axis", RotAxis);
         double speedMultiplier = (1-m_driverController.GetRawAxis(OIConstants::Joystick::ThrottleSlider))*0.5;
+        double throttle = (1-m_driverController.GetRawAxis(OIConstants::Joystick::ThrottleSlider))*0.5;
         XAxis*=speedMultiplier;
         YAxis*=speedMultiplier;
         RotAxis*=speedMultiplier;
@@ -49,7 +50,7 @@ RobotContainer::RobotContainer() {
         //     true
         //     );
         if(m_driverController.GetRawButton(OIConstants::Joystick::Trigger)){
-          m_drive.moveToAngle(0, 0.7);
+          m_drive.moveToAngle(cos(throttle*2*M_PI)*0.3, sin(throttle*2*M_PI)*0.3);
         }else{        
           m_drive.moveToAngle(XAxis, YAxis);
         }

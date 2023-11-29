@@ -68,6 +68,7 @@ using namespace rev;
     m_turningController.SetPositionPIDWrappingEnabled(true);
     m_turningEncoder.SetPositionConversionFactor(2*M_PI/ SwerveModuleConstants::steerRatio);
     // m_turningEncoder.SetPosition(getAbsolutePosition()*M_2_PI);
+    // m_turningController.SetFeedbackDevice(m_absoluteEncoder);
     resetTurningEncoder();
   }
 

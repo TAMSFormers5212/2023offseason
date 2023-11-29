@@ -168,10 +168,10 @@ using namespace units;
     frc::SmartDashboard::PutNumber("tr apos", m_modules[1].getAbsolutePosition());
     frc::SmartDashboard::PutNumber("bl apos", m_modules[2].getAbsolutePosition());
     frc::SmartDashboard::PutNumber("br apos", m_modules[3].getAbsolutePosition());
-    frc::SmartDashboard::PutNumber("tl epos", fmod(m_modules[0].getTurningPosition(), 2*M_PI));
-    frc::SmartDashboard::PutNumber("tr epos", fmod(m_modules[1].getTurningPosition(), 2*M_PI));
-    frc::SmartDashboard::PutNumber("bl epos", fmod(m_modules[2].getTurningPosition(), 2*M_PI));
-    frc::SmartDashboard::PutNumber("br epos", fmod(m_modules[3].getTurningPosition(), 2*M_PI));
+    frc::SmartDashboard::PutNumber("tl epos", abs(fmod(m_modules[0].getTurningPosition(), 2*M_PI)));
+    frc::SmartDashboard::PutNumber("tr epos", abs(fmod(m_modules[1].getTurningPosition(), 2*M_PI)));
+    frc::SmartDashboard::PutNumber("bl epos", abs(fmod(m_modules[2].getTurningPosition(), 2*M_PI)));
+    frc::SmartDashboard::PutNumber("br epos", abs(fmod(m_modules[3].getTurningPosition(), 2*M_PI)));
     
     // frc::SmartDashboard::PutNumber("bl t velocity", m_modules[2].getTurningVelocity());
     // frc::SmartDashboard::PutNumber("tl t velocity", m_modules[0].getTurningVelocity());
