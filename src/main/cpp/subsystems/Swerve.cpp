@@ -123,7 +123,7 @@ using namespace units;
       angle = 0;
     }else{
     if(x>0&&y>=0){
-       angle = atan(y/x)+M_PI/2;
+       angle = atan(y/x);//+//M_PI/2;
     }else if(x<=0&&y>0){
       angle = atan(-x/y)+M_PI;
     }else if(x<0&&y<=0){
@@ -168,10 +168,10 @@ using namespace units;
     frc::SmartDashboard::PutNumber("tr apos", m_modules[1].getAbsolutePosition());
     frc::SmartDashboard::PutNumber("bl apos", m_modules[2].getAbsolutePosition());
     frc::SmartDashboard::PutNumber("br apos", m_modules[3].getAbsolutePosition());
-    frc::SmartDashboard::PutNumber("tl epos", abs(fmod(m_modules[0].getTurningPosition(), 2*M_PI)));
-    frc::SmartDashboard::PutNumber("tr epos", abs(fmod(m_modules[1].getTurningPosition(), 2*M_PI)));
-    frc::SmartDashboard::PutNumber("bl epos", abs(fmod(m_modules[2].getTurningPosition(), 2*M_PI)));
-    frc::SmartDashboard::PutNumber("br epos", abs(fmod(m_modules[3].getTurningPosition(), 2*M_PI)));
+    frc::SmartDashboard::PutNumber("tl epos", fmod(abs(m_modules[0].getTurningPosition()), 2*M_PI));
+    frc::SmartDashboard::PutNumber("tr epos", fmod(abs(m_modules[1].getTurningPosition()), 2*M_PI));
+    frc::SmartDashboard::PutNumber("bl epos", fmod(abs(m_modules[2].getTurningPosition()), 2*M_PI));
+    frc::SmartDashboard::PutNumber("br epos", fmod(abs(m_modules[3].getTurningPosition()), 2*M_PI));
     
     // frc::SmartDashboard::PutNumber("bl t velocity", m_modules[2].getTurningVelocity());
     // frc::SmartDashboard::PutNumber("tl t velocity", m_modules[0].getTurningVelocity());
