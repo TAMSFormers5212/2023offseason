@@ -49,11 +49,11 @@ RobotContainer::RobotContainer() {
         //     std::abs(RotAxis) < OIConstants::Joystick::deadband/2 ? 0.0 : RotAxis*speedMultiplier,
         //     true
         //     );
-        if(m_driverController.GetRawButton(OIConstants::Joystick::Trigger)){
+        // if(m_driverController.GetRawButton(OIConstants::Joystick::Trigger)){
           m_drive.moveToAngle(cos(throttle*2*M_PI)*0.3, sin(throttle*2*M_PI)*0.3);
-        }else{        
-          m_drive.moveToAngle(XAxis, YAxis);
-        }
+        // }else{        
+          // m_drive.moveToAngle(XAxis, YAxis);
+        // }
       },
 
       {&m_drive}  // requirements

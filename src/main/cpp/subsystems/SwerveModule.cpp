@@ -68,7 +68,7 @@ using namespace rev;
     m_turningController.SetPositionPIDWrappingEnabled(true);
     m_turningEncoder.SetPositionConversionFactor(2*M_PI/ SwerveModuleConstants::steerRatio);
     // m_turningEncoder.SetPosition(getAbsolutePosition()*M_2_PI);
-    // m_turningController.SetFeedbackDevice(m_absoluteEncoder);
+    
     resetTurningEncoder();
   }
 
@@ -76,8 +76,9 @@ using namespace rev;
     m_driveEncoder.SetPosition(0.0);
   }
   void SwerveModule::resetTurningEncoder(){  
-    double rotations = (m_absoluteEncoder.GetVoltage() / frc::RobotController::GetVoltage5V());
-    m_turningEncoder.SetPosition(rotations*2*M_PI);
+    // double rotations = (m_absoluteEncoder.GetVoltage() / frc::RobotController::GetVoltage5V());
+    // m_turningEncoder.SetPosition(rotations*2*M_PI);
+    m_turningEncoder.SetPosition(m_absoluteEncoder.GetAbsolutePosition()*2*M_PI);
   }
   double SwerveModule::getDrivePosition(){
     return m_driveEncoder.GetPosition();
@@ -92,8 +93,9 @@ using namespace rev;
     return m_turningEncoder.GetVelocity();
   }
   double SwerveModule::getAbsolutePosition(){ // get position of absolute encoder
-    double rotations = (m_absoluteEncoder.GetVoltage() / frc::RobotController::GetVoltage5V());
-    return rotations * 2 * M_PI;
+    // double rotations = (m_absoluteEncoder.GetVoltage() / frc::RobotController::GetVoltage5V());
+    // return rotations * 2 * M_PI;
+    return m_absoluteEncoder.GetAbsolutePosition()*2*M_PI;
   }
 
   std::string SwerveModule::getName(int driveMotorID){
