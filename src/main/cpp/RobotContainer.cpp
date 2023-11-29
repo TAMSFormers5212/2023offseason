@@ -51,6 +51,7 @@ RobotContainer::RobotContainer() {
         //     );
         // if(m_driverController.GetRawButton(OIConstants::Joystick::Trigger)){
           m_drive.moveToAngle(cos(throttle*2*M_PI)*0.3, sin(throttle*2*M_PI)*0.3);
+          frc::SmartDashboard::PutNumber("Throttle", throttle);
         // }else{        
           // m_drive.moveToAngle(XAxis, YAxis);
         // }
