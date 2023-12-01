@@ -18,7 +18,8 @@ using namespace rev;
     m_driveMotor(driveMotorPort, kBrushless), 
     m_turningMotor(turningMotorPort, kBrushless), 
     m_absoluteEncoder(encoderPort),
-    m_moduleName(getName(driveMotorPort))
+    m_moduleName(getName(driveMotorPort)),
+    m_turningPIDController(ktP, ktI,ktD)
   {
     resetModule();
     // m_absoluteEncoder.SetOversampleBits(2);
@@ -57,7 +58,8 @@ using namespace rev;
     resetDriveEncoder();
   }
   void SwerveModule::resetTurningMotor(){
-    m_turningMotor.RestoreFactoryDefaults();
+    // m_turningMotor.RestoreFactoryDefaults();
+    resetTurningEncoder();
     m_turningController.SetP(ktP);
     m_turningController.SetI(ktI);
     m_turningController.SetD(ktD);
@@ -67,9 +69,9 @@ using namespace rev;
     m_turningMotor.SetSmartCurrentLimit(20, 30);
     m_turningController.SetPositionPIDWrappingEnabled(true);
     m_turningEncoder.SetPositionConversionFactor(2*M_PI/ SwerveModuleConstants::steerRatio);
+    m_turningPIDController.EnableContinuousInput(-M_PI,M_PI);
     // m_turningEncoder.SetPosition(getAbsolutePosition()*M_2_PI);
     
-    resetTurningEncoder();
   }
 
   void SwerveModule::resetDriveEncoder(){
@@ -78,7 +80,7 @@ using namespace rev;
   void SwerveModule::resetTurningEncoder(){  
     // double rotations = (m_absoluteEncoder.GetVoltage() / frc::RobotController::GetVoltage5V());
     // m_turningEncoder.SetPosition(rotations*2*M_PI);
-    m_turningEncoder.SetPosition(m_absoluteEncoder.GetAbsolutePosition()*2*M_PI);
+    m_turningEncoder.SetPosition(getAbsolutePosition());
   }
   double SwerveModule::getDrivePosition(){
     return m_driveEncoder.GetPosition();
@@ -95,7 +97,7 @@ using namespace rev;
   double SwerveModule::getAbsolutePosition(){ // get position of absolute encoder
     // double rotations = (m_absoluteEncoder.GetVoltage() / frc::RobotController::GetVoltage5V());
     // return rotations * 2 * M_PI;
-    return m_absoluteEncoder.GetAbsolutePosition()*2*M_PI;
+    return m_absoluteEncoder.GetAbsolutePosition()*2*M_PI+encoffset;
   }
 
   std::string SwerveModule::getName(int driveMotorID){
@@ -118,7 +120,7 @@ using namespace rev;
     //since the driving motor is relative it doesn't wrap around 2 pi and 0. Therefore we need to calculate the position 
     //delta to be within those bounds. (frc 2363)
 
-    frc::Rotation2d curAngle = units::radian_t{getTurningPosition()};
+    frc::Rotation2d curAngle = units::radian_t{getAbsolutePosition()};
 
     double delta = std::fmod(std::fmod((optimizedState.angle.Radians().value() -
                                       curAngle.Radians().value() + M_PI),
@@ -148,7 +150,10 @@ using namespace rev;
 
     // }
     // m_turningEncoder.SetPosition(getAbsolutePosition());
-    m_turningController.SetReference((adjustedAngle+encoffset), CANSparkMax::ControlType::kPosition);
+    // m_turningMotor.Set(m_turningPIDController.Calculate(getAbsolutePosition(), adjustedAngle));
+    frc::SmartDashboard::PutNumber("adjusted angle "+getName(m_driveMotor.GetDeviceId()), adjustedAngle);
+  
+    m_turningController.SetReference((adjustedAngle), CANSparkMax::ControlType::kPosition);
     // if (m_driveMotor.GetDeviceId()==9){
     //   frc::SmartDashboard::PutNumber("Encoder offset", encoffset);
     // }

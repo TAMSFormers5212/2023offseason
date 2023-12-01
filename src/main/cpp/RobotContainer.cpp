@@ -49,15 +49,16 @@ RobotContainer::RobotContainer() {
         //     std::abs(RotAxis) < OIConstants::Joystick::deadband/2 ? 0.0 : RotAxis*speedMultiplier,
         //     true
         //     );
-        if(m_driverController.GetRawButtonPressed(OIConstants::Joystick::ButtonThree)){
-          m_drive.SyncAbsoluteEncoders();
-        }
-        // if(m_driverController.GetRawButton(OIConstants::Joystick::Trigger)){
-          m_drive.moveToAngle(cos(0)*0.3, sin(0)*0.3);
-          frc::SmartDashboard::PutNumber("Throttle", throttle);
-        // }else{        
-          // m_drive.moveToAngle(XAxis, YAxis);
+        // if(m_driverController.GetRawButtonPressed(OIConstants::Joystick::ButtonThree)){ 
+        //   // m_drive.SyncAbsoluteEncoders();
         // }
+        if(m_driverController.GetRawButton(11)){
+          m_drive.moveToAngle(cos(throttle*2*M_PI)*0.3, sin(throttle*2*M_PI)*0.3);
+          
+        }else{        
+          m_drive.moveToAngle(cos(M_PI)*0.3, sin(M_PI)*0.3);
+          frc::SmartDashboard::PutNumber("Throttle", throttle);
+        }
       },
 
       {&m_drive}  // requirements
@@ -132,7 +133,7 @@ void RobotContainer::ConfigureBindings() {
   // pressed, cancelling on release.
   // m_driverController.B().WhileTrue(m_subsystem.ExampleMethodCommand());
 
-  frc2::JoystickButton(&m_driverController, OIConstants::Joystick::Trigger).WhenReleased(
+  frc2::JoystickButton(&m_driverController, OIConstants::Joystick::Trigger).WhenHeld(
     frc2::InstantCommand(
       [this]{
         m_drive.resetAbsoluteEncoders();

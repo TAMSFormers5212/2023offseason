@@ -15,7 +15,7 @@
 #include <frc/AnalogInput.h>
 #include <Constants.h>
 #include <frc/AnalogEncoder.h>
-
+#include <frc/controller/PIDController.h>
 class SwerveModule : public frc2::SubsystemBase {
  public:
   SwerveModule(int driveMotorPort, int turningMotorPort, int encoderPort, double offset);
@@ -56,6 +56,7 @@ class SwerveModule : public frc2::SubsystemBase {
 
   rev::SparkMaxPIDController m_driveController = m_driveMotor.GetPIDController();
   rev::SparkMaxPIDController m_turningController = m_turningMotor.GetPIDController();
+  frc::PIDController m_turningPIDController;
   // m_turningController.
 
   // frc::AnalogInput m_absoluteEncoder;

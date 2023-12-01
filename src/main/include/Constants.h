@@ -125,7 +125,7 @@ namespace SwerveModuleConstants {//per swerve module
         constexpr int turningMotor = 6; //CAN Port/NEO ID
         constexpr int absencoder = 0; //PWM Port
 
-        constexpr double offset = 0;//0.534055-0.828717-0.1;//(149.056526933-120.869343735-5)/360;
+        constexpr double offset = -0.2;//5.04/(2*M_PI);//0.534055-0.828717-0.1;//(149.056526933-120.869343735-5)/360;
         // 4.07
     }
     namespace bottomleft{
@@ -133,7 +133,7 @@ namespace SwerveModuleConstants {//per swerve module
         constexpr int turningMotor = 3; //CAN Port/NEO ID
         constexpr int absencoder = 2; //PWM Port
 
-        constexpr double offset = 0;//0.6101363-0.58127+0.1;// (343.800190846-229.081278318-15)/360;
+        constexpr double offset = 0;//(0.38+M_PI)/(2*M_PI);//0.6101363-0.58127+0.1;// (343.800190846-229.081278318-15)/360;
         //7.48
     }
     namespace bottomright{          
@@ -141,7 +141,7 @@ namespace SwerveModuleConstants {//per swerve module
         constexpr int turningMotor = 8; //CAN Port/NEO ID
         constexpr int absencoder = 1; //PWM Port
 
-        constexpr double offset = 0;
+        constexpr double offset = 0.2;//0.311/(2*M_PI);
         //2.253189
     }
 
