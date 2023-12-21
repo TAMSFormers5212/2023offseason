@@ -12,6 +12,7 @@
 using enum rev::CANSparkMaxLowLevel::MotorType;
 using namespace SwerveModuleConstants;
 using namespace rev;
+using namespace tamsmath;
 
   SwerveModule::SwerveModule(int driveMotorPort, int turningMotorPort, int encoderPort, double offset)
   : encoffset(offset),
@@ -68,8 +69,8 @@ using namespace rev;
     m_turningMotor.EnableVoltageCompensation(12.0);
     m_turningMotor.SetSmartCurrentLimit(20, 30);
     m_turningController.SetPositionPIDWrappingEnabled(true);
-    m_turningEncoder.SetPositionConversionFactor(2*M_PI/ SwerveModuleConstants::steerRatio);
-    m_turningPIDController.EnableContinuousInput(-M_PI,M_PI);
+    m_turningEncoder.SetPositionConversionFactor(2*pi/ SwerveModuleConstants::steerRatio);
+    m_turningPIDController.EnableContinuousInput(-pi,pi);
     // m_turningEncoder.SetPosition(getAbsolutePosition()*M_2_PI);
     
   }
@@ -97,7 +98,7 @@ using namespace rev;
   double SwerveModule::getAbsolutePosition(){ // get position of absolute encoder
     // double rotations = (m_absoluteEncoder.GetVoltage() / frc::RobotController::GetVoltage5V());
     // return rotations * 2 * M_PI;
-    return m_absoluteEncoder.GetAbsolutePosition()*2*M_PI+encoffset;
+    return m_absoluteEncoder.GetAbsolutePosition()*2*pi+encoffset;
   }
 
   std::string SwerveModule::getName(int driveMotorID){
@@ -123,11 +124,11 @@ using namespace rev;
     frc::Rotation2d curAngle = units::radian_t{getAbsolutePosition()};
 
     double delta = std::fmod(std::fmod((optimizedState.angle.Radians().value() -
-                                      curAngle.Radians().value() + M_PI),
-                                     2 * M_PI) +
-                               2 * M_PI,
-                           2 * M_PI) -
-                 M_PI;   // NOLINT  
+                                      curAngle.Radians().value() + pi),
+                                     2 * pi) +
+                               2 * pi,
+                           2 * pi) -
+                 pi;   // NOLINT  
 
     double adjustedAngle = delta + curAngle.Radians().value();
   // if(m_driveMotor.GetDeviceId()==bottomleft::driveMotor){

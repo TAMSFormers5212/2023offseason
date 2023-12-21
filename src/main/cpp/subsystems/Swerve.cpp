@@ -7,6 +7,7 @@
 
 using namespace SwerveModuleConstants;
 using namespace units;
+using namespace tamsmath;
 
 
 
@@ -126,11 +127,11 @@ using namespace units;
       angle = 0;
     }else{
     if(x>0&&y>=0){
-       angle = atan(y/x)+M_PI/2;
+       angle = atan(y/x)+pi/2;
     }else if(x<=0&&y>0){
-      angle = atan(-x/y)+M_PI;
+      angle = atan(-x/y)+pi;
     }else if(x<0&&y<=0){
-      angle = atan(-y/-x)+3*M_PI/2;
+      angle = atan(-y/-x)+3*pi/2;
     }else if(x>=0&&y<0){
       angle = atan(-x/y);
     }
@@ -171,10 +172,10 @@ using namespace units;
     frc::SmartDashboard::PutNumber("tr apos", m_modules[1].getAbsolutePosition());
     frc::SmartDashboard::PutNumber("bl apos", m_modules[2].getAbsolutePosition());
     frc::SmartDashboard::PutNumber("br apos", m_modules[3].getAbsolutePosition());
-    frc::SmartDashboard::PutNumber("tl epos", fmod(abs(m_modules[0].getTurningPosition()), 2*M_PI));
-    frc::SmartDashboard::PutNumber("tr epos", fmod(abs(m_modules[1].getTurningPosition()), 2*M_PI));
-    frc::SmartDashboard::PutNumber("bl epos", fmod(abs(m_modules[2].getTurningPosition()), 2*M_PI));
-    frc::SmartDashboard::PutNumber("br epos", fmod(abs(m_modules[3].getTurningPosition()), 2*M_PI));
+    frc::SmartDashboard::PutNumber("tl epos", fmod(abs(m_modules[0].getTurningPosition()), 2*pi));
+    frc::SmartDashboard::PutNumber("tr epos", fmod(abs(m_modules[1].getTurningPosition()), 2*pi));
+    frc::SmartDashboard::PutNumber("bl epos", fmod(abs(m_modules[2].getTurningPosition()), 2*pi));
+    frc::SmartDashboard::PutNumber("br epos", fmod(abs(m_modules[3].getTurningPosition()), 2*pi));
     
     // frc::SmartDashboard::PutNumber("bl t velocity", m_modules[2].getTurningVelocity());
     // frc::SmartDashboard::PutNumber("tl t velocity", m_modules[0].getTurningVelocity());

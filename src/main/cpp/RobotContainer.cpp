@@ -19,6 +19,7 @@
 
 using namespace std;
 using namespace ArmConstants::poseConstants;
+using namespace tamsmath;
 
 RobotContainer::RobotContainer() {
   // Initialize all of your commands and subsystems here
@@ -53,10 +54,10 @@ RobotContainer::RobotContainer() {
         //   // m_drive.SyncAbsoluteEncoders();
         // }
         if(m_driverController.GetRawButton(11)){
-          m_drive.moveToAngle(cos(throttle*2*M_PI)*0.3, sin(throttle*2*M_PI)*0.3);
+          m_drive.moveToAngle(cos(throttle*2*pi)*0.3, sin(throttle*2*pi)*0.3);
           
         }else{        
-          m_drive.moveToAngle(cos(M_PI)*0.3, sin(M_PI)*0.3);
+          m_drive.moveToAngle(cos(pi)*0.3, sin(pi)*0.3);
           frc::SmartDashboard::PutNumber("Throttle", throttle);
         }
       },
