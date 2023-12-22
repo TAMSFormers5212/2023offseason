@@ -23,14 +23,11 @@ using namespace tamsmath;
     m_turningPIDController(ktP, ktI,ktD)
   {
     resetModule();
-    // m_absoluteEncoder.SetOversampleBits(2);
-    // m_absoluteEncoder.SetAverageBits(2);
 
     std::cout<<"Swerve Module "<< getName(driveMotorPort)<<" initalized correctly"<<std::endl; 
   }
 
   frc::SwerveModuleState SwerveModule::getState(){
-    // return {units::meters_per_second_t{m_driveEncoder.GetVelocity()},units::radian_t{m_turningEncoder.GetPosition()}};
     return {units::meters_per_second_t{m_driveEncoder.GetVelocity()},units::radian_t{getAbsolutePosition()}};
     
   }
