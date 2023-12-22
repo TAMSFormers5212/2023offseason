@@ -2,7 +2,6 @@
 #include <frc/kinematics/ChassisSpeeds.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <iostream>
-#define M_PI 3.14159265358
 
 
 using namespace SwerveModuleConstants;
@@ -33,9 +32,7 @@ using namespace tamsmath;
                     frc::Pose2d()
     }
   {
-    //m_gyro.Calibrate();
-    //m_gyro.ZeroYaw();
-    heading = frc::Rotation2d(degree_t{-m_gyro.GetYaw()});
+    heading = getGyroHeading();
     lastAngle = -m_gyro.GetYaw();
     resetOdometry(m_poseEstimator.GetEstimatedPosition());
     std::cout<<"Swerve subsystem initalized correctly"<<std::endl;
@@ -49,14 +46,18 @@ using namespace tamsmath;
     return m_odometry.GetPose();
   } //odometry pose
 
-  frc::Rotation2d Swerve::getGyroHeading(){//i have no f*cking clue how this works
+  frc::Rotation2d Swerve::getGyroHeading(){
     double newAngle = -m_gyro.GetYaw();
+    /*i have no f*cking clue how this works
+    compensate for gyro lag i think?
+    
     double delta =
       std::fmod(std::fmod((newAngle - lastAngle + 180), 360) + 360, 360) -
       180;  // NOLINT
     lastAngle = newAngle;
     heading = heading + frc::Rotation2d(degree_t{delta * 1.02466666667});
-    return heading;
+    return heading; */
+    return frc::Rotation2d(degree_t(newAngle));
   }
 
   void Swerve::resetHeading(){
@@ -99,16 +100,9 @@ using namespace tamsmath;
     //   moduleState.speed *= scale * SwerveModuleConstants::maxSpeed / maxWheelSpeed;
     // }
     for(size_t i  = 0; i<states.size(); ++i){
-      // if(i==2){
-      //   frc::SmartDashboard::PutNumber(i+" speed", (double)states[i]);
-      // }
       m_modules[i].setState(states[i]);
       // m_modules[i].setState(states[i], openloop);
     }
-  // }
-
-
-
   }
 
   void Swerve::brake(){
@@ -116,6 +110,7 @@ using namespace tamsmath;
       module.setState(frc::SwerveModuleState{0.0_mps, module.getState().angle});
     }
   }
+
   void Swerve::moveToAngle(double x, double y){
     double temp = x;
     x = -y;

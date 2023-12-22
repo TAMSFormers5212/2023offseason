@@ -7,7 +7,6 @@
 #include <numbers>
 #include <string>
 #include <iostream>
-#define M_PI 3.14159265358
 
 using enum rev::CANSparkMaxLowLevel::MotorType;
 using namespace SwerveModuleConstants;
@@ -158,7 +157,6 @@ using namespace tamsmath;
     
     // m_driveController.SetReference(optimizedState.speed.value(), CANSparkMax::ControlType::kVelocity);
     m_driveMotor.Set(optimizedState.speed / SwerveModuleConstants::maxSpeed);
-    // m_turningMotor.
     // frc::SmartDashboard::PutNumber(getName(m_driveMotor.GetDeviceId())+" voltage", m_driveMotor.GetBusVoltage());
   }
 
