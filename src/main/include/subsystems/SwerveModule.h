@@ -61,6 +61,7 @@ class SwerveModule : public frc2::SubsystemBase {
 
   // frc::AnalogInput m_absoluteEncoder;
   frc::AnalogEncoder m_absoluteEncoder;
+  // rev::SparkMaxAnalogSensor m_analogEncoder;
 
   // frc::SwerveModuleState lastState;
 

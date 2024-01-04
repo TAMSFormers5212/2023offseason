@@ -32,6 +32,7 @@ using namespace tamsmath;
                     frc::Pose2d()
     }
   {
+    SyncAbsoluteEncoders();
     heading = getGyroHeading();
     lastAngle = -m_gyro.GetYaw();
     resetOdometry(m_poseEstimator.GetEstimatedPosition());

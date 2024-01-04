@@ -22,7 +22,6 @@ using namespace tamsmath;
     m_turningPIDController(ktP, ktI,ktD)
   {
     resetModule();
-
     std::cout<<"Swerve Module "<< getName(driveMotorPort)<<" initalized correctly"<<std::endl; 
   }
 
@@ -55,8 +54,7 @@ using namespace tamsmath;
     resetDriveEncoder();
   }
   void SwerveModule::resetTurningMotor(){
-    // m_turningMotor.RestoreFactoryDefaults();
-    resetTurningEncoder();
+    m_turningMotor.RestoreFactoryDefaults();
     m_turningController.SetP(ktP);
     m_turningController.SetI(ktI);
     m_turningController.SetD(ktD);
@@ -66,9 +64,15 @@ using namespace tamsmath;
     m_turningMotor.SetSmartCurrentLimit(20, 30);
     m_turningController.SetPositionPIDWrappingEnabled(true);
     m_turningEncoder.SetPositionConversionFactor(2*pi/ SwerveModuleConstants::steerRatio);
+    // resetTurningEncoder();
+
+
     m_turningPIDController.EnableContinuousInput(-pi,pi);
+    // m_turningController.SetFeedbackDevice(m_absoluteEncoder.);
     // m_turningEncoder.SetPosition(getAbsolutePosition()*M_2_PI);
-    
+    m_turningPIDController.SetP(ktP);
+    m_turningPIDController.SetI(ktI);
+    m_turningPIDController.SetD(ktD);
   }
 
   void SwerveModule::resetDriveEncoder(){
@@ -149,8 +153,9 @@ using namespace tamsmath;
     // m_turningEncoder.SetPosition(getAbsolutePosition());
     // m_turningMotor.Set(m_turningPIDController.Calculate(getAbsolutePosition(), adjustedAngle));
     frc::SmartDashboard::PutNumber("adjusted angle "+getName(m_driveMotor.GetDeviceId()), adjustedAngle);
-  
+    
     m_turningController.SetReference((adjustedAngle), CANSparkMax::ControlType::kPosition);
+    
     // if (m_driveMotor.GetDeviceId()==9){
     //   frc::SmartDashboard::PutNumber("Encoder offset", encoffset);
     // }
