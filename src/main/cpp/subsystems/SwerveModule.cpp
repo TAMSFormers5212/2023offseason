@@ -7,6 +7,8 @@
 #include <numbers>
 #include <string>
 #include <iostream>
+#include <frc/simulation/SimDeviceSim.h>
+// #include <frc/simulation/
 
 using enum rev::CANSparkMaxLowLevel::MotorType;
 using namespace SwerveModuleConstants;
@@ -67,7 +69,7 @@ using namespace tamsmath;
     // resetTurningEncoder();
 
 
-    m_turningPIDController.EnableContinuousInput(-pi,pi);
+    m_turningPIDController.EnableContinuousInput(-pi,pi); // frc pid, maybe turn into profiled pid
     // m_turningController.SetFeedbackDevice(m_absoluteEncoder.);
     // m_turningEncoder.SetPosition(getAbsolutePosition()*M_2_PI);
     m_turningPIDController.SetP(ktP);
@@ -131,25 +133,6 @@ using namespace tamsmath;
                  pi;   // NOLINT  
 
     double adjustedAngle = delta + curAngle.Radians().value();
-  // if(m_driveMotor.GetDeviceId()==bottomleft::driveMotor){
-  //   frc::SmartDashboard::PutNumber("turn ref", adjustedAngle+encoffset);
-  // }
-    // if (m_driveMotor.GetDeviceId()==9){
-    //   frc::SmartDashboard::PutNumber("TL Adjusted Angle",adjustedAngle+encoffset);
-
-    // }
-    // if (m_driveMotor.GetDeviceId()==5){
-    //   frc::SmartDashboard::PutNumber("TR Adjusted Angle",adjustedAngle+encoffset);
-
-    // }
-    // if (m_driveMotor.GetDeviceId()==4){
-    //   frc::SmartDashboard::PutNumber("BL Adjusted Angle",adjustedAngle+encoffset);
-
-    // }
-    // if (m_driveMotor.GetDeviceId()==7){
-    //   frc::SmartDashboard::PutNumber("BR Adjusted Angle",adjustedAngle+encoffset);
-
-    // }
     // m_turningEncoder.SetPosition(getAbsolutePosition());
     // m_turningMotor.Set(m_turningPIDController.Calculate(getAbsolutePosition(), adjustedAngle));
     frc::SmartDashboard::PutNumber("adjusted angle "+getName(m_driveMotor.GetDeviceId()), adjustedAngle);

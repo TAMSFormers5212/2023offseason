@@ -84,9 +84,11 @@ using namespace tamsmath;
                                                 y * SwerveModuleConstants::maxSpeed, 
                                                 theta * SwerveModuleConstants::maxRotation
                                              };
-
     auto states = m_driveKinematics.ToSwerveModuleStates(speeds);
-    //scale the values based on the largest one
+    // m_driveKinematics.DesaturateWheelSpeeds(states, SwerveModuleConstants::maxSpeed);
+
+
+    //scale the values based on the largest one // can be replaced by desaturate wheel speeds
     // double scale = std::max({x, y, theta});
     // //adjust speeds
     // auto maxWheelSpeed = 0.0_mps;
@@ -132,10 +134,11 @@ using namespace tamsmath;
       angle = atan(-x/y);
     }
     }
-    frc::SmartDashboard::PutNumber("Magnitude", r);
-    frc::SmartDashboard::PutNumber("angle", angle);
+    frc::SmartDashboard::PutNumber("Magnitude ", r);
+    frc::SmartDashboard::PutNumber("angle ", angle);
     frc::SmartDashboard::PutNumber("x", x);
     frc::SmartDashboard::PutNumber("y", y);
+    // frc::SmartDashboard::
     for (auto& module : m_modules){
         module.setState(frc::SwerveModuleState{meters_per_second_t(r), frc::Rotation2d(radian_t(angle))});
     }

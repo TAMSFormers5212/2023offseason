@@ -99,8 +99,9 @@ namespace SwerveModuleConstants {//per swerve module
 
     constexpr auto maxSpeed = 4.0_mps; // arbitrary values
     constexpr auto maxRotation = 2.0_rad_per_s;
-    constexpr double driveRatio = 8.14; //SDS Mk4 L1
-    constexpr double steerRatio = 12.8; //SDS Mk4 L1
+    //SDS Mk4 L1
+    constexpr double driveRatio = 8.142857143;// 8.14 rotations of the drive motor = 1 revolution of wheel
+    constexpr double steerRatio = 12.8; // 12.8 rotations of the steering motor = 1 rotation of wheel
     constexpr units::inch_t wheelDiameter = 4_in;
     constexpr units::inch_t wheelCircumfrence = 12.57_in;
     constexpr units::inch_t centerDistance = 10.5_in;
